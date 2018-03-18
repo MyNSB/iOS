@@ -2,13 +2,14 @@
 //  MyNSBUITests.swift
 //  MyNSBUITests
 //
-//  Created by Hanyuan Li on 21/11/17.
-//  Copyright © 2017 Qwerp-Derp. All rights reserved.
+//  Created by Hanyuan Li on 16/1/18.
+//  Copyright © 2018 Qwerp-Derp. All rights reserved.
 //
 
 import XCTest
 
 class MyNSBUITests: XCTestCase {
+        
     override func setUp() {
         super.setUp()
         
@@ -31,4 +32,5 @@ class MyNSBUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
 }

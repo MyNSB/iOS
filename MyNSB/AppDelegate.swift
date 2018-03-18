@@ -2,15 +2,17 @@
 //  AppDelegate.swift
 //  MyNSB
 //
-//  Created by Hanyuan Li on 21/11/17.
-//  Copyright © 2017 Qwerp-Derp. All rights reserved.
+//  Created by Hanyuan Li on 16/1/18.
+//  Copyright © 2018 Qwerp-Derp. All rights reserved.
 //
 
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
     var window: UIWindow?
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sUu-ci-ms1">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Timetable-->
+        <scene sceneID="o7Y-9N-Jic">
+            <objects>
+                <viewController id="Qlo-ha-DRZ" customClass="TimetableController" customModule="MyNSB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t8Z-lJ-b6W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kHp-eF-6Sa">
+                                <rect key="frame" x="0.0" y="171" width="375" height="496"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="496" id="7ry-St-xFP"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="periodCell" id="6HQ-Z2-tOa">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6HQ-Z2-tOa" id="riz-vY-PDv">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLr-7Y-jqA">
+                                <rect key="frame" x="0.0" y="96" width="375" height="43"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wdx-bL-jjc">
+                                <rect key="frame" x="16" y="102" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GD1-2I-s9N">
+                                <rect key="frame" x="313" y="102" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YLr-7Y-jqA" firstAttribute="top" secondItem="PNu-8c-NaQ" secondAttribute="top" constant="32" id="B6g-UI-We1"/>
+                            <constraint firstItem="YLr-7Y-jqA" firstAttribute="leading" secondItem="PNu-8c-NaQ" secondAttribute="leading" id="IMj-jA-jxk"/>
+                            <constraint firstItem="kHp-eF-6Sa" firstAttribute="top" secondItem="YLr-7Y-jqA" secondAttribute="bottom" constant="32" id="Jdc-Zc-ZKl"/>
+                            <constraint firstItem="kHp-eF-6Sa" firstAttribute="trailing" secondItem="PNu-8c-NaQ" secondAttribute="trailing" id="Rh3-9u-OHg"/>
+                            <constraint firstItem="kHp-eF-6Sa" firstAttribute="leading" secondItem="PNu-8c-NaQ" secondAttribute="leading" id="STP-Xh-gEX"/>
+                            <constraint firstItem="PNu-8c-NaQ" firstAttribute="trailing" secondItem="YLr-7Y-jqA" secondAttribute="trailing" id="cOb-zh-S7W"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PNu-8c-NaQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Timetable" id="35h-Q8-SJd">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="8mE-o2-eAY"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hkm-5h-QNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="119.2" y="122.78860569715144"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="y32-qh-Jqf">
+            <objects>
+                <navigationController id="sUu-ci-ms1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KIK-vD-U28">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Qlo-ha-DRZ" kind="relationship" relationship="rootViewController" id="wPp-UG-9Yd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8sp-it-sos" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-705" y="123"/>
+        </scene>
+    </scenes>
+</document>

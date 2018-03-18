@@ -2,14 +2,15 @@
 //  MyNSBTests.swift
 //  MyNSBTests
 //
-//  Created by Hanyuan Li on 21/11/17.
-//  Copyright © 2017 Qwerp-Derp. All rights reserved.
+//  Created by Hanyuan Li on 16/1/18.
+//  Copyright © 2018 Qwerp-Derp. All rights reserved.
 //
 
 import XCTest
 @testable import MyNSB
 
 class MyNSBTests: XCTestCase {
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -31,4 +32,5 @@ class MyNSBTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
 }
