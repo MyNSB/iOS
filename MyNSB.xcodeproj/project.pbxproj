@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		03A1C530EC5FE2946C698639 /* Pods_MyNSBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4847A71EED5C5C35837252DA /* Pods_MyNSBTests.framework */; };
 		287BB061B3575ABB1463E9F4 /* Pods_MyNSBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759F460CEB3E0F6E3AF80353 /* Pods_MyNSBUITests.framework */; };
+		2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607B921042E5B00D0C601 /* EventCell.swift */; };
+		2C3607BC210432C000D0C601 /* SingleEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607BB210432C000D0C601 /* SingleEventController.swift */; };
+		2C42262620F97E960067A50E /* PeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42262520F97E960067A50E /* PeriodCell.swift */; };
+		2C5D6AD220F2DE4A009CC3A3 /* LogoutSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D6AD120F2DE4A009CC3A3 /* LogoutSegue.swift */; };
+		2C67B3BE20DF7BF700ADB773 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B3BD20DF7BF700ADB773 /* MainPageController.swift */; };
 		2CB299A2200DE10000825CBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB299A1200DE10000825CBA /* AppDelegate.swift */; };
 		2CB299A4200DE10000825CBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB299A3200DE10000825CBA /* ViewController.swift */; };
 		2CB299A7200DE10000825CBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB299A5200DE10000825CBA /* Main.storyboard */; };
@@ -20,7 +25,13 @@
 		2CB299D6200DF83100825CBA /* TimetableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB299D5200DF83100825CBA /* TimetableController.swift */; };
 		2CC7279420D605E2006EACC9 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC7279320D605E2006EACC9 /* Settings.storyboard */; };
 		2CC7279820D6075B006EACC9 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC7279720D6075B006EACC9 /* SettingsController.swift */; };
+		2CCD40C121009CEB001975B9 /* TodayPeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD40C021009CEB001975B9 /* TodayPeriodCell.swift */; };
+		2CCD40C3210209E9001975B9 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CCD40C2210209E9001975B9 /* Events.storyboard */; };
+		2CCD40C721020C09001975B9 /* EventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCD40C621020C09001975B9 /* EventsController.swift */; };
 		2FB10AF4ADDE9E654AAF96C3 /* Pods_MyNSB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D12F2296CBFA48C0734EE8 /* Pods_MyNSB.framework */; };
+		311A41DD6A048CF8E61DBFFD /* Timespan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A4EA1E3AE48EA82972946 /* Timespan.swift */; };
+		311A44C7F9D4402114596981 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A4DE736D9390A203ED33F /* Event.swift */; };
+		311A497982D49BA67D1108E3 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A4FAE23807AD1A90ADF43 /* Period.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +53,11 @@
 
 /* Begin PBXFileReference section */
 		1B8E4894D65ADC604095FB6F /* Pods-MyNSB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSB.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB.release.xcconfig"; sourceTree = "<group>"; };
+		2C3607B921042E5B00D0C601 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		2C3607BB210432C000D0C601 /* SingleEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventController.swift; sourceTree = "<group>"; };
+		2C42262520F97E960067A50E /* PeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodCell.swift; sourceTree = "<group>"; };
+		2C5D6AD120F2DE4A009CC3A3 /* LogoutSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutSegue.swift; sourceTree = "<group>"; };
+		2C67B3BD20DF7BF700ADB773 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		2CB2999E200DE10000825CBA /* MyNSB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNSB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB299A1200DE10000825CBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CB299A3200DE10000825CBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +75,12 @@
 		2CB299D5200DF83100825CBA /* TimetableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableController.swift; sourceTree = "<group>"; };
 		2CC7279320D605E2006EACC9 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		2CC7279720D6075B006EACC9 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		2CCD40C021009CEB001975B9 /* TodayPeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayPeriodCell.swift; sourceTree = "<group>"; };
+		2CCD40C2210209E9001975B9 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
+		2CCD40C621020C09001975B9 /* EventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsController.swift; sourceTree = "<group>"; };
+		311A4DE736D9390A203ED33F /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		311A4EA1E3AE48EA82972946 /* Timespan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timespan.swift; sourceTree = "<group>"; };
+		311A4FAE23807AD1A90ADF43 /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		4847A71EED5C5C35837252DA /* Pods_MyNSBTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNSBTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D12F2296CBFA48C0734EE8 /* Pods_MyNSB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNSB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		759F460CEB3E0F6E3AF80353 /* Pods_MyNSBUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNSBUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,11 +129,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2C08F01920390169005F1758 /* Calendar */ = {
+		2C08F01920390169005F1758 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				2CCD40C2210209E9001975B9 /* Events.storyboard */,
+				2CCD40C621020C09001975B9 /* EventsController.swift */,
+				311A4DE736D9390A203ED33F /* Event.swift */,
+				2C3607B921042E5B00D0C601 /* EventCell.swift */,
+				2C3607BB210432C000D0C601 /* SingleEventController.swift */,
 			);
-			path = Calendar;
+			path = Events;
 			sourceTree = "<group>";
 		};
 		2CB29995200DE10000825CBA = {
@@ -141,7 +168,7 @@
 			children = (
 				2CB299CF200DE10D00825CBA /* 4U */,
 				2CB299D2200DE15000825CBA /* Bulletin */,
-				2C08F01920390169005F1758 /* Calendar */,
+				2C08F01920390169005F1758 /* Events */,
 				2CEC5DB62059D84800DC833D /* Notifications */,
 				2CEC5DB72059D85000DC833D /* Settings */,
 				2CB299D1200DE12E00825CBA /* Sports */,
@@ -152,6 +179,7 @@
 				2CB299A8200DE10000825CBA /* Assets.xcassets */,
 				2CB299AA200DE10000825CBA /* LaunchScreen.storyboard */,
 				2CB299AD200DE10000825CBA /* Info.plist */,
+				2C67B3BD20DF7BF700ADB773 /* MainPageController.swift */,
 			);
 			path = MyNSB;
 			sourceTree = "<group>";
@@ -186,6 +214,10 @@
 			children = (
 				2CB299D3200DF43500825CBA /* Timetable.storyboard */,
 				2CB299D5200DF83100825CBA /* TimetableController.swift */,
+				2C42262520F97E960067A50E /* PeriodCell.swift */,
+				311A4FAE23807AD1A90ADF43 /* Period.swift */,
+				311A4EA1E3AE48EA82972946 /* Timespan.swift */,
+				2CCD40C021009CEB001975B9 /* TodayPeriodCell.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -216,6 +248,7 @@
 			children = (
 				2CC7279320D605E2006EACC9 /* Settings.storyboard */,
 				2CC7279720D6075B006EACC9 /* SettingsController.swift */,
+				2C5D6AD120F2DE4A009CC3A3 /* LogoutSegue.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -344,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CCD40C3210209E9001975B9 /* Events.storyboard in Resources */,
 				2CB299AC200DE10000825CBA /* LaunchScreen.storyboard in Resources */,
 				2CB299A9200DE10000825CBA /* Assets.xcassets in Resources */,
 				2CB299D4200DF43500825CBA /* Timetable.storyboard in Resources */,
@@ -396,12 +430,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/RSDayFlow/RSDayFlow.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSDayFlow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,9 +489,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CC7279820D6075B006EACC9 /* SettingsController.swift in Sources */,
+				2CCD40C721020C09001975B9 /* EventsController.swift in Sources */,
 				2CB299A4200DE10000825CBA /* ViewController.swift in Sources */,
+				2CCD40C121009CEB001975B9 /* TodayPeriodCell.swift in Sources */,
+				2C67B3BE20DF7BF700ADB773 /* MainPageController.swift in Sources */,
 				2CB299A2200DE10000825CBA /* AppDelegate.swift in Sources */,
 				2CB299D6200DF83100825CBA /* TimetableController.swift in Sources */,
+				2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */,
+				2C42262620F97E960067A50E /* PeriodCell.swift in Sources */,
+				2C5D6AD220F2DE4A009CC3A3 /* LogoutSegue.swift in Sources */,
+				311A497982D49BA67D1108E3 /* Period.swift in Sources */,
+				311A41DD6A048CF8E61DBFFD /* Timespan.swift in Sources */,
+				2C3607BC210432C000D0C601 /* SingleEventController.swift in Sources */,
+				311A44C7F9D4402114596981 /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

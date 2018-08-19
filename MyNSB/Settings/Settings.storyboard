@@ -27,15 +27,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYm-BQ-vFc">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYm-BQ-vFc">
                                                     <rect key="frame" x="161" y="6" width="52" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Log out"/>
+                                                    <state key="normal" title="Log out">
+                                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="appLogout:" destination="Q13-aA-nId" eventType="touchUpInside" id="puV-qG-MEI"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eYm-BQ-vFc" firstAttribute="centerY" secondItem="AJb-Ay-lKk" secondAttribute="centerY" id="Pzw-g1-0Hm"/>
+                                                <constraint firstItem="eYm-BQ-vFc" firstAttribute="centerX" secondItem="AJb-Ay-lKk" secondAttribute="centerX" id="vxN-Zf-ATk"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -48,12 +53,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="FXT-1d-01x"/>
                     <connections>
-                        <segue destination="EX5-mR-feq" kind="show" identifier="LogoutSegue" id="98u-8E-GDT"/>
+                        <segue destination="EX5-mR-feq" kind="custom" identifier="logoutSegue" customClass="LogoutSegue" customModule="MyNSB" customModuleProvider="target" id="vZO-xH-isn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YPg-aA-HQx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="113" y="216"/>
+            <point key="canvasLocation" x="112.8" y="215.44227886056973"/>
         </scene>
         <!--Main-->
         <scene sceneID="Dgh-tq-DlA">

@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         checkLogin().done { verified in
             if verified {
-                self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                self.performSegue(withIdentifier: "loginSegue", sender: self)
             }
         }.catch { error in
             debugPrint(error.localizedDescription)
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
 
     @IBAction func submitLogin(_ sender: Any) {
         login(user: usernameField.text, password: passwordField.text).done { _ in
-            self.performSegue(withIdentifier: "LoginSegue", sender: self)
+            self.performSegue(withIdentifier: "loginSegue", sender: self)
         }.catch { error in
             self.initAlertController(error: error)
         }

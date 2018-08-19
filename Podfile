@@ -7,9 +7,10 @@ target 'MyNSB' do
 
   # Pods for MyNSB
   pod 'Alamofire', '~>4.5'
-  pod 'SwiftyJSON', '4.0'
+  pod 'SwiftyJSON', '~>4.1.0'
   pod 'PromiseKit', '~>6.0'
   pod 'PromiseKit/Alamofire', '~>6.0'
+  pod 'RSDayFlow', '~>1.7.0'
 
   target 'MyNSBTests' do
     inherit! :search_paths

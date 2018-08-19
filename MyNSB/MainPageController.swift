@@ -1,20 +1,22 @@
 //
-//  SettingsController.swift
+//  MainPageController.swift
 //  MyNSB
 //
-//  Created by Hanyuan Li on 17/6/18.
+//  Created by Hanyuan Li on 24/6/18.
 //  Copyright © 2018 Qwerp-Derp. All rights reserved.
 //
 
 import UIKit
-import Alamofire
-import PromiseKit
 
-class SettingsController: UITableViewController {
-    private var alertController = UIAlertController()
-
+class MainPageController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,12 +28,16 @@ class SettingsController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 
     /*
@@ -88,37 +94,4 @@ class SettingsController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    private func initAlertController(error: Error) {
-        self.alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
-        }
-
-        self.alertController.addAction(confirmAction)
-        self.present(self.alertController, animated: true, completion: nil)
-    }
-
-    private func logout() -> Promise<Void> {
-        return Promise { seal in
-            Alamofire.request("http://35.189.50.185:8080/api/v1/user/Logout", method: .post)
-                .validate()
-                .responseJSON { response in
-                    switch response.result {
-                        case .success:
-                            seal.fulfill(())
-                        case .failure(let error):
-                            seal.reject(error)
-                    }
-                }
-        }
-    }
-
-    @IBAction func appLogout(_ sender: Any) {
-        logout().done {
-            self.performSegue(withIdentifier: "logoutSegue", sender: self)
-            self.navigationController!.navigationBar.isHidden = true
-        }.catch { error in
-            self.initAlertController(error: error)
-        }
-    }
 }

@@ -12,25 +12,29 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.2.7):
     - PromiseKit/CorePromise
-  - SwiftyJSON (4.0.0)
+  - RSDayFlow (1.7.0)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - PromiseKit (~> 6.0)
   - PromiseKit/Alamofire (~> 6.0)
-  - SwiftyJSON (= 4.0)
+  - RSDayFlow (~> 1.7.0)
+  - SwiftyJSON (~> 4.1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - PromiseKit
+    - RSDayFlow
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   PromiseKit: 12b9d87748b170714247d8b2677146ca57e488f2
-  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  RSDayFlow: 5c3af19200155a956eda4b3a82fec4020e0b5ffd
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 64ceaa6becdf5cb4234db8299c8a9f0179062c12
+PODFILE CHECKSUM: 1dad2fb9f80526beeed32838b7eddab8a7e835ba
 
 COCOAPODS: 1.5.2

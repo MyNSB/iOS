@@ -2,19 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91c8c3b1-a83d-4bd5-849a-d8a4ab0fedb5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Settings.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Settings.imageset/icons8-settings-filled-50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Settings/Settings.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/AppIcon.appiconset/mynsb_1024pp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/AppIcon.appiconset/mynsb_120pp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Events.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Events.imageset/icons8-flag-2-filled-50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Left Arrow.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Left Arrow.imageset/icons8-long-arrow-left-filled-50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/MyNSB.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/MyNSB.imageset/mynsb_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Right Arrow.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Right Arrow.imageset/icons8-right-arrow-filled-50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Timetable.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Timetable.imageset/icons8-timetable-filled-50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Events/Event.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Events/EventCell.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Events/Events.storyboard" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Events/EventsController.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/MainPageController.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Settings/LogoutSegue.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/Period.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/PeriodCell.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/TodayPeriodCell.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/xcode.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/xcode.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/AppDelegate.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Base.lproj/LaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Base.lproj/Main.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Settings/Settings.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Settings/Settings.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/Timetable.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/Timetable.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/ViewController.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile.lock" afterDir="false" />
@@ -29,20 +47,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_E04C7D06-A407-4642-A906-D4CD1A01B240" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AppDelegate.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ViewController.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/ViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-920">
-              <caret line="21" column="81" lean-forward="true" selection-start-line="21" selection-start-column="81" selection-end-line="21" selection-end-column="81" />
+            <state relative-caret-position="1666">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
               <folding>
                 <element signature="e#137#149#0" expanded="true" />
               </folding>
@@ -50,14 +59,53 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingsController.swift" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SettingsController.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="118" column="68" selection-start-line="118" selection-start-column="68" selection-end-line="118" selection-end-column="68" />
+            <state relative-caret-position="187">
+              <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="53" />
               <folding>
                 <element signature="e#141#153#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimetableController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+              <folding>
+                <element signature="e#142#154#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventsController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyNSB/Events/EventsController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SingleEventController.swift" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Event.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyNSB/Events/Event.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="18" column="150" selection-start-line="18" selection-start-column="150" selection-end-line="18" selection-end-column="150" />
             </state>
           </provider>
         </entry>
@@ -78,10 +126,21 @@
         <option value="$PROJECT_DIR$/MyNSBTests/MyNSBTests.swift" />
         <option value="$PROJECT_DIR$/MyNSBUITests/MyNSBUITests.swift" />
         <option value="$PROJECT_DIR$/MyNSB/.gitignore" />
-        <option value="$PROJECT_DIR$/Podfile" />
         <option value="$PROJECT_DIR$/MyNSB/AppDelegate.swift" />
-        <option value="$PROJECT_DIR$/MyNSB/ViewController.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/MainPageController.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/ViewController.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Settings/LogoutSegue.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Timetable/Period.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Calendar/CalendarCellView.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Calendar/Event.swift" />
+        <option value="$PROJECT_DIR$/Podfile" />
+        <option value="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Calendar/CalendarController.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Events/Event.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Events/EventsController.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift" />
       </list>
     </option>
   </component>
@@ -104,6 +163,7 @@
     </navigator>
     <panes>
       <pane id="Cidr.FilesView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -120,12 +180,19 @@
               <item name="" type="efc3779f:XcodeRootNode" />
               <item name="MyNSB" type="1d218c8b:XcodeProjectNode" />
               <item name="MyNSB" type="fcab9f18:XcodeViewNode" />
+              <item name="Events" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="MyNSB" type="1d218c8b:XcodeProjectNode" />
+              <item name="MyNSB" type="fcab9f18:XcodeViewNode" />
               <item name="Settings" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
               <item name="" type="efc3779f:XcodeRootNode" />
               <item name="MyNSB" type="1d218c8b:XcodeProjectNode" />
-              <item name="Pods" type="fcab9f18:XcodeViewNode" />
+              <item name="MyNSB" type="fcab9f18:XcodeViewNode" />
+              <item name="Timetable" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
               <item name="" type="efc3779f:XcodeRootNode" />
@@ -135,7 +202,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -156,12 +222,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MyNSB">
     <configuration name="MyNSB" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="MyNSB" TARGET_NAME="MyNSB" CONFIG_NAME="Debug" SCHEME_NAME="MyNSB" IS_LOCATION_SIMULATION_ALLOWED="true" RUN_TARGET_PROJECT_NAME="MyNSB" RUN_TARGET_NAME="MyNSB" MAKE_ACTIVE="TRUE">
       <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
         <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
       </EXTENSION>
     </configuration>
+    <configuration name="RSDayFlow" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="RSDayFlow" CONFIG_NAME="Debug" SCHEME_NAME="RSDayFlow" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE">
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MyNSB" />
+      <item itemvalue="Application.RSDayFlow" />
+    </list>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -182,7 +257,14 @@
       <workItem from="1528877762340" duration="1053000" />
       <workItem from="1528887457399" duration="188000" />
       <workItem from="1528887765508" duration="2723000" />
-      <workItem from="1529129244952" duration="13791000" />
+      <workItem from="1529129244952" duration="14632000" />
+      <workItem from="1530945330038" duration="1000" />
+      <workItem from="1530945462180" duration="11524000" />
+      <workItem from="1531485765343" duration="1779000" />
+      <workItem from="1531558200553" duration="3199000" />
+      <workItem from="1531961732567" duration="22576000" />
+      <workItem from="1532149724554" duration="10361000" />
+      <workItem from="1534660345065" duration="278000" />
     </task>
     <task id="LOCAL-00001" summary="Added storyboard for timetable">
       <created>1511681482071</created>
@@ -191,11 +273,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511681482071</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Finished login and logout capabilities">
+      <created>1529213160904</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1529213160905</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31896000" />
+    <option name="totallyTimeSpent" value="82455000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -213,11 +302,11 @@
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964765" weight="0.32969698" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.44115573" weight="0.32969698" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.41578576" weight="0.32969698" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.51585627" side_tool="true" visible="true" weight="0.32969698" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.48414376" visible="true" weight="0.32969698" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.53276956" side_tool="true" visible="true" weight="0.32969698" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49964765" weight="0.32969698" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.46723044" visible="true" weight="0.32969698" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49964765" weight="0.32969698" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -239,100 +328,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added storyboard for timetable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added storyboard for timetable" />
+    <MESSAGE value="Finished login and logout capabilities" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished login and logout capabilities" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Desktop/Swift/ReminderApp/ReminderApp/ReminderController.swift">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/Swift/Weather/Weather/ViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2261">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/ViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="9" lean-forward="true" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
-          <folding>
-            <element signature="e#137#149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/Swift/ReminderApp/ReminderApp/ReminderController.swift">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/Swift/Weather/Weather/ViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2261">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/ViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="32" lean-forward="true" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-          <folding>
-            <element signature="e#137#149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/Swift/ReminderApp/ReminderApp/ReminderController.swift">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/Swift/Weather/Weather/ViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2261">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/ViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
-          <folding>
-            <element signature="e#137#149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/Swift/ReminderApp/ReminderApp/ReminderController.swift">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/Swift/Weather/Weather/ViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2346">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/ViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -499,25 +498,11 @@
     <entry file="file://$PROJECT_DIR$/Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB.debug.xcconfig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Podfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Pods/Alamofire/Source/AFError.swift">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$USER_HOME$/Desktop/Swift/ReminderApp/ReminderApp/ReminderController.swift">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$USER_HOME$/Desktop/Swift/Weather/Weather/ViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
@@ -533,10 +518,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/ViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-920">
-          <caret line="21" column="81" lean-forward="true" selection-start-line="21" selection-start-column="81" selection-end-line="21" selection-end-column="81" />
+        <state relative-caret-position="1666">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
           <folding>
             <element signature="e#137#149#0" expanded="true" />
           </folding>
@@ -545,11 +537,97 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="118" column="68" selection-start-line="118" selection-start-column="68" selection-end-line="118" selection-end-column="68" />
+        <state relative-caret-position="187">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="53" />
           <folding>
             <element signature="e#141#153#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/MainPageController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1615">
+          <caret line="95" column="6" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Period.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Calendar/CalendarCellView.swift" />
+    <entry file="file://$PROJECT_DIR$/MyNSB/Settings/LogoutSegue.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/PeriodCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Calendar/Event.swift" />
+    <entry file="jar://$APPLICATION_HOME_DIR$/Resources/module_cache.zip!/ModuleCache/9F1027a/4.1.2/arm64/iphoneos11.4/UIKit.UITableView/UIKit.UITableView.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="568" column="16" selection-start-line="568" selection-start-column="16" selection-end-line="568" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Podfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Calendar/CalendarController.swift" />
+    <entry file="file://$PROJECT_DIR$/MyNSB/Events/EventCell.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Events/Event.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="18" column="150" selection-start-line="18" selection-start-column="150" selection-end-line="18" selection-end-column="150" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Events/EventsController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <folding>
+            <element signature="e#142#154#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
         </state>
       </provider>
     </entry>
