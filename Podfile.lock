@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.7.2)
+  - AlamofireImage (3.3.1):
+    - Alamofire (~> 4.5)
   - PromiseKit (6.2.7):
     - PromiseKit/CorePromise (= 6.2.7)
     - PromiseKit/Foundation (= 6.2.7)
@@ -17,6 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
+  - AlamofireImage (~> 3.3)
   - PromiseKit (~> 6.0)
   - PromiseKit/Alamofire (~> 6.0)
   - RSDayFlow (~> 1.7.0)
@@ -25,16 +28,18 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AlamofireImage
     - PromiseKit
     - RSDayFlow
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   PromiseKit: 12b9d87748b170714247d8b2677146ca57e488f2
   RSDayFlow: 5c3af19200155a956eda4b3a82fec4020e0b5ffd
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 1dad2fb9f80526beeed32838b7eddab8a7e835ba
+PODFILE CHECKSUM: 2fec44d75a96bb44ac48d1531065983137b73f00
 
 COCOAPODS: 1.5.2

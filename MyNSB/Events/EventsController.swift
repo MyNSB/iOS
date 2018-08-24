@@ -107,7 +107,7 @@ class EventsController: UIViewController {
                         organiser: organiser,
                         shortDescription: shortDescription,
                         longDescription: longDescription,
-                        picture: picture
+                        imageURL: picture
                 )
             }.sorted { first, second in
                 first.start < second.start

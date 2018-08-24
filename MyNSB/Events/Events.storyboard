@@ -135,13 +135,59 @@
                     <view key="view" contentMode="scaleToFill" id="g4T-sh-Kjc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9aq-v9-K5O">
+                                <rect key="frame" x="37.5" y="42.5" width="300" height="259"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="kxA-2P-mU1">
+                                <rect key="frame" x="37.5" y="354" width="300" height="48"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mu6-T6-awS">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkP-Ru-8Mt">
+                                        <rect key="frame" x="0.0" y="30" width="78.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.77258743519999995" green="0.77258743519999995" blue="0.77258743519999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFY-XQ-irb">
+                                <rect key="frame" x="37.5" y="416" width="300" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kxA-2P-mU1" firstAttribute="centerX" secondItem="QeE-w2-81V" secondAttribute="centerX" id="7xf-v3-WgL"/>
+                            <constraint firstItem="hFY-XQ-irb" firstAttribute="top" secondItem="kxA-2P-mU1" secondAttribute="bottom" constant="14" id="9Em-IO-sGI"/>
+                            <constraint firstItem="hFY-XQ-irb" firstAttribute="width" secondItem="QeE-w2-81V" secondAttribute="width" multiplier="0.8" id="BIS-jH-oTX"/>
+                            <constraint firstItem="9aq-v9-K5O" firstAttribute="width" secondItem="QeE-w2-81V" secondAttribute="width" multiplier="0.8" id="CeW-4W-IHq"/>
+                            <constraint firstItem="9aq-v9-K5O" firstAttribute="centerX" secondItem="QeE-w2-81V" secondAttribute="centerX" id="D87-9g-Rsx"/>
+                            <constraint firstItem="9aq-v9-K5O" firstAttribute="centerY" secondItem="QeE-w2-81V" secondAttribute="centerY" multiplier="0.5" id="RdT-f0-TUA"/>
+                            <constraint firstItem="hFY-XQ-irb" firstAttribute="centerX" secondItem="QeE-w2-81V" secondAttribute="centerX" id="mLh-yL-jPP"/>
+                            <constraint firstItem="9aq-v9-K5O" firstAttribute="height" secondItem="QeE-w2-81V" secondAttribute="height" multiplier="0.4" id="pPC-gt-mCk"/>
+                            <constraint firstItem="kxA-2P-mU1" firstAttribute="centerY" secondItem="QeE-w2-81V" secondAttribute="centerY" multiplier="1.1" id="rH1-BO-dw9"/>
+                            <constraint firstItem="kxA-2P-mU1" firstAttribute="width" secondItem="QeE-w2-81V" secondAttribute="width" multiplier="0.8" id="v46-8e-ROT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="QeE-w2-81V"/>
                     </view>
+                    <connections>
+                        <outlet property="eventImage" destination="9aq-v9-K5O" id="Lgo-xZ-aQG"/>
+                        <outlet property="eventLongDesc" destination="hFY-XQ-irb" id="cXJ-26-O7E"/>
+                        <outlet property="eventName" destination="mu6-T6-awS" id="nPb-BK-aXA"/>
+                        <outlet property="eventShortDesc" destination="bkP-Ru-8Mt" id="pv7-6K-Eez"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2a-cm-iAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="859" y="157"/>
+            <point key="canvasLocation" x="858.39999999999998" y="156.97151424287858"/>
         </scene>
     </scenes>
 </document>

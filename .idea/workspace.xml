@@ -2,38 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91c8c3b1-a83d-4bd5-849a-d8a4ab0fedb5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/AppIcon.appiconset/mynsb_1024pp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/AppIcon.appiconset/mynsb_120pp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Events.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Events.imageset/icons8-flag-2-filled-50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Left Arrow.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Left Arrow.imageset/icons8-long-arrow-left-filled-50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/MyNSB.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/MyNSB.imageset/mynsb_logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Right Arrow.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Right Arrow.imageset/icons8-right-arrow-filled-50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Timetable.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/Timetable.imageset/icons8-timetable-filled-50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Events/Event.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Events/EventCell.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Events/Events.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Events/EventsController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/MainPageController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Settings/LogoutSegue.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/Period.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/PeriodCell.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/TodayPeriodCell.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Base.lproj/Main.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Settings/Settings.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Settings/Settings.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/Timetable.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/Timetable.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Events/Event.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Events/Event.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Events/Events.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Events/Events.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Events/EventsController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Events/EventsController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/ViewController.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile.lock" afterDir="false" />
     </list>
@@ -74,8 +49,8 @@
       <file leaf-file-name="TimetableController.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+            <state relative-caret-position="3799">
+              <caret line="261" column="17" selection-start-line="261" selection-start-column="17" selection-end-line="261" selection-end-column="17" />
               <folding>
                 <element signature="e#142#154#0" expanded="true" />
               </folding>
@@ -86,8 +61,11 @@
       <file leaf-file-name="EventsController.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/Events/EventsController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+            <state relative-caret-position="101">
+              <caret line="30" column="4" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="37" selection-end-column="5" />
+              <folding>
+                <element signature="e#141#153#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,8 +73,20 @@
       <file leaf-file-name="SingleEventController.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            <state relative-caret-position="424">
+              <caret line="42" column="49" lean-forward="true" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+              <folding>
+                <element signature="e#144#156#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Podfile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Podfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -104,8 +94,8 @@
       <file leaf-file-name="Event.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/Events/Event.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="18" column="150" selection-start-line="18" selection-start-column="150" selection-end-line="18" selection-end-column="150" />
+            <state relative-caret-position="459">
+              <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -135,11 +125,11 @@
         <option value="$PROJECT_DIR$/MyNSB/Timetable/Period.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Calendar/CalendarCellView.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Calendar/Event.swift" />
-        <option value="$PROJECT_DIR$/Podfile" />
-        <option value="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Calendar/CalendarController.swift" />
-        <option value="$PROJECT_DIR$/MyNSB/Events/Event.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Events/EventsController.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Events/Event.swift" />
+        <option value="$PROJECT_DIR$/Podfile" />
         <option value="$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift" />
       </list>
     </option>
@@ -222,21 +212,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MyNSB">
+  <component name="RunManager">
     <configuration name="MyNSB" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="MyNSB" TARGET_NAME="MyNSB" CONFIG_NAME="Debug" SCHEME_NAME="MyNSB" IS_LOCATION_SIMULATION_ALLOWED="true" RUN_TARGET_PROJECT_NAME="MyNSB" RUN_TARGET_NAME="MyNSB" MAKE_ACTIVE="TRUE">
       <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
         <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
       </EXTENSION>
     </configuration>
-    <configuration name="RSDayFlow" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="RSDayFlow" CONFIG_NAME="Debug" SCHEME_NAME="RSDayFlow" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-    </configuration>
-    <list>
-      <item itemvalue="Application.MyNSB" />
-      <item itemvalue="Application.RSDayFlow" />
-    </list>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -264,7 +245,7 @@
       <workItem from="1531558200553" duration="3199000" />
       <workItem from="1531961732567" duration="22576000" />
       <workItem from="1532149724554" duration="10361000" />
-      <workItem from="1534660345065" duration="278000" />
+      <workItem from="1534660345065" duration="9693000" />
     </task>
     <task id="LOCAL-00001" summary="Added storyboard for timetable">
       <created>1511681482071</created>
@@ -280,11 +261,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529213160905</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Finished login and logout capabilities">
+      <created>1534660814929</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1534660814930</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82455000" />
+    <option name="totallyTimeSpent" value="91870000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -302,11 +290,11 @@
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964765" weight="0.32969698" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.41578576" weight="0.32969698" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.40591967" weight="0.32969698" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.53276956" side_tool="true" visible="true" weight="0.32969698" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5377026" side_tool="true" visible="true" weight="0.32969698" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49964765" weight="0.32969698" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.46723044" visible="true" weight="0.32969698" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.46229738" visible="true" weight="0.32969698" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49964765" weight="0.32969698" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -589,45 +577,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Podfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/Calendar/CalendarController.swift" />
     <entry file="file://$PROJECT_DIR$/MyNSB/Events/EventCell.swift">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/Events/Event.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="18" column="150" selection-start-line="18" selection-start-column="150" selection-end-line="18" selection-end-column="150" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/Events/EventsController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+        <state relative-caret-position="3799">
+          <caret line="261" column="17" selection-start-line="261" selection-start-column="17" selection-end-line="261" selection-end-column="17" />
           <folding>
             <element signature="e#142#154#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Events/Event.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Podfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Events/EventsController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="30" column="4" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="37" selection-end-column="5" />
+          <folding>
+            <element signature="e#141#153#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        <state relative-caret-position="424">
+          <caret line="42" column="49" lean-forward="true" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+          <folding>
+            <element signature="e#144#156#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

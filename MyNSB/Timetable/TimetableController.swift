@@ -71,7 +71,8 @@ class TimetableController: UIViewController {
         let timeframes = timeStrings.map { string -> Date in
             let date = formatter.date(from: string.trimmingCharacters(in: .whitespaces))
             let time = calendar.dateComponents([.hour, .minute, .second], from: date!)
-            return calendar.date(bySettingHour: time.hour!, minute: time.minute!, second: time.day!, of: Date())!
+            // print(calendar.date(bySettingHour: time.hour!, minute: time.minute!, second: time.second!, of: Date())!)
+            return calendar.date(bySettingHour: time.hour!, minute: time.minute!, second: time.second!, of: Date())!
         }
 
         return Timespan(name: name, start: timeframes[0], end: timeframes[1])
@@ -87,7 +88,6 @@ class TimetableController: UIViewController {
         }.map { json, response in
             let weekday = self.localDay % 5
             let weekdayBellTimes = JSON(json)["Message"]["Body"][0][weekdaysList[weekday]]
-            print(weekdayBellTimes.dictionaryValue)
             
             return weekdayBellTimes.dictionaryValue.map { key, value in
                 self.toTimespan(name: key, value: value.stringValue)
@@ -113,9 +113,13 @@ class TimetableController: UIViewController {
                 } else if timespan.name == "Lunch" {
                     return Lunch(start: timespan.start, end: timespan.end)
                 } else {
-                    let periodJson = localDayPeriods.first { period in
-                        period["name"].stringValue == timespan.name
-                    }!
+                    let periodJsonNilable = localDayPeriods.first { period in
+                        return period["period"].stringValue == timespan.name
+                    }
+
+                    guard let periodJson = periodJsonNilable else {
+                        return nil
+                    }
 
                     let className = periodJson["class"].stringValue
                     let teacher = periodJson["teacher"].stringValue
@@ -123,6 +127,10 @@ class TimetableController: UIViewController {
 
                     return Period(name: className, teacher: teacher, room: room, start: timespan.start, end: timespan.end)
                 }
+            }.filter {
+                $0 != nil
+            }.map {
+                $0!
             }
         }
     }
@@ -207,7 +215,7 @@ extension TimetableController: UITableViewDelegate, UITableViewDataSource {
     }
 
     private func calculateCountdown(time: Date) -> String {
-        let interval = DateInterval(start: time, end: Date()).duration
+        let interval = DateInterval(start: Date(), end: time).duration
 
         if interval >= 3600 {
             return "\(interval / 3600)h"
@@ -224,7 +232,7 @@ extension TimetableController: UITableViewDelegate, UITableViewDataSource {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
 
-        if userOnToday() && start < Date() {
+        if userOnToday() && Date() < start {
             let cell = self.periods.dequeueReusableCell(withIdentifier: "todayPeriodCell", for: indexPath) as! TodayPeriodCell
 
             cell.timeLabel.text = formatter.string(from: start)
@@ -250,10 +258,12 @@ extension TimetableController: UITableViewDelegate, UITableViewDataSource {
             if period.name == "Recess" || period.name == "Lunch" {
                 cell.stackView.isHidden = true
             } else {
+                cell.stackView.isHidden = false
                 cell.roomLabel.text = period.room!
                 cell.teacherLabel.text = period.teacher!
             }
 
+            print(cell.stackView.isHidden)
             return cell
         }
     }

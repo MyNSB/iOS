@@ -14,9 +14,9 @@ class Event {
     let organiser: String
     let shortDescription: String
     let longDescription: String
-    let picture: String
+    let imageURL: String
 
-    init(name: String, start: Date, end: Date, location: String, organiser: String, shortDescription: String, longDescription: String, picture: String) {
+    init(name: String, start: Date, end: Date, location: String, organiser: String, shortDescription: String, longDescription: String, imageURL: String) {
         self.name = name
         self.start = start
         self.end = end
@@ -24,6 +24,6 @@ class Event {
         self.organiser = organiser
         self.shortDescription = shortDescription
         self.longDescription = longDescription
-        self.picture = picture
+        self.imageURL = imageURL
     }
 }

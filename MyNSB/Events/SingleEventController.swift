@@ -8,20 +8,68 @@
 
 import UIKit
 
+import PromiseKit
+import Alamofire
+import AlamofireImage
+
 class SingleEventController: UIViewController {
+    private var alertController = UIAlertController()
+
     var event: Event?
 
+    @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var eventName: UILabel!
+    @IBOutlet weak var eventShortDesc: UILabel!
+    @IBOutlet weak var eventLongDesc: UILabel!
+
+    private func initAlertController(error: Error) {
+        self.alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
+        }
+
+        self.alertController.addAction(confirmAction)
+        self.present(self.alertController, animated: true, completion: nil)
+    }
+
+    private func fetchImage() -> Promise<Image> {
+        return Promise<Image> { seal in
+            let csCopy = CharacterSet(bitmapRepresentation: CharacterSet.urlPathAllowed.bitmapRepresentation)
+            Alamofire.request(event!.imageURL.addingPercentEncoding(withAllowedCharacters: csCopy)!)
+                    .validate()
+                    .responseImage { response in
+                        switch response.result {
+                        case .success(let value):
+                            seal.fulfill(value)
+                        case .failure(let error):
+                            seal.reject(error)
+                        }
+                    }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController!.title = event!.name
+
+        self.eventName.text = event!.name
+        self.eventShortDesc.text = event!.shortDescription
+        self.eventLongDesc.text = event!.longDescription
+
+        firstly {
+            self.fetchImage()
+        }.done { image in
+            self.eventImage.image = image
+        }.catch { error in
+            self.initAlertController(error: error)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
