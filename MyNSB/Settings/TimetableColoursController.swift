@@ -1,18 +1,23 @@
 //
-//  SettingsController.swift
+//  TimetableColoursController.swift
 //  MyNSB
 //
-//  Created by Hanyuan Li on 17/6/18.
+//  Created by Hanyuan Li on 2/9/18.
 //  Copyright © 2018 Qwerp-Derp. All rights reserved.
 //
 
 import UIKit
-import Alamofire
-import PromiseKit
+import SwiftyJSON
 
-class SettingsController: UITableViewController {
+class TimetableColoursController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,12 +29,18 @@ class SettingsController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        if section == 0 {
+            let archivedColours = UserDefaults.standard.object(forKey: "timetableColours")
+            let colours = NSKeyedUnarchiver.unarchiveObject(with: archivedColours as! Data) as! [String: UIColor]
+            return colours.count
+        } else {
+            return 1
+        }
     }
 
     /*
@@ -87,27 +98,4 @@ class SettingsController: UITableViewController {
     }
     */
 
-    private func logout() -> Promise<Void> {
-        return Promise { seal in
-            Alamofire.request("http://35.189.50.185:8080/api/v1/user/Logout", method: .post)
-                .validate()
-                .responseJSON { response in
-                    switch response.result {
-                        case .success:
-                            seal.fulfill(())
-                        case .failure(let error):
-                            seal.reject(error)
-                    }
-                }
-        }
-    }
-
-    @IBAction func appLogout(_ sender: Any) {
-        self.logout().done {
-            self.performSegue(withIdentifier: "logoutSegue", sender: self)
-            self.navigationController!.navigationBar.isHidden = true
-        }.catch { error in
-            MyNSBErrorController.error(self, error: error)
-        }
-    }
 }

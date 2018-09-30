@@ -18,6 +18,7 @@ class SingleEventController: UIViewController {
     var event: Event?
 
     @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var eventDate: UILabel!
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventShortDesc: UILabel!
     @IBOutlet weak var eventLongDesc: UILabel!
@@ -46,6 +47,13 @@ class SingleEventController: UIViewController {
                     }
         }
     }
+
+    private func dateToString(start: Date, end: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, YYYY"
+
+        return formatter.string(from: start) + " - " + formatter.string(from: end)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +62,11 @@ class SingleEventController: UIViewController {
         self.navigationController!.title = event!.name
 
         self.eventName.text = event!.name
+        self.eventDate.text = self.dateToString(start: event!.start, end: event!.end)
         self.eventShortDesc.text = event!.shortDescription
         self.eventLongDesc.text = event!.longDescription
 
-        firstly {
-            self.fetchImage()
-        }.done { image in
+        self.fetchImage().done { image in
             self.eventImage.image = image
         }.catch { error in
             self.initAlertController(error: error)

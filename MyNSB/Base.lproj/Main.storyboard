@@ -107,6 +107,7 @@
         <!--MyNSB-->
         <scene sceneID="mT7-sb-0pA">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yLl-lI-Rrj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="5aD-7u-c5d" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nDz-Do-mWI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -189,7 +190,6 @@
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yLl-lI-Rrj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1612.5" y="115.14084507042254"/>
         </scene>
@@ -202,7 +202,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="5aD-7u-c5d" kind="relationship" relationship="rootViewController" id="ihA-lF-7Yb"/>
+                        <segue destination="5aD-7u-c5d" kind="relationship" relationship="rootViewController" id="h4v-tW-3aj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szY-HY-oUy" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -2,7 +2,7 @@
 //  PeriodCell.swift
 //  MyNSB
 //
-//  Created by Hanyuan Li on 14/7/18.
+//  Created by Hanyuan Li on 19/7/18.
 //  Copyright © 2018 Qwerp-Derp. All rights reserved.
 //
 
@@ -14,6 +14,7 @@ class PeriodCell: UITableViewCell {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var teacherLabel: UILabel!
+    @IBOutlet weak var countdownLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

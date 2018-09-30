@@ -1,0 +1,79 @@
+{
+  "CAPA": {
+    "DRA": "Drama",
+    "MU": "Music",
+    "MUS": "Music",
+    "MUX": "Music Ext.",
+    "VAR": "Visual Arts"
+  },
+  "Careers/Library": {
+    "CAR": "Careers",
+    "LIB": "Library"
+  },
+  "English": {
+    "EN": "English",
+    "ENG": "English",
+    "EX1": "English Ext. 1",
+    "EX2": "English Ext. 2"
+  },
+  "Free Periods": {
+    "FREE": "Free Period"
+  },
+  "HSIE": {
+    "AHI": "Ancient History",
+    "BST": "Business Studies",
+    "COM": "Commerce",
+    "ECO": "Economics",
+    "GEO": "Geography",
+    "HEL": "History Elective",
+    "HIS": "History",
+    "LST": "Legal Studies",
+    "MHI": "Modern History"
+  },
+  "IT": {
+    "IPT": "IPT",
+    "SDD": "SDD"
+  },
+  "Languages": {
+    "FRB": "French Beginners",
+    "FRE": "French",
+    "FRX": "French Ext.",
+    "GEB": "German Beginners",
+    "GER": "German",
+    "GEX": "German Ext.",
+    "INB": "Indonesian Beginners",
+    "IND": "Indonesian",
+    "INX": "Indonesian Ext.",
+    "JAB": "Japanese Beginners",
+    "JAP": "Japanese",
+    "JAX": "Japanese Ext.",
+    "LAT": "Latin",
+    "LAX": "Latin Ext."
+  },
+  "Mathematics": {
+    "MAT": "Mathematics",
+    "MM": "Mathematics",
+    "MX1": "Mathematics Ext. 1",
+    "MX2": "Mathematics Ext. 2"
+  },
+  "PDHPE": {
+    "PAS": "PASS",
+    "PDH": "PDHPE"
+  },
+  "Roll Call": {
+    "RC": "Roll Call"
+  },
+  "Science": {
+    "BIO": "Biology",
+    "CHE": "Chemistry",
+    "PHY": "Physics",
+    "SCI": "Science"
+  },
+  "TAS": {
+    "DAT": "Design and Tech",
+    "EST": "Engineering",
+    "FTE": "Food Tech",
+    "GTE": "Graphics Tech",
+    "PSY": "Power Systems"
+  }
+}

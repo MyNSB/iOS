@@ -14,29 +14,31 @@ import SwiftyJSON
 import RSDayFlow
 
 class EventsController: UIViewController {
-    private var alertController = UIAlertController()
-
+    // Current calendar configuration
     private var calendar = Calendar.current
-    private var events = [Event]()
+    // A list of all the events, taken from the API
+    private var events: [Event] = []
+    // A list of all the dates covered by the events - any range of dates is inclusive.
+    // For example, if an event runs through May 24 to May 27, then all the dates May 24, 25, 26 and 27
+    // would be included in the set.
+    // This variable is a set, meaning there are no repeated dates.
     private var eventDates = Set<Date>()
-    private var eventsInDate = [Event]()
+    // A list of all the events in a certain date, needed for the `eventView` containing
+    // all events in the day when the user clicks on a day
+    private var eventsInDate: [Event] = []
+    // A flag to detect whether `stackView` is in display or not
+    private var eventsShown = false
 
-    private var selectedDate: Date!
+    // The event that's currently being selected, used when preparing to segue into a SingleEventController
     private var currentEvent: Event!
 
     @IBOutlet weak var calendarView: RSDFDatePickerView!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var currentDayLabel: UILabel!
     @IBOutlet weak var eventView: UITableView!
-    
-    private func initAlertController(error: Error) {
-        self.alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
-        }
 
-        self.alertController.addAction(confirmAction)
-        self.present(self.alertController, animated: true, completion: nil)
-    }
-
+    // Given a date `date`, returns that same date but at 00:00:00
     private func getDay(date: Date) -> Date {
         let currentComponents = self.calendar.dateComponents([.year, .month, .day], from: date)
         return self.calendar.date(from: currentComponents)!
@@ -46,17 +48,21 @@ class EventsController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.currentDayLabel.layer.borderWidth = 1
-        self.currentDayLabel.layer.borderColor = UIColor.lightGray.cgColor
 
-        self.selectedDate = self.getDay(date: Date())
-        self.calendarView.select(self.selectedDate)
+        // Make the selected date on the calendar today
+        self.calendarView.select(self.getDay(date: Date()))
 
         self.calendarView.delegate = self
         self.calendarView.dataSource = self
+        self.calendarView.scroll(toToday: false)
 
         self.eventView.delegate = self
         self.eventView.dataSource = self
+
+        self.stackView.alpha = 0.0
+        self.stackConstraint.constant = self.stackView.frame.height
+        self.view.layoutIfNeeded()
+        self.eventsShown = false
 
         firstly {
             fetchEvents()
@@ -65,7 +71,7 @@ class EventsController: UIViewController {
             self.eventDates = self.getEventDates()
             self.calendarView.reloadData()
         }.catch { error in
-            self.initAlertController(error: error)
+            MyNSBErrorController.error(self, error: error)
         }
     }
 
@@ -139,6 +145,32 @@ class EventsController: UIViewController {
         }
     }
 
+    private func hideStackView() {
+        self.view.isUserInteractionEnabled = false
+        self.stackConstraint.constant = self.stackView.frame.height
+
+        UIView.animate(.promise, duration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+            self.view.layoutIfNeeded()
+            self.stackView.alpha = 0.0
+        }).done { _ in
+            self.view.isUserInteractionEnabled = true
+            self.eventsShown = false
+        }
+    }
+
+    private func showStackView() {
+        self.view.isUserInteractionEnabled = false
+        self.stackConstraint.constant = 0
+
+        UIView.animate(.promise, duration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+            self.stackView.alpha = 1.0
+        }).done { _ in
+            self.view.isUserInteractionEnabled = true
+            self.eventsShown = true
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as! SingleEventController
         destination.event = self.currentEvent
@@ -148,6 +180,12 @@ class EventsController: UIViewController {
 extension EventsController: RSDFDatePickerViewDelegate, RSDFDatePickerViewDataSource {
     func datePickerView(_ view: RSDFDatePickerView, didSelect date: Date) {
         self.eventsInDate = self.getAllEvents(for: date)
+
+        if self.eventsInDate.count == 0 && self.eventsShown {
+            self.hideStackView()
+        } else if self.eventsInDate.count != 0 && !self.eventsShown {
+            self.showStackView()
+        }
 
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM d', 'yyyy"

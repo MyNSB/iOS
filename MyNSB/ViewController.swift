@@ -12,8 +12,6 @@ import SwiftyJSON
 import PromiseKit
 
 class ViewController: UIViewController {
-    private var alertController = UIAlertController()
-
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
 
@@ -35,9 +33,17 @@ class ViewController: UIViewController {
                 }
         }
     }
+
+    @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        self.usernameField.resignFirstResponder()
+        self.passwordField.resignFirstResponder()
+    }
     
     override func viewDidLoad() {
-        checkLogin().done { verified in
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+        self.view.addGestureRecognizer(gesture)
+
+        self.checkLogin().done { verified in
             if verified {
                 self.performSegue(withIdentifier: "loginSegue", sender: self)
             }
@@ -49,15 +55,6 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    private func initAlertController(error: Error) {
-        self.alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
-        }
-
-        self.alertController.addAction(confirmAction)
-        self.present(self.alertController, animated: true, completion: nil)
     }
 
     private func generateHeaders(user: String, password: String) -> HTTPHeaders? {
@@ -92,10 +89,10 @@ class ViewController: UIViewController {
     }
 
     @IBAction func submitLogin(_ sender: Any) {
-        login(user: usernameField.text, password: passwordField.text).done { _ in
+        self.login(user: usernameField.text, password: passwordField.text).done { _ in
             self.performSegue(withIdentifier: "loginSegue", sender: self)
         }.catch { error in
-            self.initAlertController(error: error)
+            MyNSBErrorController.error(self, error: error)
         }
     }
 }
