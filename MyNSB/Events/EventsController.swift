@@ -18,11 +18,6 @@ class EventsController: UIViewController {
     private var calendar = Calendar.current
     // A list of all the events, taken from the API
     private var events: [Event] = []
-    // A list of all the dates covered by the events - any range of dates is inclusive.
-    // For example, if an event runs through May 24 to May 27, then all the dates May 24, 25, 26 and 27
-    // would be included in the set.
-    // This variable is a set, meaning there are no repeated dates.
-    private var eventDates = Set<Date>()
     // A list of all the events in a certain date, needed for the `eventView` containing
     // all events in the day when the user clicks on a day
     private var eventsInDate: [Event] = []
@@ -68,7 +63,6 @@ class EventsController: UIViewController {
             fetchEvents()
         }.done { events in
             self.events = events
-            self.eventDates = self.getEventDates()
             self.calendarView.reloadData()
         }.catch { error in
             MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
@@ -80,13 +74,6 @@ class EventsController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    private func parseDate(from string: String) -> Date {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-
-        return formatter.date(from: string)!
-    }
-
     private func fetchEvents() -> Promise<[Event]> {
         return firstly {
             Alamofire.request("http://35.189.50.185:8080/api/v1/events/Get")
@@ -96,25 +83,7 @@ class EventsController: UIViewController {
             let body = JSON(json)["Message"]["Body"][0].arrayValue
 
             return body.map { eventJson in
-                let name = eventJson["EventName"].stringValue
-                let start = self.parseDate(from: eventJson["EventStart"].stringValue)
-                let end = self.parseDate(from: eventJson["EventEnd"].stringValue)
-                let location = eventJson["EventLocation"].stringValue
-                let organiser = eventJson["EventOrganiser"].stringValue
-                let shortDescription = eventJson["EventShortDesc"].stringValue
-                let longDescription = eventJson["EventLongDesc"].stringValue
-                let picture = eventJson["EventPictureURL"].stringValue
-
-                return Event(
-                        name: name,
-                        start: start,
-                        end: end,
-                        location: location,
-                        organiser: organiser,
-                        shortDescription: shortDescription,
-                        longDescription: longDescription,
-                        imageURL: picture
-                )
+                return Event(contents: eventJson)
             }.sorted { first, second in
                 first.start < second.start
             }
@@ -195,7 +164,7 @@ extension EventsController: RSDFDatePickerViewDelegate, RSDFDatePickerViewDataSo
     }
 
     func datePickerView(_ view: RSDFDatePickerView, shouldMark date: Date) -> Bool {
-        return self.eventDates.contains(date)
+        return self.getEventDates().contains(date)
     }
 
     func datePickerView(_ view: RSDFDatePickerView, markImageColorFor date: Date) -> UIColor {

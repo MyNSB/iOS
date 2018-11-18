@@ -5,6 +5,7 @@
 
 import UIKit
 import Foundation
+import SwiftyJSON
 
 class Event {
     let name: String
@@ -15,15 +16,22 @@ class Event {
     let shortDescription: String
     let longDescription: String
     let imageURL: String
-
-    init(name: String, start: Date, end: Date, location: String, organiser: String, shortDescription: String, longDescription: String, imageURL: String) {
-        self.name = name
-        self.start = start
-        self.end = end
-        self.location = location
-        self.organiser = organiser
-        self.shortDescription = shortDescription
-        self.longDescription = longDescription
-        self.imageURL = imageURL
+    
+    private func parseDate(from string: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        
+        return formatter.date(from: string)!
+    }
+    
+    init(contents: JSON) {
+        self.name = contents["EventName"].stringValue
+        self.start = self.parseDate(from: contents["EventStart"].stringValue)
+        self.end = self.parseDate(from: contents["EventEnd"].stringValue)
+        self.location = contents["EventLocation"].stringValue
+        self.organiser = contents["EventOrganiser"].stringValue
+        self.shortDescription = contents["EventShortDesc"].stringValue
+        self.longDescription = contents["EventLongDesc"].stringValue
+        self.imageURL = contents["EventPictureURL"].stringValue
     }
 }

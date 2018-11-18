@@ -19,10 +19,10 @@ class TimetableController: UIViewController {
     private var todayIsWeekend = false
     // A list of bell times, separated by day - each `Timespan` class denotes the start
     // and end of each period
-    private var bellTimes: [[Timespan]]? = nil
+    private var bellTimes: [[Timespan]]?
     // A list of periods within the timetable, separated by day - each `Period` class contains
     // all the information needed to represent a period (e.g. classroom, teacher name, subject name)
-    private var timetable: [[Period]]? = nil
+    private var timetable: [[Period]]?
     
     // Mark: Properties
     
@@ -42,7 +42,6 @@ class TimetableController: UIViewController {
     private func isUserOnToday() -> Bool {
         return self.userSelectedDay == self.today
     }
-
     
     /// Checks if the user has their timetable stored locally.
     ///
@@ -53,6 +52,56 @@ class TimetableController: UIViewController {
     }
 
     // Private functions used internally
+    
+    // Helper functions
+    
+    /// Creates a `Timespan` object, which represents a length of time associated
+    /// with a certain period. Converts arbitrary times, such as `8:58`, to a `Time`
+    /// object representing that time today.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the timespan, e.g. "Period 1", "Recess".
+    ///   - value: A string representing the start and end time, e.g. "8:50-8:58".
+    /// - Returns: A `Timespan` object with all that information.
+    private func toTimespan(name: String, value: String) -> Timespan {
+        // Setting up calendar and date formatter
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mma"
+        
+        // Split "8:58am-9:50am" into ["8:58am", "9:50am"]
+        let timeStrings = value.split(separator: "-")
+        let timeframes = timeStrings.map { string -> Date in
+            // Formats the string representation into a Date object
+            let date = formatter.date(from: string.trimmingCharacters(in: .whitespaces))
+            // Fetches hours, minutes, seconds from Date object (since they're the only
+            // values that are set, the rest default to 0)
+            let time = calendar.dateComponents([.hour, .minute, .second], from: date!)
+            // Return the date today, but with the time described in `time`
+            return calendar.date(bySettingHour: time.hour!, minute: time.minute!, second: time.second!, of: Date())!
+        }
+        
+        // Return timespan object
+        return Timespan(name: name, start: timeframes[0], end: timeframes[1])
+    }
+    
+    private func toPeriod(contents json: JSON?, timespan: Timespan) -> Period? {
+        if json == nil {
+            return nil
+        } else if timespan.name == "Recess" {
+            return Recess(timespan: timespan)
+        } else if timespan.name == "Lunch" {
+            return Lunch(timespan: timespan)
+        } else {
+            return Period(contents: json!, timespan: timespan)
+        }
+    }
+    
+    private func filterNils<T>(unfiltered: [T?]) -> [T] {
+        return unfiltered.filter { $0 != nil }.map { $0! }
+    }
+    
+    // API calls & Promises
     
     /// Fetches a week from the API, either "A" or "B".
     ///
@@ -69,7 +118,6 @@ class TimetableController: UIViewController {
             return body.stringValue
         }
     }
-
     
     /// Fetches the day that today corresponds with in the fortnight. Week A Monday is 0,
     /// Week B Friday is 9.
@@ -105,36 +153,6 @@ class TimetableController: UIViewController {
         }
     }
 
-    /// Creates a `Timespan` object, which represents a length of time associated
-    /// with a certain period. Converts arbitrary times, such as `8:58`, to a `Time`
-    /// object representing that time today.
-    ///
-    /// - Parameters:
-    ///   - name: The name of the timespan, e.g. "Period 1", "Recess".
-    ///   - value: A string representing the start and end time, e.g. "8:50-8:58".
-    /// - Returns: A `Timespan` object with all that information.
-    private func toTimespan(name: String, value: String) -> Timespan {
-        // Setting up calendar and date formatter
-        let calendar = Calendar.current
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mma"
-
-        // Split "8:58am-9:50am" into ["8:58am", "9:50am"]
-        let timeStrings = value.split(separator: "-")
-        let timeframes = timeStrings.map { string -> Date in
-            // Formats the string representation into a Date object
-            let date = formatter.date(from: string.trimmingCharacters(in: .whitespaces))
-            // Fetches hours, minutes, seconds from Date object (since they're the only
-            // values that are set, the rest default to 0)
-            let time = calendar.dateComponents([.hour, .minute, .second], from: date!)
-            // Return the date today, but with the time described in `time`
-            return calendar.date(bySettingHour: time.hour!, minute: time.minute!, second: time.second!, of: Date())!
-        }
-
-        // Return timespan object
-        return Timespan(name: name, start: timeframes[0], end: timeframes[1])
-    }
-
     /// <#Description#>
     ///
     /// - Returns: <#return value description#>
@@ -145,7 +163,7 @@ class TimetableController: UIViewController {
             Alamofire.request("http://35.189.50.185:8080/api/v1/belltimes/Get")
                     .validate()
                     .responseJSON()
-        }.map { json, response in
+        }.map { json, _ in
             var bellTimes: [[Timespan]] = []
 
             for weekday in 0..<5 {
@@ -159,7 +177,7 @@ class TimetableController: UIViewController {
                 })
             }
 
-            return bellTimes
+            return bellTimes + bellTimes
         }
     }
 
@@ -168,42 +186,26 @@ class TimetableController: UIViewController {
             Alamofire.request("http://35.189.50.185:8080/api/v1/timetable/Get")
                 .validate()
                 .responseJSON()
-        }.map { json, response in
-            let body = JSON(json)["Message"]["Body"][0]
+        }.map { json, _ in
+            let body = JSON(json)["Message"]["Body"][0].arrayValue
             var periods: [[Period]] = []
 
             for day in 0..<10 {
-                let weekday = day % 5
-
-                periods.append(bellTimes[weekday].map { timespan in
-                    if timespan.name == "Recess" {
-                        return Recess(start: timespan.start, end: timespan.end)
-                    } else if timespan.name == "Lunch" {
-                        return Lunch(start: timespan.start, end: timespan.end)
+                let bellTimesForDay = bellTimes[day]
+                let periodsForDay = body.filter { item in
+                    return item["day"].intValue == day + 1
+                }
+                
+                let unfilteredPeriods = bellTimesForDay.map { (timespan: Timespan) -> Period? in
+                    let periodJSON = periodsForDay.first { period in
+                        period["period"].stringValue == timespan.name
                     }
-
-                    let localDayPeriods = body.arrayValue.filter { item in
-                        return item["day"].intValue == day + 1
-                    }
-
-                    let periodJsonNilable = localDayPeriods.first { period in
-                        return period["period"].stringValue == timespan.name
-                    }
-
-                    guard let periodJson = periodJsonNilable else {
-                        return nil
-                    }
-
-                    let className = periodJson["class"].stringValue
-                    let teacher = periodJson["teacher"].stringValue
-                    let room = periodJson["room"].stringValue
-
-                    return Period(subject: Subject(name: className), teacher: teacher, room: room, start: timespan.start, end: timespan.end)
-                }.filter {
-                    $0 != nil
-                }.map {
-                    $0!
-                })
+                    
+                    return self.toPeriod(contents: periodJSON, timespan: timespan)
+                }
+                
+                let filteredPeriods = self.filterNils(unfiltered: unfilteredPeriods)
+                periods.append(filteredPeriods)
             }
 
             return periods
@@ -285,7 +287,10 @@ class TimetableController: UIViewController {
             MyNSBErrorController.error(self, error: MyNSBError.connection)
         }
     }
-    
+}
+
+// Methods exposed to public
+extension TimetableController {
     @objc private func updateTimetable() {
         firstly {
             self.loadTimetableData()
@@ -295,10 +300,7 @@ class TimetableController: UIViewController {
             MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
         }
     }
-}
-
-// Methods exposed to public
-extension TimetableController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -316,7 +318,6 @@ extension TimetableController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     /*

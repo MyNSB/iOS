@@ -11,6 +11,35 @@ class Subject: NSObject, NSCoding {
     let group: String
     let shortName: String
     let longName: String
+    
+    
+    /// Given a subject's code (e.g. "10RC4", "7VAR"), returns that subject's short
+    /// name ("RC" and "VAR" in the two examples above)
+    ///
+    /// - Parameter code: a raw subject code (e.g. "11MM2")
+    /// - Returns: the subject's short name
+    private static func matchShortName(code: String) -> String {
+        let extensionSubjects = ["EX1", "EX2", "MX1", "MX2"]
+        
+        let regex = try! NSRegularExpression(pattern: "(\\d+)([A-Z]+)(\\d+)")
+        let unfilteredName = regex.stringByReplacingMatches(in: code, range: NSRange(location: 0, length: code.count), withTemplate: "$2$3")
+        
+        if extensionSubjects.contains(unfilteredName) {
+            return unfilteredName
+        } else {
+            let index = unfilteredName.index(unfilteredName.endIndex, offsetBy: -1)
+            return String(unfilteredName[..<index])
+        }
+    }
+    
+    /// Returns the contents of subject_list.json
+    ///
+    /// - Returns: a JSON object filled with data from subject_list.json
+    private static func contentsOfSubjectsFile() -> JSON {
+        let path = Bundle.main.path(forResource: "subject_list", ofType: "json")!
+        let string = try! String(contentsOfFile: path)
+        return JSON(parseJSON: string)
+    }
 
     /// Finds the full name of the subject based on a shortened version of it.
     ///
@@ -20,27 +49,14 @@ class Subject: NSObject, NSCoding {
             return (name, name)
         }
 
-        if let path = Bundle.main.path(forResource: "subject_list", ofType: "json") {
-            do {
-                let regex = try! NSRegularExpression(pattern: "(\\d+)([A-Z]+)(\\d+)")
-                let matchName = regex.stringByReplacingMatches(in: name, range: NSRange(location: 0, length: name.count), withTemplate: "$2$3")
-
-                let string = try String(contentsOfFile: path)
-                let json = JSON(parseJSON: string).dictionaryValue
-
-                for (group, subjects) in json {
-                    let subjectJSON = subjects.dictionaryValue
-
-                    for (key, value) in subjectJSON {
-                        if matchName.contains(key) {
-                            return (group, value.stringValue)
-                        }
-                    }
-                }
-
-                return ("Default", name)
-            } catch {
-                return ("Default", name)
+        let matchedName = Subject.matchShortName(code: name)
+        let json = Subject.contentsOfSubjectsFile().dictionaryValue
+        
+        for (group, subjects) in json {
+            let subjectJSON = subjects.dictionaryValue
+            
+            if let matchedKey = subjectJSON.keys.firstIndex(of: matchedName) {
+                return (group, subjectJSON[matchedKey].value.stringValue)
             }
         }
 

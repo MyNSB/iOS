@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class Period: NSObject, NSCoding {
     let subject: Subject
@@ -11,13 +12,21 @@ class Period: NSObject, NSCoding {
     let room: String?
     let start: Date
     let end: Date
-
-    init(subject: Subject, teacher: String?, room: String?, start: Date, end: Date) {
-        self.subject = subject
-        self.teacher = teacher
-        self.room = room
-        self.start = start
-        self.end = end
+    
+    init(name: String, timespan: Timespan) {
+        self.subject = Subject(name: name)
+        self.teacher = nil
+        self.room = nil
+        self.start = timespan.start
+        self.end = timespan.end
+    }
+    
+    init(contents: JSON, timespan: Timespan) {
+        self.subject = Subject(name: contents["class"].stringValue)
+        self.teacher = contents["teacher"].stringValue
+        self.room = contents["room"].stringValue
+        self.start = timespan.start
+        self.end = timespan.end
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -38,8 +47,8 @@ class Period: NSObject, NSCoding {
 }
 
 class Recess: Period {
-    init(start: Date, end: Date) {
-        super.init(subject: Subject(name: "Recess"), teacher: nil, room: nil, start: start, end: end)
+    init(timespan: Timespan) {
+        super.init(name: "Recess", timespan: timespan)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -48,8 +57,8 @@ class Recess: Period {
 }
 
 class Lunch: Period {
-    init(start: Date, end: Date) {
-        super.init(subject: Subject(name: "Lunch"), teacher: nil, room: nil, start: start, end: end)
+    init(timespan: Timespan) {
+        super.init(name: "Lunch", timespan: timespan)
     }
 
     required init(coder aDecoder: NSCoder) {
