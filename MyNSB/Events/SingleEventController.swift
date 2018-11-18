@@ -66,10 +66,17 @@ class SingleEventController: UIViewController {
         self.eventShortDesc.text = event!.shortDescription
         self.eventLongDesc.text = event!.longDescription
 
-        self.fetchImage().done { image in
+        if let image = ImageCache.cache.object(forKey: self.event!.imageURL as NSString) {
             self.eventImage.image = image
-        }.catch { error in
-            self.initAlertController(error: error)
+        } else {
+            firstly {
+                self.fetchImage()
+            }.done { image in
+                ImageCache.cache.setObject(image, forKey: self.event!.imageURL as NSString)
+                self.eventImage.image = image
+            }.catch { error in
+                MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
+            }
         }
     }
 

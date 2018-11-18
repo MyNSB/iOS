@@ -96,7 +96,7 @@
                                                     <constraints>
                                                         <constraint firstItem="uAa-M7-uOD" firstAttribute="centerX" secondItem="JEf-jo-hha" secondAttribute="centerX" id="4qm-i8-AJW"/>
                                                         <constraint firstItem="7lq-EQ-bX1" firstAttribute="width" secondItem="JEf-jo-hha" secondAttribute="width" multiplier="0.1" id="9SN-mz-7KM"/>
-                                                        <constraint firstAttribute="bottom" secondItem="i3t-Oe-tfq" secondAttribute="bottom" constant="6.5" id="9oB-2J-Q6L"/>
+                                                        <constraint firstItem="i3t-Oe-tfq" firstAttribute="bottom" secondItem="JEf-jo-hha" secondAttribute="bottom" constant="-6" id="9oB-2J-Q6L"/>
                                                         <constraint firstItem="7lq-EQ-bX1" firstAttribute="centerY" secondItem="JEf-jo-hha" secondAttribute="centerY" id="GpH-7J-s3i"/>
                                                         <constraint firstItem="i3t-Oe-tfq" firstAttribute="centerX" secondItem="JEf-jo-hha" secondAttribute="centerX" multiplier="1.8" id="H5U-EE-b2Q"/>
                                                         <constraint firstItem="7lq-EQ-bX1" firstAttribute="height" secondItem="JEf-jo-hha" secondAttribute="height" multiplier="0.5" id="PPg-Fm-YVn"/>
@@ -104,7 +104,6 @@
                                                         <constraint firstItem="uAa-M7-uOD" firstAttribute="width" secondItem="JEf-jo-hha" secondAttribute="width" multiplier="0.6" id="Ukb-B5-wmB"/>
                                                         <constraint firstItem="7lq-EQ-bX1" firstAttribute="centerX" secondItem="JEf-jo-hha" secondAttribute="centerX" multiplier="1.5" id="fhL-wP-F7c"/>
                                                         <constraint firstItem="uAa-M7-uOD" firstAttribute="centerY" secondItem="JEf-jo-hha" secondAttribute="centerY" id="rQw-aw-K6Z"/>
-                                                        <constraint firstItem="i3t-Oe-tfq" firstAttribute="centerY" secondItem="JEf-jo-hha" secondAttribute="centerY" id="sqy-zg-ca3"/>
                                                         <constraint firstItem="Mz3-vc-iMq" firstAttribute="centerX" secondItem="JEf-jo-hha" secondAttribute="centerX" multiplier="0.2" id="v5D-dr-R5t"/>
                                                         <constraint firstItem="i3t-Oe-tfq" firstAttribute="top" secondItem="JEf-jo-hha" secondAttribute="top" constant="6" id="zwR-jZ-jmy"/>
                                                     </constraints>

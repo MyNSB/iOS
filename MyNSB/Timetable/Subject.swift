@@ -7,11 +7,14 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-struct Subject {
+class Subject: NSObject, NSCoding {
     let group: String
     let shortName: String
     let longName: String
 
+    /// Finds the full name of the subject based on a shortened version of it.
+    ///
+    /// - Parameter name: The name of a shortened version of a subject, for example `10RC4`.
     private static func find(name: String) -> (String, String) {
         if name == "Recess" || name == "Lunch" {
             return (name, name)
@@ -19,7 +22,7 @@ struct Subject {
 
         if let path = Bundle.main.path(forResource: "subject_list", ofType: "json") {
             do {
-                let regex = try NSRegularExpression(pattern: "\\d+[A-Z]+\\d+")
+                let regex = try! NSRegularExpression(pattern: "(\\d+)([A-Z]+)(\\d+)")
                 let matchName = regex.stringByReplacingMatches(in: name, range: NSRange(location: 0, length: name.count), withTemplate: "$2$3")
 
                 let string = try String(contentsOfFile: path)
@@ -29,7 +32,7 @@ struct Subject {
                     let subjectJSON = subjects.dictionaryValue
 
                     for (key, value) in subjectJSON {
-                        if matchName.range(of: key) != nil {
+                        if matchName.contains(key) {
                             return (group, value.stringValue)
                         }
                     }
@@ -47,6 +50,18 @@ struct Subject {
     init(name: String) {
         self.shortName = name
         (self.group, self.longName) = Subject.find(name: name)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        self.group = aDecoder.decodeObject(forKey: "group") as! String
+        self.shortName = aDecoder.decodeObject(forKey: "shortName") as! String
+        self.longName = aDecoder.decodeObject(forKey: "longName") as! String
+    }
+
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.group, forKey: "group")
+        aCoder.encode(self.shortName, forKey: "shortName")
+        aCoder.encode(self.longName, forKey: "longName")
     }
 
     static func textColourIsWhite(colour: UIColor) -> Bool {

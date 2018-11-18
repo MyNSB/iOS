@@ -25,5 +25,11 @@ struct Constants {
             "TAS": UIColor(red: 1.0, green: 84 / 255.0, blue: 1.0, alpha: 1.0),
             "Default": UIColor.white
         ]
+        
+        static let subjects = [
+            "CAPA", "Careers/Library", "English", "Free Periods", "HSIE", "IT",
+            "Languages", "Lunch", "Mathematics", "PDHPE", "Recess", "Roll Call",
+            "Science", "TAS", "Default"
+        ]
     }
 }

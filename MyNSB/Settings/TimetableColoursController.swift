@@ -7,9 +7,12 @@
 //
 
 import UIKit
-import SwiftyJSON
+import iOS_Color_Picker
 
 class TimetableColoursController: UITableViewController {
+    private var colours = NSKeyedUnarchiver.unarchiveObject(with: UserDefaults.standard.data(forKey: "timetableColours")!) as! [String: UIColor]
+    private var currentSubject = "Default"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,29 +32,37 @@ class TimetableColoursController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
-            let archivedColours = UserDefaults.standard.object(forKey: "timetableColours")
-            let colours = NSKeyedUnarchiver.unarchiveObject(with: archivedColours as! Data) as! [String: UIColor]
-            return colours.count
-        } else {
-            return 1
-        }
+        return self.colours.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "timetableColourCell", for: indexPath)
+        let subjectName = Constants.Timetable.subjects[indexPath.row]
+        let colour = self.colours[subjectName]
+        
+        cell.textLabel?.text = subjectName
+        cell.textLabel?.textColor = Subject.textColourIsWhite(colour: colour!) ? UIColor.white : UIColor.black
+        cell.backgroundColor = colour
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let subjectName = Constants.Timetable.subjects[indexPath.row]
+        self.currentSubject = subjectName
+        
+        let colourPicker = FCColorPickerViewController()
+        colourPicker.backgroundColor = UIColor.white
+        colourPicker.color = self.colours[subjectName]
+        colourPicker.delegate = self
+        
+        self.present(colourPicker, animated: true, completion: nil)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -98,4 +109,18 @@ class TimetableColoursController: UITableViewController {
     }
     */
 
+}
+
+extension TimetableColoursController: FCColorPickerViewControllerDelegate {
+    func colorPickerViewController(_ colorPicker: FCColorPickerViewController, didSelect color: UIColor) {
+        self.colours[self.currentSubject] = color
+        UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: self.colours), forKey: "timetableColours")
+        
+        self.dismiss(animated: true, completion: nil)
+        self.tableView.reloadData()
+    }
+    
+    func colorPickerViewControllerDidCancel(_ colorPicker: FCColorPickerViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

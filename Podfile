@@ -12,7 +12,8 @@ target 'MyNSB' do
   pod 'PromiseKit', '~>6.0'
   pod 'PromiseKit/Alamofire', '~>6.0'
   pod 'RSDayFlow', '~>1.7.0'
-
+  pod 'iOS-Color-Picker'
+  
   target 'MyNSBTests' do
     inherit! :search_paths
     # Pods for testing

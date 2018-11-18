@@ -28,7 +28,7 @@ class ViewController: UIViewController {
                         case .success:
                             seal.fulfill(true)
                         case .failure(let error):
-                            seal.reject(error)
+                            seal.reject(MyNSBError.generic(error as NSError))
                     }
                 }
         }
@@ -66,12 +66,12 @@ class ViewController: UIViewController {
     private func login(user: String?, password: String?) -> Promise<Void> {
         return Promise { seal in
             guard user != nil, user != "" else {
-                seal.reject(NSError(domain: "", code: 203, userInfo: [NSLocalizedDescriptionKey: "Username is empty"]))
+                seal.reject(MyNSBError.emptyUsername)
                 return
             }
 
             guard password != nil, password != "" else {
-                seal.reject(NSError(domain: "", code: 202, userInfo: [NSLocalizedDescriptionKey: "Password is empty"]))
+                seal.reject(MyNSBError.emptyPassword)
                 return
             }
 
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
                         case .success:
                             seal.fulfill(())
                         case .failure(let error):
-                            seal.reject(error)
+                            seal.reject(MyNSBError.generic(error as NSError))
                     }
                 }
         }
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         self.login(user: usernameField.text, password: passwordField.text).done { _ in
             self.performSegue(withIdentifier: "loginSegue", sender: self)
         }.catch { error in
-            MyNSBErrorController.error(self, error: error)
+            MyNSBErrorController.error(self, error: error as! MyNSBError)
         }
     }
 }

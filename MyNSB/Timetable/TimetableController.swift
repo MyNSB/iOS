@@ -15,7 +15,8 @@ class TimetableController: UIViewController {
     // The day that the user is currently on, from 0 to 9 (0 being Week A Monday, 9 being Week B Friday)
     private var userSelectedDay = 0
     // The date today, expressed from 0 to 9 (see above)
-    private var today: Int? = 0
+    private var today = 0
+    private var todayIsWeekend = false
     // A list of bell times, separated by day - each `Timespan` class denotes the start
     // and end of each period
     private var bellTimes: [[Timespan]]? = nil
@@ -31,25 +32,51 @@ class TimetableController: UIViewController {
     @IBOutlet weak var nextDay: UIButton!
     @IBOutlet weak var periods: UITableView!
 
-    // Checks if user is on today's respective page
-    private func userOnToday() -> Bool {
+    // Flags
+    
+    /// Checks if a user's on the weekday page for today. For example, if it
+    /// is currently a Wednesday in Week A, this function returns `true` if
+    /// the user is currently on Wednesday, Week A in the timetable.
+    ///
+    /// - Returns: A boolean that describes if the user is on the weekday page for today.
+    private func isUserOnToday() -> Bool {
         return self.userSelectedDay == self.today
     }
 
-    // Fetch the current week (A or B) from the API
+    
+    /// Checks if the user has their timetable stored locally.
+    ///
+    /// - Returns: A boolean that indicates whether the user has their timetable stored.
+    private func isTimetableStored() -> Bool {
+        let defaults = UserDefaults.standard
+        return defaults.object(forKey: "bellTimes") != nil && defaults.object(forKey: "timetable") != nil
+    }
+
+    // Private functions used internally
+    
+    /// Fetches a week from the API, either "A" or "B".
+    ///
+    /// - Returns: A string that indicates the current week - "A" or "B".
     private func fetchWeek() -> Promise<String> {
         return firstly {
+            // Get request to week/Get
             Alamofire.request("http://35.189.50.185:8080/api/v1/week/Get")
-                .validate()
-                .responseJSON()
+                .validate()     // Check that request has a valid code
+                .responseJSON() // Coerces the response into a JSON format
         }.map { json, response in
-            return JSON(json)["Message"]["Body"].stringValue
+            // Response is either "A" or "B"
+            let body = JSON(json)["Message"]["Body"]
+            return body.stringValue
         }
     }
 
-    // Given the current week, convert the current day into a valid integer from
-    // 0 to 9, which is then assigned to `self.today`
-    private func fetchDay(week: String) -> Guarantee<Int> {
+    
+    /// Fetches the day that today corresponds with in the fortnight. Week A Monday is 0,
+    /// Week B Friday is 9.
+    ///
+    /// - Parameter week: The current week, either "A" or "B"
+    /// - Returns: A value from 0-9 detailing what day it is in the fortnight
+    private func fetchDayGivenWeek(week: String) -> Guarantee<Int> {
         return Guarantee<Int> { completion in
             // Current week: since week A Monday is represented as 0, week B Monday is
             // represented as 5. This integer helps separate the possibility for the
@@ -62,9 +89,7 @@ class TimetableController: UIViewController {
 
             // If today is on a weekend:
             if weekday == 1 || weekday == 7 {
-                // We don't want any date to contain times since we don't have classes
-                // today, so self.today is nil
-                self.today = nil
+                self.todayIsWeekend = true
                 // The displayed day is set to the following Monday by rotating the week
                 displayDay = (weekInt + 5) % 10
             } else {
@@ -72,7 +97,7 @@ class TimetableController: UIViewController {
                 // and add back on the weekday
                 self.today = weekInt + weekday - 2
                 // We want to display today
-                displayDay = self.today!
+                displayDay = self.today
             }
 
             // Return the displayed day as completion value in Guarantee
@@ -80,21 +105,39 @@ class TimetableController: UIViewController {
         }
     }
 
+    /// Creates a `Timespan` object, which represents a length of time associated
+    /// with a certain period. Converts arbitrary times, such as `8:58`, to a `Time`
+    /// object representing that time today.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the timespan, e.g. "Period 1", "Recess".
+    ///   - value: A string representing the start and end time, e.g. "8:50-8:58".
+    /// - Returns: A `Timespan` object with all that information.
     private func toTimespan(name: String, value: String) -> Timespan {
+        // Setting up calendar and date formatter
         let calendar = Calendar.current
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma"
 
+        // Split "8:58am-9:50am" into ["8:58am", "9:50am"]
         let timeStrings = value.split(separator: "-")
         let timeframes = timeStrings.map { string -> Date in
+            // Formats the string representation into a Date object
             let date = formatter.date(from: string.trimmingCharacters(in: .whitespaces))
+            // Fetches hours, minutes, seconds from Date object (since they're the only
+            // values that are set, the rest default to 0)
             let time = calendar.dateComponents([.hour, .minute, .second], from: date!)
+            // Return the date today, but with the time described in `time`
             return calendar.date(bySettingHour: time.hour!, minute: time.minute!, second: time.second!, of: Date())!
         }
 
+        // Return timespan object
         return Timespan(name: name, start: timeframes[0], end: timeframes[1])
     }
 
+    /// <#Description#>
+    ///
+    /// - Returns: <#return value description#>
     private func fetchBellTimes() -> Promise<[[Timespan]]> {
         let weekdaysList = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
@@ -106,7 +149,8 @@ class TimetableController: UIViewController {
             var bellTimes: [[Timespan]] = []
 
             for weekday in 0..<5 {
-                let weekdayBellTimes = JSON(json)["Message"]["Body"][0][weekdaysList[weekday]]
+                let body = JSON(json)["Message"]["Body"][0]
+                let weekdayBellTimes = body[weekdaysList[weekday]]
 
                 bellTimes.append(weekdayBellTimes.dictionaryValue.map { key, value in
                     self.toTimespan(name: key, value: value.stringValue)
@@ -125,13 +169,10 @@ class TimetableController: UIViewController {
                 .validate()
                 .responseJSON()
         }.map { json, response in
+            let body = JSON(json)["Message"]["Body"][0]
             var periods: [[Period]] = []
 
             for day in 0..<10 {
-                let localDayPeriods = JSON(json)["Message"]["Body"][0].arrayValue.filter { item in
-                    return item["day"].intValue == day + 1
-                }
-
                 let weekday = day % 5
 
                 periods.append(bellTimes[weekday].map { timespan in
@@ -139,21 +180,25 @@ class TimetableController: UIViewController {
                         return Recess(start: timespan.start, end: timespan.end)
                     } else if timespan.name == "Lunch" {
                         return Lunch(start: timespan.start, end: timespan.end)
-                    } else {
-                        let periodJsonNilable = localDayPeriods.first { period in
-                            return period["period"].stringValue == timespan.name
-                        }
-
-                        guard let periodJson = periodJsonNilable else {
-                            return nil
-                        }
-
-                        let className = periodJson["class"].stringValue
-                        let teacher = periodJson["teacher"].stringValue
-                        let room = periodJson["room"].stringValue
-
-                        return Period(subject: Subject(name: className), teacher: teacher, room: room, start: timespan.start, end: timespan.end)
                     }
+
+                    let localDayPeriods = body.arrayValue.filter { item in
+                        return item["day"].intValue == day + 1
+                    }
+
+                    let periodJsonNilable = localDayPeriods.first { period in
+                        return period["period"].stringValue == timespan.name
+                    }
+
+                    guard let periodJson = periodJsonNilable else {
+                        return nil
+                    }
+
+                    let className = periodJson["class"].stringValue
+                    let teacher = periodJson["teacher"].stringValue
+                    let room = periodJson["room"].stringValue
+
+                    return Period(subject: Subject(name: className), teacher: teacher, room: room, start: timespan.start, end: timespan.end)
                 }.filter {
                     $0 != nil
                 }.map {
@@ -165,19 +210,46 @@ class TimetableController: UIViewController {
         }
     }
 
-    private func initTimetable() {
-        self.fetchBellTimes().then { (bellTimes: [[Timespan]]) -> Promise<[[Period]]> in
+    private func loadTimetableData() -> Promise<[[Period]]> {
+        return firstly {
+            self.fetchBellTimes()
+        }.then { (bellTimes: [[Timespan]]) -> Promise<[[Period]]> in
             self.bellTimes = bellTimes
             return self.fetchPeriods(bellTimes: bellTimes)
-        }.done { periods in
-            self.timetable = periods
-            self.periods.reloadData()
-        }.catch { error in
-            MyNSBErrorController.error(self, error: error)
         }
     }
 
-    private func displayDay() {
+    private func fetchDay() -> Promise<Int> {
+        return firstly {
+            self.fetchWeek()
+        }.then { week in
+            return self.fetchDayGivenWeek(week: week)
+        }
+    }
+
+    // Saving offline timetable
+
+    private func saveTimetable() {
+        let defaults = UserDefaults.standard
+
+        if let bellTimes = self.bellTimes {
+            defaults.set(NSKeyedArchiver.archivedData(withRootObject: bellTimes), forKey: "bellTimes")
+        }
+
+        if let timetable = self.timetable {
+            defaults.set(NSKeyedArchiver.archivedData(withRootObject: timetable), forKey: "timetable")
+        }
+    }
+
+    private func fetchOfflineTimetable() {
+        let defaults = UserDefaults.standard
+        self.bellTimes = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "bellTimes") as! Data) as! [[Timespan]]?
+        self.timetable = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "timetable") as! Data) as! [[Period]]?
+    }
+    
+    // Moving the view to the selected day
+
+    private func moveViewToSelectedDay() {
         let weekdaysList = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
         let weekday = self.userSelectedDay % 5
         let week = (self.userSelectedDay - weekday) / 5
@@ -185,88 +257,98 @@ class TimetableController: UIViewController {
         self.currentWeek.selectedSegmentIndex = week
         self.currentDay.text = weekdaysList[weekday]
 
-        if self.bellTimes == nil && self.timetable == nil {
-            initTimetable()
-        } else {
-            print(self.timetable)
-            self.periods.reloadData()
-        }
-    }
-
-    @objc private func downloadTimetable(_ sender: UIBarButtonItem) {
-        let defaults = UserDefaults.standard
-        defaults.set(self.bellTimes, forKey: "bellTimes")
-        defaults.set(self.timetable, forKey: "timetable")
+        self.periods.reloadData()
     }
     
+    // Loading the timetable overall
+
+    private func loadTimetable() {
+        let connected = Connection.isConnected
+
+        if connected && UserDefaults.standard.bool(forKey: "automaticUpdatesFlag") {
+            firstly {
+                self.loadTimetableData()
+            }.then { (periods: [[Period]]) -> Promise<Int> in
+                self.timetable = periods
+                return self.fetchDay()
+            }.done { day in
+                self.saveTimetable()
+                self.userSelectedDay = day
+                self.moveViewToSelectedDay()
+            }.catch { error in
+                MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
+            }
+        } else if self.isTimetableStored() {
+            self.fetchOfflineTimetable()
+            self.moveViewToSelectedDay()
+        } else {
+            MyNSBErrorController.error(self, error: MyNSBError.connection)
+        }
+    }
+    
+    @objc private func updateTimetable() {
+        firstly {
+            self.loadTimetableData()
+        }.done { periods in
+            self.timetable = periods
+        }.catch { error in
+            MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
+        }
+    }
+}
+
+// Methods exposed to public
+extension TimetableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
-        let downloadButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.downloadTimetable(_:)))
-        self.navigationItem.setRightBarButton(downloadButton, animated: false)
-
+        let updateTimetableButton = UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(self.updateTimetable))
+        self.navigationItem.rightBarButtonItem = updateTimetableButton
+        
         self.previousDay.tintColor = self.view.tintColor
         self.nextDay.tintColor = self.view.tintColor
         
         self.periods.delegate = self
         self.periods.dataSource = self
-
-        if Connection.isConnected {
-            self.fetchWeek().then { week in
-                return self.fetchDay(week: week)
-            }.done { day in
-                self.userSelectedDay = day
-                self.displayDay()
-            }.catch { error in
-                MyNSBErrorController.error(self, error: error)
-            }
-        } else {
-            if UserDefaults.standard.object(forKey: "bellTimes") == nil {
-                MyNSBErrorController.error(self, error: NSError(domain: "", code: 503))
-            }
-
-            let defaults = UserDefaults.standard
-            self.bellTimes = defaults.object(forKey: "bellTimes") as! [[Timespan]]?
-            self.timetable = defaults.object(forKey: "timetable") as! [[Period]]?
-            self.displayDay()
-        }
+        
+        self.loadTimetable()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     // MARK: Actions
-
+    
     @IBAction func toggleWeek(_ sender: Any) {
         let weekday = self.userSelectedDay % 5
         self.userSelectedDay = (self.currentWeek.selectedSegmentIndex * 5) + weekday
-        self.displayDay()
+        self.moveViewToSelectedDay()
     }
     
     @IBAction func clickPreviousDay(_ sender: Any) {
         self.userSelectedDay = (self.userSelectedDay + 9) % 10
-        self.displayDay()
+        self.moveViewToSelectedDay()
     }
     
     @IBAction func clickNextDay(_ sender: Any) {
         self.userSelectedDay = (self.userSelectedDay + 1) % 10
-        self.displayDay()
+        self.moveViewToSelectedDay()
     }
 }
 
+// Extension on TimetableController for UITableViewController overloads
 extension TimetableController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let timetable = self.timetable else {
@@ -298,7 +380,6 @@ extension TimetableController: UITableViewDelegate, UITableViewDataSource {
         formatter.dateFormat = "HH:mm"
 
         let cell = self.periods.dequeueReusableCell(withIdentifier: "periodCell", for: indexPath) as! PeriodCell
-        cell.contentView.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10)
 
         let archived = UserDefaults.standard.data(forKey: "timetableColours")!
         let colours = NSKeyedUnarchiver.unarchiveObject(with: archived) as! [String: UIColor]
@@ -312,11 +393,16 @@ extension TimetableController: UITableViewDelegate, UITableViewDataSource {
         cell.subjectLabel.text = period.subject.longName
         cell.subjectLabel.textColor = adjustedTextColour
 
-        if userOnToday() && Date() < period.end {
-            cell.countdownLabel.backgroundColor = currentColour == UIColor.white ? self.view.tintColor : UIColor.white
-            cell.countdownLabel.layer.cornerRadius = 3
+        if !self.todayIsWeekend && self.isUserOnToday() && Date() < period.end {
+            cell.countdownLabel.isHidden = false
             cell.countdownLabel.text = self.calculateCountdown(start: period.start)
             cell.countdownLabel.textColor = currentColour
+
+            if currentColour == UIColor.white {
+                cell.countdownLabel.backgroundColor = UIColor.lightGray
+            } else {
+                cell.countdownLabel.backgroundColor = UIColor.white
+            }
         } else {
             cell.countdownLabel.isHidden = true
         }

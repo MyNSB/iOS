@@ -11,6 +11,8 @@
 		287BB061B3575ABB1463E9F4 /* Pods_MyNSBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759F460CEB3E0F6E3AF80353 /* Pods_MyNSBUITests.framework */; };
 		2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607B921042E5B00D0C601 /* EventCell.swift */; };
 		2C3607BC210432C000D0C601 /* SingleEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607BB210432C000D0C601 /* SingleEventController.swift */; };
+		2C5C677B219EE9720070D572 /* MyNSBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C677A219EE9720070D572 /* MyNSBError.swift */; };
+		2C5C678021A13E210070D572 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C677F21A13E210070D572 /* ImageCache.swift */; };
 		2C5D6AD220F2DE4A009CC3A3 /* LogoutSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D6AD120F2DE4A009CC3A3 /* LogoutSegue.swift */; };
 		2C5F60F1213C05A8008249C8 /* TimetableColoursController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F60F0213C05A8008249C8 /* TimetableColoursController.swift */; };
 		2C67B3BE20DF7BF700ADB773 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67B3BD20DF7BF700ADB773 /* MainPageController.swift */; };
@@ -60,6 +62,8 @@
 		1B8E4894D65ADC604095FB6F /* Pods-MyNSB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSB.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB.release.xcconfig"; sourceTree = "<group>"; };
 		2C3607B921042E5B00D0C601 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		2C3607BB210432C000D0C601 /* SingleEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventController.swift; sourceTree = "<group>"; };
+		2C5C677A219EE9720070D572 /* MyNSBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNSBError.swift; sourceTree = "<group>"; };
+		2C5C677F21A13E210070D572 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		2C5D6AD120F2DE4A009CC3A3 /* LogoutSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutSegue.swift; sourceTree = "<group>"; };
 		2C5F60F0213C05A8008249C8 /* TimetableColoursController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableColoursController.swift; sourceTree = "<group>"; };
 		2C67B3BD20DF7BF700ADB773 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
@@ -142,13 +146,25 @@
 		2C08F01920390169005F1758 /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				2C9362E72132A4300008CF38 /* Events.storyboard */,
 				2CCD40C621020C09001975B9 /* EventsController.swift */,
 				311A4DE736D9390A203ED33F /* Event.swift */,
 				2C3607B921042E5B00D0C601 /* EventCell.swift */,
 				2C3607BB210432C000D0C601 /* SingleEventController.swift */,
-				2C9362E72132A4300008CF38 /* Events.storyboard */,
+				2C5C677F21A13E210070D572 /* ImageCache.swift */,
 			);
 			path = Events;
+			sourceTree = "<group>";
+		};
+		2C5C677C21A12F990070D572 /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				311A4FD3973F79B051DC6E1C /* Constants.swift */,
+				311A413AD82CED57324694A8 /* Connection.swift */,
+				2C5C677A219EE9720070D572 /* MyNSBError.swift */,
+				311A47C75AA547326B592964 /* MyNSBErrorController.swift */,
+			);
+			path = Default;
 			sourceTree = "<group>";
 		};
 		2CB29995200DE10000825CBA = {
@@ -178,6 +194,7 @@
 			children = (
 				2CB299CF200DE10D00825CBA /* 4U */,
 				2CB299D2200DE15000825CBA /* Bulletin */,
+				2C5C677C21A12F990070D572 /* Default */,
 				2C08F01920390169005F1758 /* Events */,
 				2CEC5DB62059D84800DC833D /* Notifications */,
 				2CEC5DB72059D85000DC833D /* Settings */,
@@ -190,9 +207,6 @@
 				2CB299AA200DE10000825CBA /* LaunchScreen.storyboard */,
 				2CB299AD200DE10000825CBA /* Info.plist */,
 				2C67B3BD20DF7BF700ADB773 /* MainPageController.swift */,
-				311A47C75AA547326B592964 /* MyNSBErrorController.swift */,
-				311A413AD82CED57324694A8 /* Connection.swift */,
-				311A4FD3973F79B051DC6E1C /* Constants.swift */,
 			);
 			path = MyNSB;
 			sourceTree = "<group>";
@@ -449,6 +463,7 @@
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RSDayFlow/RSDayFlow.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/iOS-Color-Picker/iOS_Color_Picker.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -457,6 +472,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSDayFlow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iOS_Color_Picker.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -516,6 +532,7 @@
 				2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */,
 				2C5D6AD220F2DE4A009CC3A3 /* LogoutSegue.swift in Sources */,
 				311A497982D49BA67D1108E3 /* Period.swift in Sources */,
+				2C5C678021A13E210070D572 /* ImageCache.swift in Sources */,
 				311A41DD6A048CF8E61DBFFD /* Timespan.swift in Sources */,
 				2C3607BC210432C000D0C601 /* SingleEventController.swift in Sources */,
 				311A44C7F9D4402114596981 /* Event.swift in Sources */,
@@ -524,6 +541,7 @@
 				2C5F60F1213C05A8008249C8 /* TimetableColoursController.swift in Sources */,
 				311A47783D270B5357C28BA4 /* Subject.swift in Sources */,
 				311A47035F0824FF280EAE55 /* Constants.swift in Sources */,
+				2C5C677B219EE9720070D572 /* MyNSBError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

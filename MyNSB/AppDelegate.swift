@@ -11,13 +11,22 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    
+    private func isFirstLaunch() -> Bool {
+        return !UserDefaults.standard.bool(forKey: "launchedFlag")
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let standard = UserDefaults.standard
-
-        if standard.object(forKey: "timetableColours") == nil {
-            standard.set(NSKeyedArchiver.archivedData(withRootObject: Constants.Timetable.defaultColours), forKey: "timetableColours")
+        
+        // If the user hasn't launched the app before:
+        if self.isFirstLaunch() {
+            UserDefaults.standard.set(true, forKey: "downloadTimetableFlag")
+            // Add default constant for colours (based off of NSB intranet colours on timetables)
+            UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: Constants.Timetable.defaultColours), forKey: "timetableColours")
+            
+            UserDefaults.standard.set(true, forKey: "launchedFlag")
+            UserDefaults.standard.synchronize()
         }
 
         return true

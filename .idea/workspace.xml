@@ -2,27 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91c8c3b1-a83d-4bd5-849a-d8a4ab0fedb5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/MyNSB/Connection.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Constants.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/MyNSBErrorController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Settings/TimetableColoursController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/Subject.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MyNSB/Timetable/subject_list.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB.xcodeproj/project.pbxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB/AppDelegate.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/AppDelegate.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Base.lproj/Main.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Events/Events.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Events/Events.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Events/EventsController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Events/EventsController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Events/SingleEventController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Settings/Settings.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Settings/Settings.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/Period.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/Period.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/PeriodCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/PeriodCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/Subject.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/Subject.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/Timetable.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/Timetable.storyboard" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/Timetable/TodayPeriodCell.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyNSB/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/MyNSB/ViewController.swift" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,7 +23,7 @@
       <file leaf-file-name="ViewController.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/ViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
+            <state relative-caret-position="140">
               <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
               <folding>
                 <element signature="e#137#149#0" expanded="true" />
@@ -46,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimetableController.swift" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TimetableController.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="309" selection-start-line="309" selection-end-line="309" />
+            <state relative-caret-position="257">
+              <caret line="258" column="44" lean-forward="true" selection-start-line="258" selection-start-column="44" selection-end-line="258" selection-end-column="44" />
               <folding>
                 <element signature="e#142#154#0" expanded="true" />
               </folding>
@@ -67,20 +53,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppDelegate.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
+      <file leaf-file-name="Timespan.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="104" selection-start-line="19" selection-start-column="104" selection-end-line="19" selection-end-column="104" />
+            <state relative-caret-position="476">
+              <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Subject.swift" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AppDelegate.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="26" column="19" lean-forward="true" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Subject.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Subject.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+            <state relative-caret-position="332">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#98#115#0" expanded="true" />
               </folding>
@@ -91,8 +86,8 @@
       <file leaf-file-name="Constants.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/Constants.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+            <state>
+              <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
               <folding>
                 <element signature="e#98#115#0" expanded="true" />
               </folding>
@@ -104,7 +99,7 @@
         <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/subject_list.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="151">
-              <caret line="55" column="8" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
+              <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -112,8 +107,8 @@
       <file leaf-file-name="Period.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Period.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+            <state relative-caret-position="540">
+              <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -137,7 +132,6 @@
         <option value="$PROJECT_DIR$/MyNSB/.gitignore" />
         <option value="$PROJECT_DIR$/MyNSB/MainPageController.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Settings/LogoutSegue.swift" />
-        <option value="$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Calendar/CalendarCellView.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Calendar/Event.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Calendar/CalendarController.swift" />
@@ -151,13 +145,14 @@
         <option value="$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Timetable/PeriodData.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Timetable/SubjectData.swift" />
-        <option value="$PROJECT_DIR$/MyNSB/Timetable/Period.swift" />
-        <option value="$PROJECT_DIR$/MyNSB/Constants.swift" />
-        <option value="$PROJECT_DIR$/MyNSB/AppDelegate.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Settings/TimetableColoursController.swift" />
-        <option value="$PROJECT_DIR$/MyNSB/Timetable/Subject.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Timetable/PeriodCell.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Timetable/subject_list.json" />
+        <option value="$PROJECT_DIR$/MyNSB/Constants.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Timetable/Period.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/Timetable/Subject.swift" />
+        <option value="$PROJECT_DIR$/MyNSB/AppDelegate.swift" />
         <option value="$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift" />
       </list>
     </option>
@@ -212,6 +207,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="MyNSB" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/MyNSB.xcworkspace" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -265,7 +261,7 @@
       <workItem from="1534660345065" duration="12962000" />
       <workItem from="1535269234236" duration="11000" />
       <workItem from="1535285997555" duration="35849000" />
-      <workItem from="1538291963165" duration="738000" />
+      <workItem from="1538291963165" duration="12619000" />
     </task>
     <task id="LOCAL-00001" summary="Added storyboard for timetable">
       <created>1511681482071</created>
@@ -295,11 +291,18 @@
       <option name="project" value="LOCAL" />
       <updated>1535116878285</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added colours to timetable items, started documentation">
+      <created>1538297418452</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1538297418453</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131737000" />
+    <option name="totallyTimeSpent" value="143618000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -312,15 +315,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49964765" weight="0.32969698" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.38477802" weight="0.32969698" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5510923" side_tool="true" visible="true" weight="0.32969698" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5567301" side_tool="true" visible="true" weight="0.32969698" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49964765" weight="0.32969698" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.44890767" weight="0.32969698" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4432699" weight="0.32969698" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49964765" weight="0.32969698" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -333,7 +336,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4982382" weight="0.32969698" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.39182523" weight="0.32969698" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,7 +348,8 @@
     <MESSAGE value="Added storyboard for timetable" />
     <MESSAGE value="Finished login and logout capabilities" />
     <MESSAGE value="Finish basic functionality of events and timetable pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish basic functionality of events and timetable pages" />
+    <MESSAGE value="Added colours to timetable items, started documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added colours to timetable items, started documentation" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -506,13 +509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/Connection.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -564,13 +560,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Period.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/Settings/SettingsController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1511">
@@ -588,16 +577,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="104" selection-start-line="19" selection-start-column="104" selection-end-line="19" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyNSB/ViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
+        <state relative-caret-position="140">
           <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
           <folding>
             <element signature="e#137#149#0" expanded="true" />
@@ -605,12 +587,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift">
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Period.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="309" selection-start-line="309" selection-end-line="309" />
+        <state relative-caret-position="540">
+          <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/subject_list.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Constants.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
           <folding>
-            <element signature="e#142#154#0" expanded="true" />
+            <element signature="e#98#115#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Timespan.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Subject.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#98#115#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -622,29 +635,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/subject_list.json">
+    <entry file="file://$PROJECT_DIR$/MyNSB/AppDelegate.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="55" column="8" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
+        <state relative-caret-position="368">
+          <caret line="26" column="19" lean-forward="true" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/Constants.swift">
+    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/TimetableController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+        <state relative-caret-position="257">
+          <caret line="258" column="44" lean-forward="true" selection-start-line="258" selection-start-column="44" selection-end-line="258" selection-end-column="44" />
           <folding>
-            <element signature="e#98#115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyNSB/Timetable/Subject.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-          <folding>
-            <element signature="e#98#115#0" expanded="true" />
+            <element signature="e#142#154#0" expanded="true" />
           </folding>
         </state>
       </provider>

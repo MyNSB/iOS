@@ -11,8 +11,11 @@ import Alamofire
 import PromiseKit
 
 class SettingsController: UITableViewController {
+    @IBOutlet weak var automaticUpdatesSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticUpdatesSwitch.isOn = UserDefaults.standard.bool(forKey: "automaticUpdatesFlag")
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,12 +27,16 @@ class SettingsController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        if (section == 0) {
+            return 2
+        } else {
+            return 1
+        }
     }
 
     /*
@@ -84,8 +91,14 @@ class SettingsController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+     }
+     */
+    
+    @IBAction func toggleAutomaticUpdates(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "automaticUpdatesFlag")
     }
-    */
+    
+    // User functions
 
     private func logout() -> Promise<Void> {
         return Promise { seal in
@@ -107,7 +120,7 @@ class SettingsController: UITableViewController {
             self.performSegue(withIdentifier: "logoutSegue", sender: self)
             self.navigationController!.navigationBar.isHidden = true
         }.catch { error in
-            MyNSBErrorController.error(self, error: error)
+            MyNSBErrorController.error(self, error: error as! MyNSBError)
         }
     }
 }
