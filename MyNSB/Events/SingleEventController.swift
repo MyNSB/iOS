@@ -12,6 +12,15 @@ import PromiseKit
 import Alamofire
 import AlamofireImage
 
+extension Date {
+    static func formatStringForEvents(start: Date, end: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, YYYY"
+        
+        return formatter.string(from: start) + " - " + formatter.string(from: end)
+    }
+}
+
 class SingleEventController: UIViewController {
     private var alertController = UIAlertController()
 
@@ -47,13 +56,6 @@ class SingleEventController: UIViewController {
                     }
         }
     }
-
-    private func dateToString(start: Date, end: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, YYYY"
-
-        return formatter.string(from: start) + " - " + formatter.string(from: end)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,7 @@ class SingleEventController: UIViewController {
         self.navigationController!.title = event!.name
 
         self.eventName.text = event!.name
-        self.eventDate.text = self.dateToString(start: event!.start, end: event!.end)
+        self.eventDate.text = Date.formatStringForEvents(start: event!.start, end: event!.end)
         self.eventShortDesc.text = event!.shortDescription
         self.eventLongDesc.text = event!.longDescription
 
