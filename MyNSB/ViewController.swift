@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         return Promise { seal in
             Alamofire.request("http://35.189.50.185:8080/api/v1/user/GetDetails")
                 .responseJSON { response in
-                    if response.response!.statusCode == 400 {
+                    if response.response?.statusCode == 400 {
                         seal.fulfill(false)
                         return
                     }

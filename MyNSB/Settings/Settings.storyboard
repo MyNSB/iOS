@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q13-aA-nId">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q13-aA-nId">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Main-->
+        <scene sceneID="BhL-oD-hfs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="Zeq-yj-Y7R" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dpA-EE-5xS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="688" y="-452"/>
+        </scene>
         <!--Settings-->
         <scene sceneID="1pY-h7-gfW">
             <objects>
@@ -108,7 +116,16 @@
                             <outlet property="delegate" destination="Q13-aA-nId" id="z8b-07-JaO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="FXT-1d-01x"/>
+                    <navigationItem key="navigationItem" title="Settings" id="FXT-1d-01x">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Home" id="wMG-eu-Aqo">
+                            <inset key="imageInsets" minX="0.0" minY="-7" maxX="-19" maxY="0.0"/>
+                            <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
+                            <connections>
+                                <segue destination="Zeq-yj-Y7R" kind="show" id="g2e-hN-mCz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="automaticUpdatesSwitch" destination="MaP-5t-p9j" id="gZH-Ep-KIx"/>
                         <segue destination="EX5-mR-feq" kind="custom" identifier="logoutSegue" customClass="LogoutSegue" customModule="MyNSB" customModuleProvider="target" id="vZO-xH-isn"/>
@@ -164,4 +181,7 @@
             <point key="canvasLocation" x="900" y="31"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Home" width="46.551723480224609" height="44.068965911865234"/>
+    </resources>
 </document>
