@@ -26,16 +26,14 @@ class Subject: NSObject, NSCoding {
     private static func matchShortName(code: String) -> String {
         let extensionSubjects = ["EX1", "EX2", "MX1", "MX2"]
         
+        let regex = try! NSRegularExpression(pattern: "(\\d+)([A-Z]+)(\\d*)")
         let unfilteredName = regex.stringByReplacingMatches(in: code, range: NSRange(location: 0, length: code.count), withTemplate: "$2$3")
         
         if extensionSubjects.contains(unfilteredName) || !unfilteredName.containsDigit() {
             return unfilteredName
         } else {
-        } else if unfilteredName.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil {
             let index = unfilteredName.index(unfilteredName.endIndex, offsetBy: -1)
             return String(unfilteredName[..<index])
-        } else {
-            return unfilteredName
         }
     }
     
@@ -56,6 +54,8 @@ class Subject: NSObject, NSCoding {
             return (name, name)
         }
 
+        let splitName = name.components(separatedBy: " ")[0]
+        let matchedName = Subject.matchShortName(code: splitName)
         let json = Subject.contentsOfSubjectsFile().dictionaryValue
         
         for (group, subjects) in json {
