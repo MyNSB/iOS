@@ -11,6 +11,8 @@
 		287BB061B3575ABB1463E9F4 /* Pods_MyNSBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759F460CEB3E0F6E3AF80353 /* Pods_MyNSBUITests.framework */; };
 		2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607B921042E5B00D0C601 /* EventCell.swift */; };
 		2C3607BC210432C000D0C601 /* SingleEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607BB210432C000D0C601 /* SingleEventController.swift */; };
+		2C413F4321A8CFF4008F334E /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C413F4221A8CFF4008F334E /* Timetable.swift */; };
+		2C413F4821AA8DCD008F334E /* Reminders.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C413F4721AA8DCD008F334E /* Reminders.storyboard */; };
 		2C5C677B219EE9720070D572 /* MyNSBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C677A219EE9720070D572 /* MyNSBError.swift */; };
 		2C5C678021A13E210070D572 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C677F21A13E210070D572 /* ImageCache.swift */; };
 		2C5D6AD220F2DE4A009CC3A3 /* LogoutSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D6AD120F2DE4A009CC3A3 /* LogoutSegue.swift */; };
@@ -62,6 +64,8 @@
 		1B8E4894D65ADC604095FB6F /* Pods-MyNSB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSB.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB.release.xcconfig"; sourceTree = "<group>"; };
 		2C3607B921042E5B00D0C601 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		2C3607BB210432C000D0C601 /* SingleEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventController.swift; sourceTree = "<group>"; };
+		2C413F4221A8CFF4008F334E /* Timetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
+		2C413F4721AA8DCD008F334E /* Reminders.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Reminders.storyboard; sourceTree = "<group>"; };
 		2C5C677A219EE9720070D572 /* MyNSBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNSBError.swift; sourceTree = "<group>"; };
 		2C5C677F21A13E210070D572 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		2C5D6AD120F2DE4A009CC3A3 /* LogoutSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutSegue.swift; sourceTree = "<group>"; };
@@ -156,6 +160,14 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
+		2C413F4421AA8D75008F334E /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				2C413F4721AA8DCD008F334E /* Reminders.storyboard */,
+			);
+			path = Reminders;
+			sourceTree = "<group>";
+		};
 		2C5C677C21A12F990070D572 /* Default */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +209,7 @@
 				2C5C677C21A12F990070D572 /* Default */,
 				2C08F01920390169005F1758 /* Events */,
 				2CEC5DB62059D84800DC833D /* Notifications */,
+				2C413F4421AA8D75008F334E /* Reminders */,
 				2CEC5DB72059D85000DC833D /* Settings */,
 				2CB299D1200DE12E00825CBA /* Sports */,
 				2CB299D0200DE12800825CBA /* Timetable */,
@@ -239,13 +252,14 @@
 		2CB299D0200DE12800825CBA /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
-				2CB299D3200DF43500825CBA /* Timetable.storyboard */,
-				2CB299D5200DF83100825CBA /* TimetableController.swift */,
 				311A4FAE23807AD1A90ADF43 /* Period.swift */,
-				311A4EA1E3AE48EA82972946 /* Timespan.swift */,
 				2CCD40C021009CEB001975B9 /* PeriodCell.swift */,
-				311A40C1E309CC08382F40EA /* Subject.swift */,
+				2CB299D3200DF43500825CBA /* Timetable.storyboard */,
 				311A49D13CA309EA66CD8CEF /* subject_list.json */,
+				311A40C1E309CC08382F40EA /* Subject.swift */,
+				311A4EA1E3AE48EA82972946 /* Timespan.swift */,
+				2C413F4221A8CFF4008F334E /* Timetable.swift */,
+				2CB299D5200DF83100825CBA /* TimetableController.swift */,
 			);
 			path = Timetable;
 			sourceTree = "<group>";
@@ -410,6 +424,7 @@
 				2CB299A9200DE10000825CBA /* Assets.xcassets in Resources */,
 				2C9362E82132A4300008CF38 /* Events.storyboard in Resources */,
 				2CB299D4200DF43500825CBA /* Timetable.storyboard in Resources */,
+				2C413F4821AA8DCD008F334E /* Reminders.storyboard in Resources */,
 				2CB299A7200DE10000825CBA /* Main.storyboard in Resources */,
 				2CC7279420D605E2006EACC9 /* Settings.storyboard in Resources */,
 				311A4B6C10691DB5C93D6CF5 /* subject_list.json in Resources */,
@@ -542,6 +557,7 @@
 				311A47783D270B5357C28BA4 /* Subject.swift in Sources */,
 				311A47035F0824FF280EAE55 /* Constants.swift in Sources */,
 				2C5C677B219EE9720070D572 /* MyNSBError.swift in Sources */,
+				2C413F4321A8CFF4008F334E /* Timetable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

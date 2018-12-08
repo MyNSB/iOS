@@ -7,11 +7,16 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
+extension String {
+    func containsDigit() -> Bool {
+        return self.rangeOfCharacter(from: .decimalDigits) != nil
+    }
+}
+
 class Subject: NSObject, NSCoding {
     let group: String
     let shortName: String
     let longName: String
-    
     
     /// Given a subject's code (e.g. "10RC4", "7VAR"), returns that subject's short
     /// name ("RC" and "VAR" in the two examples above)
@@ -24,7 +29,7 @@ class Subject: NSObject, NSCoding {
         let regex = try! NSRegularExpression(pattern: "(\\d+)([A-Z]+)(\\d+)")
         let unfilteredName = regex.stringByReplacingMatches(in: code, range: NSRange(location: 0, length: code.count), withTemplate: "$2$3")
         
-        if extensionSubjects.contains(unfilteredName) {
+        if extensionSubjects.contains(unfilteredName) || !unfilteredName.containsDigit() {
             return unfilteredName
         } else {
             let index = unfilteredName.index(unfilteredName.endIndex, offsetBy: -1)

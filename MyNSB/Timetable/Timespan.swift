@@ -56,12 +56,11 @@ class Timespan: NSObject, NSCoding {
     func toPeriod(contents: JSON?) -> Period? {
         if contents == nil {
             return nil
-        } else if self.name == "Recess" {
-            return Recess(timespan: self)
-        } else if self.name == "Lunch" {
-            return Lunch(timespan: self)
+        } else if self.name == "Recess" || self.name == "Lunch" {
+            return Period(name: self.name, timespan: self)
         } else {
             return Period(contents: contents!, timespan: self)
         }
     }
 }
+

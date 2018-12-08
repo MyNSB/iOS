@@ -13,6 +13,8 @@ class Period: NSObject, NSCoding {
     let start: Date
     let end: Date
     
+    // Initialise function for subjects without teachers or rooms (i.e. recess,
+    // lunch, free periods)
     init(name: String, timespan: Timespan) {
         self.subject = Subject(name: name)
         self.teacher = nil
@@ -21,6 +23,7 @@ class Period: NSObject, NSCoding {
         self.end = timespan.end
     }
     
+    // Normal initialisation functions
     init(contents: JSON, timespan: Timespan) {
         self.subject = Subject(name: contents["class"].stringValue)
         self.teacher = contents["teacher"].stringValue
@@ -29,6 +32,7 @@ class Period: NSObject, NSCoding {
         self.end = timespan.end
     }
 
+    // Decodes an NSObject back into a Period
     required init(coder aDecoder: NSCoder) {
         self.subject = aDecoder.decodeObject(forKey: "subject") as! Subject
         self.teacher = aDecoder.decodeObject(forKey: "teacher") as! String?
@@ -37,31 +41,12 @@ class Period: NSObject, NSCoding {
         self.end = aDecoder.decodeObject(forKey: "end") as! Date
     }
 
+    // Encodes a Period into an NSObject
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.subject, forKey: "subject")
         aCoder.encode(self.teacher, forKey: "teacher")
         aCoder.encode(self.room, forKey: "room")
         aCoder.encode(self.start, forKey: "start")
         aCoder.encode(self.end, forKey: "end")
-    }
-}
-
-class Recess: Period {
-    init(timespan: Timespan) {
-        super.init(name: "Recess", timespan: timespan)
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-
-class Lunch: Period {
-    init(timespan: Timespan) {
-        super.init(name: "Lunch", timespan: timespan)
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 }
