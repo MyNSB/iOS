@@ -42,6 +42,9 @@
 		311A4B6C10691DB5C93D6CF5 /* subject_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 311A49D13CA309EA66CD8CEF /* subject_list.json */; };
 		5C8FCA9121AB936500C87CC7 /* 4U.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C8FCA9021AB936500C87CC7 /* 4U.storyboard */; };
 		5C8FCA9321AB938200C87CC7 /* 4U.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8FCA9221AB938200C87CC7 /* 4U.swift */; };
+		B75149BC21BC894700926DB2 /* ReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75149B921BC894700926DB2 /* ReminderController.swift */; };
+		B75149BD21BC894700926DB2 /* Reminders.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75149BA21BC894700926DB2 /* Reminders.storyboard */; };
+		B75149BE21BC894700926DB2 /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75149BB21BC894700926DB2 /* Reminders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +111,9 @@
 		96D6E328BAA3AAF1456DE418 /* Pods-MyNSBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSBTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSBTests/Pods-MyNSBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		971B7577A1832D010A83843B /* Pods-MyNSB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB.debug.xcconfig"; sourceTree = "<group>"; };
 		A6C1707B8ED9BD932CA4CEC7 /* Pods-MyNSBTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSBTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSBTests/Pods-MyNSBTests.release.xcconfig"; sourceTree = "<group>"; };
+		B75149B921BC894700926DB2 /* ReminderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderController.swift; sourceTree = "<group>"; };
+		B75149BA21BC894700926DB2 /* Reminders.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Reminders.storyboard; sourceTree = "<group>"; };
+		B75149BB21BC894700926DB2 /* Reminders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
 		BE2DF868C5330F69A48537BB /* Pods-MyNSBUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSBUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSBUITests/Pods-MyNSBUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,6 +204,7 @@
 		2CB299A0200DE10000825CBA /* MyNSB */ = {
 			isa = PBXGroup;
 			children = (
+				B7F34D4F21BC88FA009B96C0 /* Reminders */,
 				2CB299CF200DE10D00825CBA /* 4U */,
 				2C5C677C21A12F990070D572 /* Default */,
 				2C08F01920390169005F1758 /* Events */,
@@ -265,6 +272,16 @@
 				2C5F60F0213C05A8008249C8 /* TimetableColoursController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		B7F34D4F21BC88FA009B96C0 /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				B75149BA21BC894700926DB2 /* Reminders.storyboard */,
+				B75149BB21BC894700926DB2 /* Reminders.swift */,
+				B75149B921BC894700926DB2 /* ReminderController.swift */,
+			);
+			path = Reminders;
 			sourceTree = "<group>";
 		};
 		F69B786A4B45B9D32D5CFB5E /* Pods */ = {
@@ -399,6 +416,7 @@
 				5C8FCA9121AB936500C87CC7 /* 4U.storyboard in Resources */,
 				2CC7279420D605E2006EACC9 /* Settings.storyboard in Resources */,
 				311A4B6C10691DB5C93D6CF5 /* subject_list.json in Resources */,
+				B75149BD21BC894700926DB2 /* Reminders.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,11 +529,13 @@
 				2CC7279820D6075B006EACC9 /* SettingsController.swift in Sources */,
 				2CCD40C721020C09001975B9 /* EventsController.swift in Sources */,
 				2CB299A4200DE10000825CBA /* ViewController.swift in Sources */,
+				B75149BE21BC894700926DB2 /* Reminders.swift in Sources */,
 				2CCD40C121009CEB001975B9 /* PeriodCell.swift in Sources */,
 				2C67B3BE20DF7BF700ADB773 /* MainPageController.swift in Sources */,
 				2CB299A2200DE10000825CBA /* AppDelegate.swift in Sources */,
 				2CB299D6200DF83100825CBA /* TimetableController.swift in Sources */,
 				2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */,
+				B75149BC21BC894700926DB2 /* ReminderController.swift in Sources */,
 				2C5D6AD220F2DE4A009CC3A3 /* LogoutSegue.swift in Sources */,
 				311A497982D49BA67D1108E3 /* Period.swift in Sources */,
 				2C5C678021A13E210070D572 /* ImageCache.swift in Sources */,
