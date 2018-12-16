@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main-->
+        <!--Contents-->
         <scene sceneID="MZD-wQ-QJR">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="tMf-3p-p1l" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="Contents" id="tMf-3p-p1l" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RaD-zh-YlF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="656" y="-230"/>
@@ -187,7 +187,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Home" width="185" height="175"/>
+        <image name="Home" width="46.551723480224609" height="44.068965911865234"/>
         <image name="Left Arrow" width="37.5" height="37.5"/>
         <image name="Right Arrow" width="37.5" height="37.5"/>
     </resources>

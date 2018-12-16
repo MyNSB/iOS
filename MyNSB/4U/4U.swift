@@ -12,7 +12,7 @@ import Alamofire
 import PromiseKit
 import SwiftyJSON
 
-private func fetch4U() -> Promise<[Event]> {
+private func Get4U() -> Promise<[Event]> {
     return firstly {
         Alamofire.request("http://35.189.50.185:8080/api/v1/4U/Get")
             .validate()
@@ -28,14 +28,14 @@ private func fetch4U() -> Promise<[Event]> {
     }
 }
 
-private func get4U(){
-    
-    Alamofire.request("https://github.com/MyNSB/API/blob/master/src/4U/Get/main.go").responseJSON { response in
-        if let result = response.result.value {
-            let json = JSON(result)
-            print(json["url"])
-            print(json["explanation"])
+private func Create4U() -> Promise<Void> {
+    return firstly {
+        Alamofire.request("http://35.189.50.185:8080/api/v1/4U/Create").responseJSON { response in
+            if let result = response.result.value {
+                let json = JSON(result)
+                print(json["url"])
+                print(json["explanation"])
+            }
         }
     }
 }
-

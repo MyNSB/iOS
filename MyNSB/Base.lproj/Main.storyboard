@@ -110,10 +110,10 @@
             </objects>
             <point key="canvasLocation" x="2166" y="2"/>
         </scene>
-        <!--MyNSB-->
+        <!--Contents-->
         <scene sceneID="mT7-sb-0pA">
             <objects>
-                <tableViewController id="5aD-7u-c5d" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Contents" title="Contents" id="5aD-7u-c5d" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nDz-Do-mWI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -192,8 +192,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="4U Logo" translatesAutoresizingMaskIntoConstraints="NO" id="e8A-Eu-bz9">
-                                                    <rect key="frame" x="8" y="7" width="48" height="30"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4U Logo" translatesAutoresizingMaskIntoConstraints="NO" id="e8A-Eu-bz9">
+                                                    <rect key="frame" x="-189" y="-125" width="461" height="293.5"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>

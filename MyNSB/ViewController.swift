@@ -28,6 +28,7 @@ class ViewController: UIViewController {
                         case .success:
                             seal.fulfill(true)
                         case .failure(let error):
+                            print(error.localizedDescription)
                             seal.reject(MyNSBError.generic(error as NSError))
                     }
                 }
