@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import PromiseKit
+import UserNotifications
 
 class ViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
@@ -28,7 +29,6 @@ class ViewController: UIViewController {
                         case .success:
                             seal.fulfill(true)
                         case .failure(let error):
-                            print(error.localizedDescription)
                             seal.reject(MyNSBError.generic(error as NSError))
                     }
                 }
@@ -94,6 +94,17 @@ class ViewController: UIViewController {
             self.performSegue(withIdentifier: "loginSegue", sender: self)
         }.catch { error in
             MyNSBErrorController.error(self, error: error as! MyNSBError)
+        }
+    }
+    
+    @objc func requestNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge, .alert, .sound]) { (Success, Error ) in
+            if Success {
+                print("notifications enabled")
+            } else {
+                print("notification permissions request failed with error: \(Error!)")
+            }
         }
     }
 }

@@ -16,13 +16,15 @@ class TimetableController: UIViewController {
     private var userSelectedDay = 0
     // The date today, expressed from 0 to 9 (see above)
     private var today = 0
-    private var todayIsWeekend = false
+    var todayIsWeekend = false
     // A list of bell times, separated by day - each `Timespan` class denotes the start
     // and end of each period
     private var bellTimes: [[Timespan]]?
     // A list of periods within the timetable, separated by day - each `Period` class contains
     // all the information needed to represent a period (e.g. classroom, teacher name, subject name)
     private var timetable: [[Period]]?
+    
+    private var timetableObject: Timetable?
     
     // Mark: Properties
     
@@ -39,14 +41,14 @@ class TimetableController: UIViewController {
     /// the user is currently on Wednesday, Week A in the timetable.
     ///
     /// - Returns: A boolean that describes if the user is on the weekday page for today.
-    private func isUserOnToday() -> Bool {
+    func isUserOnToday() -> Bool {
         return self.userSelectedDay == self.today
     }
     
     /// Checks if the user has their timetable stored locally.
     ///
     /// - Returns: A boolean that indicates whether the user has their timetable stored.
-    private func isTimetableStored() -> Bool {
+    func isTimetableStored() -> Bool {
         let defaults = UserDefaults.standard
         return defaults.object(forKey: "bellTimes") != nil && defaults.object(forKey: "timetable") != nil
     }
@@ -58,7 +60,7 @@ class TimetableController: UIViewController {
     /// Fetches a week from the API, either "A" or "B".
     ///
     /// - Returns: A string that indicates the current week - "A" or "B".
-    private func fetchWeek() -> Promise<String> {
+    private func getWeek() -> Promise<String> {
         return firstly {
             // Get request to week/Get
             Alamofire.request("http://35.189.50.185:8080/api/v1/week/Get")
@@ -76,39 +78,41 @@ class TimetableController: UIViewController {
     ///
     /// - Parameter week: The current week, either "A" or "B"
     /// - Returns: A value from 0-9 detailing what day it is in the fortnight
-    private func fetchDayGivenWeek(week: String) -> Guarantee<Int> {
-        return Guarantee<Int> { completion in
-            // Current week: since week A Monday is represented as 0, week B Monday is
-            // represented as 5. This integer helps separate the possibility for the
-            // current day into two separate weeks
-            let weekInt = week == "A" ? 0 : 5
-            // Fetch today's date as an integer - Sunday is 1, Saturday is 7
-            let weekday = Calendar.current.component(.weekday, from: Date())
-            // Returns the day that's going to be displayed, different from `self.today`
-            var displayDay = 0
-
-            // If today is on a weekend:
-            if weekday == 1 || weekday == 7 {
-                self.todayIsWeekend = true
-                // The displayed day is set to the following Monday by rotating the week
-                displayDay = (weekInt + 5) % 10
-            } else {
-                // Today is a weekday - since Monday starts at 2, we need to subtract 2
-                // and add back on the weekday
-                self.today = weekInt + weekday - 2
-                // We want to display today
-                displayDay = self.today
-            }
-
-            // Return the displayed day as completion value in Guarantee
-            completion(displayDay)
+    private func fetchDayGivenWeek(week: String) -> Int {
+        // Current week: since week A Monday is represented as 0, week B Monday is
+        // represented as 5. This integer helps separate the possibility for the
+        // current day into two separate weeks
+        let weekInt = week == "A" ? 0 : 5
+        // Fetch today's date as an integer - Sunday is 1, Saturday is 7
+        let weekday = Calendar.current.component(.weekday, from: Date())
+        // Returns the day that's going to be displayed, different from `self.today`
+        var displayDay = 0
+        
+        // If today is on a weekend:
+        if weekday == 1 || weekday == 7 {
+            self.todayIsWeekend = true
+            // The displayed day is set to the following Monday by rotating the week
+            displayDay = (weekInt + 5) % 10
+        } else {
+            // Today is a weekday - since Monday starts at 2, we need to subtract 2
+            // and add back on the weekday
+            self.today = weekInt + weekday - 2
+            // We want to display today
+            displayDay = self.today
         }
+        
+        // Return the displayed day as completion value in Guarantee
+        return displayDay
     }
 
-    /// <#Description#>
+    /// Fetches bell times from the API and converts it to a list of lists. There
+    /// are 10 `[Timespan]`s in `bellTimes`, each one representing a day in the
+    /// 10-day school fortnight. Each `[Timespan]` contains all the timespans
+    /// for each period.
     ///
-    /// - Returns: <#return value description#>
-    private func fetchBellTimes() -> Promise<[[Timespan]]> {
+    /// - Returns: Bell times for the fortnight, marking the beginning and end
+    ///            of each period
+    private func getBellTimes() -> Promise<[[Timespan]]> {
         let weekdaysList = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
         return firstly {
@@ -133,7 +137,8 @@ class TimetableController: UIViewController {
         }
     }
 
-    private func fetchPeriods(bellTimes: [[Timespan]]) -> Promise<[[Period]]> {
+    
+    private func getPeriods(bellTimes: [[Timespan]]) -> Promise<[[Period]]> {
         return firstly {
             Alamofire.request("http://35.189.50.185:8080/api/v1/timetable/Get")
                 .validate()
@@ -166,18 +171,18 @@ class TimetableController: UIViewController {
 
     private func loadTimetableData() -> Promise<[[Period]]> {
         return firstly {
-            self.fetchBellTimes()
+            self.getBellTimes()
         }.then { (bellTimes: [[Timespan]]) -> Promise<[[Period]]> in
             self.bellTimes = bellTimes
-            return self.fetchPeriods(bellTimes: bellTimes)
+            return self.getPeriods(bellTimes: bellTimes)
         }
     }
 
     private func fetchDay() -> Promise<Int> {
         return firstly {
-            self.fetchWeek()
-        }.then { week in
-            return self.fetchDayGivenWeek(week: week)
+            self.getWeek()
+        }.map { week in
+            self.fetchDayGivenWeek(week: week)
         }
     }
 
@@ -311,64 +316,12 @@ extension TimetableController: UITableViewDelegate, UITableViewDataSource {
         return timetable[self.userSelectedDay].count
     }
 
-    private func calculateCountdown(start: Date) -> String {
-        if Date() < start {
-            let secondsUntilStart = Int(DateInterval(start: Date(), end: start).duration)
-
-            if secondsUntilStart >= 3600 {
-                return "\(secondsUntilStart / 3600)h"
-            } else if secondsUntilStart < 3600 && secondsUntilStart > 60 {
-                return "\(secondsUntilStart / 60)m"
-            } else {
-                return "<1m"
-            }
-        } else {
-            return "Now"
-        }
-    }
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let period = self.timetable![self.userSelectedDay][indexPath.row]
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
 
         let cell = self.periods.dequeueReusableCell(withIdentifier: "periodCell", for: indexPath) as! PeriodCell
-
-        let archived = UserDefaults.standard.data(forKey: "timetableColours")!
-        let colours = NSKeyedUnarchiver.unarchiveObject(with: archived) as! [String: UIColor]
-        let currentColour = colours[period.subject.group]!
-        let adjustedTextColour = Subject.textColourIsWhite(colour: currentColour) ? UIColor.white : UIColor.black
-
-        cell.backgroundColor = currentColour
-
-        cell.timeLabel.text = formatter.string(from: period.start)
-        cell.timeLabel.textColor = adjustedTextColour
-        cell.subjectLabel.text = period.subject.longName
-        cell.subjectLabel.textColor = adjustedTextColour
-
-        if !self.todayIsWeekend && self.isUserOnToday() && Date() < period.end {
-            cell.countdownLabel.isHidden = false
-            cell.countdownLabel.text = self.calculateCountdown(start: period.start)
-            cell.countdownLabel.textColor = currentColour
-
-            if currentColour == UIColor.white {
-                cell.countdownLabel.backgroundColor = UIColor.lightGray
-            } else {
-                cell.countdownLabel.backgroundColor = UIColor.white
-            }
-        } else {
-            cell.countdownLabel.isHidden = true
-        }
-
-        if period.subject.group == "Recess" || period.subject.group == "Lunch" {
-            cell.stackView.isHidden = true
-        } else {
-            cell.stackView.isHidden = false
-            cell.roomLabel.text = period.room!
-            cell.roomLabel.textColor = adjustedTextColour
-            cell.teacherLabel.text = period.teacher!
-            cell.teacherLabel.textColor = adjustedTextColour
-        }
+        cell.controller = self
+        cell.update(period: period)
 
         return cell
     }
