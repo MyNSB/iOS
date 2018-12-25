@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: "downloadTimetableFlag")
             // Add default constant for colours (based off of NSB intranet colours on timetables)
             UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: Constants.Timetable.defaultColours),   forKey: "timetableColours")
-            
             UserDefaults.standard.set(true, forKey: "launchedFlag")
             UserDefaults.standard.set(true, forKey: "notificationsEnabledFlag")
             UserDefaults.standard.synchronize()
