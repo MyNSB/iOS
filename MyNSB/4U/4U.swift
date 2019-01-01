@@ -14,7 +14,7 @@ import SwiftyJSON
 
 private func fetch4U() -> Promise<[Event]> {
     return firstly {
-        Alamofire.request("http://35.189.50.185:8080/api/v1/4U/Get")
+        Alamofire.request("http://35.244.66.186:8080/api/v1/4U/Get")
             .validate()
             .responseJSON()
         }.map { json, response in
@@ -28,8 +28,7 @@ private func fetch4U() -> Promise<[Event]> {
     }
 }
 
-private func get4U(){
-    
+private func get4U() {
     Alamofire.request("https://github.com/MyNSB/API/blob/master/src/4U/Get/main.go").responseJSON { response in
         if let result = response.result.value {
             let json = JSON(result)

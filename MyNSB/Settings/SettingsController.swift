@@ -102,7 +102,7 @@ class SettingsController: UITableViewController {
 
     private func logout() -> Promise<Void> {
         return Promise { seal in
-            Alamofire.request("http://35.189.50.185:8080/api/v1/user/Logout", method: .post)
+            Alamofire.request("http://35.244.66.186:8080/api/v1/user/Logout", method: .post)
                 .validate()
                 .responseJSON { response in
                     switch response.result {

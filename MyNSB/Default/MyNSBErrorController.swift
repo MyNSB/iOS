@@ -10,7 +10,7 @@ class MyNSBErrorController {
     static func error(_ controller: UIViewController, error: MyNSBError) {
         let alertController = UIAlertController(title: "Error", message: error.description, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
-            if !(controller is ViewController) {
+            if !(controller is LoginController) {
                 controller.navigationController?.popViewController(animated: true)
             }
         }

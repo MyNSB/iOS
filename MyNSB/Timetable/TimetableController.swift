@@ -16,15 +16,11 @@ class TimetableController: UIViewController {
     private var userSelectedDay = 0
     // The date today, expressed from 0 to 9 (see above)
     private var today = 0
+    // Flag for whether today is a weekend or not
     var todayIsWeekend = false
-    // A list of bell times, separated by day - each `Timespan` class denotes the start
-    // and end of each period
-    private var bellTimes: [[Timespan]]?
     // A list of periods within the timetable, separated by day - each `Period` class contains
     // all the information needed to represent a period (e.g. classroom, teacher name, subject name)
-    private var timetable: [[Period]]?
-    
-    private var timetableObject: Timetable?
+    private var timetable: Timetable?
     
     // Mark: Properties
     
@@ -50,139 +46,53 @@ class TimetableController: UIViewController {
     /// - Returns: A boolean that indicates whether the user has their timetable stored.
     func isTimetableStored() -> Bool {
         let defaults = UserDefaults.standard
-        return defaults.object(forKey: "bellTimes") != nil && defaults.object(forKey: "timetable") != nil
+        return defaults.object(forKey: "timetable") != nil
     }
-
-    // Private functions used internally
     
     // API calls & Promises
-    
-    /// Fetches a week from the API, either "A" or "B".
-    ///
-    /// - Returns: A string that indicates the current week - "A" or "B".
-    private func getWeek() -> Promise<String> {
-        return firstly {
-            // Get request to week/Get
-            Alamofire.request("http://35.189.50.185:8080/api/v1/week/Get")
-                .validate()     // Check that request has a valid code
-                .responseJSON() // Coerces the response into a JSON format
-        }.map { json, response in
-            // Response is either "A" or "B"
-            let body = JSON(json)["Message"]["Body"]
-            return body.stringValue
-        }
-    }
     
     /// Fetches the day that today corresponds with in the fortnight. Week A Monday is 0,
     /// Week B Friday is 9.
     ///
     /// - Parameter week: The current week, either "A" or "B"
     /// - Returns: A value from 0-9 detailing what day it is in the fortnight
-    private func fetchDayGivenWeek(week: String) -> Int {
+    private func fetchDayGivenWeek(week: String, day: Int) -> Int {
         // Current week: since week A Monday is represented as 0, week B Monday is
         // represented as 5. This integer helps separate the possibility for the
         // current day into two separate weeks
         let weekInt = week == "A" ? 0 : 5
-        // Fetch today's date as an integer - Sunday is 1, Saturday is 7
-        let weekday = Calendar.current.component(.weekday, from: Date())
         // Returns the day that's going to be displayed, different from `self.today`
         var displayDay = 0
         
         // If today is on a weekend:
-        if weekday == 1 || weekday == 7 {
-            self.todayIsWeekend = true
+        if self.todayIsWeekend {
             // The displayed day is set to the following Monday by rotating the week
             displayDay = (weekInt + 5) % 10
-        } else {
-            // Today is a weekday - since Monday starts at 2, we need to subtract 2
-            // and add back on the weekday
-            self.today = weekInt + weekday - 2
-            // We want to display today
-            displayDay = self.today
         }
         
-        // Return the displayed day as completion value in Guarantee
+        // Return the displayed day
         return displayDay
     }
 
-    /// Fetches bell times from the API and converts it to a list of lists. There
-    /// are 10 `[Timespan]`s in `bellTimes`, each one representing a day in the
-    /// 10-day school fortnight. Each `[Timespan]` contains all the timespans
-    /// for each period.
-    ///
-    /// - Returns: Bell times for the fortnight, marking the beginning and end
-    ///            of each period
-    private func getBellTimes() -> Promise<[[Timespan]]> {
-        let weekdaysList = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-
+    private func loadTimetableData() -> Promise<Timetable> {
         return firstly {
-            Alamofire.request("http://35.189.50.185:8080/api/v1/belltimes/Get")
-                    .validate()
-                    .responseJSON()
-        }.map { json, _ in
-            var bellTimes: [[Timespan]] = []
-
-            for weekday in 0..<5 {
-                let body = JSON(json)["Message"]["Body"][0]
-                let weekdayBellTimes = body[weekdaysList[weekday]]
-
-                bellTimes.append(weekdayBellTimes.dictionaryValue.map { key, value in
-                    Timespan(name: key, time: value.stringValue)
-                }.sorted { first, second in
-                    first.start < second.start
-                })
-            }
-
-            return bellTimes + bellTimes
-        }
-    }
-
-    
-    private func getPeriods(bellTimes: [[Timespan]]) -> Promise<[[Period]]> {
-        return firstly {
-            Alamofire.request("http://35.189.50.185:8080/api/v1/timetable/Get")
-                .validate()
-                .responseJSON()
-        }.map { json, _ in
-            let body = JSON(json)["Message"]["Body"][0].arrayValue
-            var periods: [[Period]] = []
-
-            for day in 0..<10 {
-                let bellTimesForDay = bellTimes[day]
-                let periodsForDay = body.filter { item in
-                    return item["day"].intValue == day + 1
-                }
-                
-                let unfilteredPeriods = bellTimesForDay.map { (timespan: Timespan) -> Period? in
-                    let periodJSON = periodsForDay.first { period in
-                        period["period"].stringValue == timespan.name
-                    }
-                    
-                    return timespan.toPeriod(contents: periodJSON)
-                }
-                
-                let filteredPeriods = unfilteredPeriods.compactMap { $0 }
-                periods.append(filteredPeriods)
-            }
-
-            return periods
-        }
-    }
-
-    private func loadTimetableData() -> Promise<[[Period]]> {
-        return firstly {
-            self.getBellTimes()
-        }.then { (bellTimes: [[Timespan]]) -> Promise<[[Period]]> in
-            self.bellTimes = bellTimes
-            return self.getPeriods(bellTimes: bellTimes)
+            TimetableAPI.bellTimes()
+        }.then { bellTimes in
+            return TimetableAPI.timetable(bellTimes: bellTimes)
         }
     }
 
     private func fetchDay() -> Promise<Int> {
         return firstly {
-            self.getWeek()
+            TimetableAPI.week()
         }.map { week in
-            self.fetchDayGivenWeek(week: week)
+            let day = Calendar.current.component(.weekday, from: Date())
+            
+            if day == 1 || day == 7 {
+                self.todayIsWeekend = true
+            }
+            
+            return self.fetchDayGivenWeek(week: week, day: day)
         }
     }
 
@@ -191,10 +101,6 @@ class TimetableController: UIViewController {
     private func saveTimetable() {
         let defaults = UserDefaults.standard
 
-        if let bellTimes = self.bellTimes {
-            defaults.set(NSKeyedArchiver.archivedData(withRootObject: bellTimes), forKey: "bellTimes")
-        }
-
         if let timetable = self.timetable {
             defaults.set(NSKeyedArchiver.archivedData(withRootObject: timetable), forKey: "timetable")
         }
@@ -202,8 +108,7 @@ class TimetableController: UIViewController {
 
     private func fetchOfflineTimetable() {
         let defaults = UserDefaults.standard
-        self.bellTimes = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "bellTimes") as! Data) as! [[Timespan]]?
-        self.timetable = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "timetable") as! Data) as! [[Period]]?
+        self.timetable = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "timetable") as! Data) as! Timetable?
     }
     
     // Moving the view to the selected day
@@ -225,13 +130,14 @@ class TimetableController: UIViewController {
         let connected = Connection.isConnected
 
         if connected && UserDefaults.standard.bool(forKey: "automaticUpdatesFlag") {
-            firstly {
-                self.loadTimetableData()
-            }.then { (periods: [[Period]]) -> Promise<Int> in
-                self.timetable = periods
-                return self.fetchDay()
-            }.done { day in
+            let timetable: Promise<Timetable> = self.loadTimetableData()
+            let day: Promise<Int> = self.fetchDay()
+            
+            when(fulfilled: timetable, day).done { (timetable, day) in
+                self.timetable = timetable
                 self.saveTimetable()
+                
+                self.today = day
                 self.userSelectedDay = day
                 self.moveViewToSelectedDay()
             }.catch { error in
@@ -313,11 +219,11 @@ extension TimetableController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
 
-        return timetable[self.userSelectedDay].count
+        return timetable.get(day: self.userSelectedDay).count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let period = self.timetable![self.userSelectedDay][indexPath.row]
+        let period = self.timetable!.get(day: self.userSelectedDay)[indexPath.row]
 
         let cell = self.periods.dequeueReusableCell(withIdentifier: "periodCell", for: indexPath) as! PeriodCell
         cell.controller = self

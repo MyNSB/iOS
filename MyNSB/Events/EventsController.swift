@@ -76,7 +76,7 @@ class EventsController: UIViewController {
 
     private func fetchEvents() -> Promise<[Event]> {
         return firstly {
-            Alamofire.request("http://35.189.50.185:8080/api/v1/events/Get")
+            Alamofire.request("http://35.244.66.186:8080/api/v1/events/Get")
                     .validate()
                     .responseJSON()
         }.map { json, response in
