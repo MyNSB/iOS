@@ -141,8 +141,10 @@ class EventsController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.destination as! SingleEventController
-        destination.event = self.currentEvent
+        if (segue.identifier == "clickEventSegue") {
+            let destination = segue.destination as! SingleEventController
+            destination.event = self.currentEvent
+        }
     }
 }
 
