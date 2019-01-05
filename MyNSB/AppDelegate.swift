@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,11 +26,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Add default constant for colours (based off of NSB intranet colours on timetables)
             UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: Constants.Timetable.defaultColours),   forKey: "timetableColours")
             UserDefaults.standard.set(true, forKey: "launchedFlag")
-            UserDefaults.standard.set(true, forKey: "notificationsEnabledFlag")
-            UserDefaults.standard.synchronize()
+            // setup notifications (or not)
+            requestNotifications()
+            let center = UNUserNotificationCenter.current()
+            center.getNotificationSettings(completionHandler: { (settings) in
+                if settings.alertSetting == UNNotificationSetting.enabled {
+                    UserDefaults.standard.set(true, forKey: "notificationsEnabledFlag")
+                } else {
+                    UserDefaults.standard.set(false, forKey: "notificationsEnabledFlag")
+                }
+            })
         }
-
         return true
+    }
+    
+    @objc func requestNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge, .alert, .sound]) { (Success, Error ) in
+            if Success {
+                print("notifications enabled")
+            } else {
+                print("notification permissions request failed with error: \(Error!)")
+            }
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
