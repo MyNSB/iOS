@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import PromiseKit
-import UserNotifications
 
 class ViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
