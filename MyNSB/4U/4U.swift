@@ -27,7 +27,7 @@ private func Get4U() -> Promise<[Event]> {
             }
     }
 }
-
+/* FIXME: Pls fix
 private func Create4U() -> Promise<Void> {
     return firstly {
         Alamofire.request("http://35.189.50.185:8080/api/v1/4U/Create").responseJSON { response in
@@ -39,3 +39,4 @@ private func Create4U() -> Promise<Void> {
         }
     }
 }
+*/
