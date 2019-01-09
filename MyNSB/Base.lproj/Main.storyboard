@@ -262,7 +262,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jxR-zt-N7A">
             <objects>
-                <navigationController id="con-FV-WK4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Contents" id="con-FV-WK4" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XjR-0S-TJJ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -277,7 +277,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4U Logo" width="1923" height="1221"/>
+        <image name="4U Logo" width="25" height="25"/>
         <image name="Events" width="25" height="25"/>
         <image name="MyNSB" width="256" height="256"/>
         <image name="Settings" width="25" height="25"/>
