@@ -12,6 +12,14 @@
 		2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607B921042E5B00D0C601 /* EventCell.swift */; };
 		2C3607BC210432C000D0C601 /* SingleEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607BB210432C000D0C601 /* SingleEventController.swift */; };
 		2C383C7A21DB9A20000C1F07 /* Timespan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C383C7921DB9A20000C1F07 /* Timespan.swift */; };
+		2C383C8E21E5A6B9000C1F07 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C383C8B21E5A6B9000C1F07 /* Period.swift */; };
+		2C383C8F21E5A6B9000C1F07 /* subject_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C383C8C21E5A6B9000C1F07 /* subject_list.json */; };
+		2C383C9021E5A6B9000C1F07 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C383C8D21E5A6B9000C1F07 /* Subject.swift */; };
+		2C383CA521E5CAB0000C1F07 /* FourU.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C383CA021E5CAAF000C1F07 /* FourU.storyboard */; };
+		2C383CA621E5CAB0000C1F07 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C383CA121E5CAAF000C1F07 /* CollectionViewCell.swift */; };
+		2C383CA721E5CAB0000C1F07 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C383CA221E5CAAF000C1F07 /* Issue.swift */; };
+		2C383CA921E5CAB0000C1F07 /* FourUAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C383CA421E5CAAF000C1F07 /* FourUAPI.swift */; };
+		2C383CAB21E5CB04000C1F07 /* FourUController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C383CAA21E5CB03000C1F07 /* FourUController.swift */; };
 		2C3D0DFE21DA2B0000EE80C3 /* Timetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D0DFD21DA2B0000EE80C3 /* Timetable.swift */; };
 		2C3D0E0021DA2BA700EE80C3 /* TimetableAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D0DFF21DA2BA700EE80C3 /* TimetableAPI.swift */; };
 		2C3D0E0321DB79E400EE80C3 /* BellTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D0E0221DB79E400EE80C3 /* BellTimes.swift */; };
@@ -41,12 +49,8 @@
 		311A411BDC20F39632881832 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A413AD82CED57324694A8 /* Connection.swift */; };
 		311A44C7F9D4402114596981 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A4DE736D9390A203ED33F /* Event.swift */; };
 		311A47035F0824FF280EAE55 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A4FD3973F79B051DC6E1C /* Constants.swift */; };
-		311A47783D270B5357C28BA4 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A40C1E309CC08382F40EA /* Subject.swift */; };
-		311A497982D49BA67D1108E3 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A4FAE23807AD1A90ADF43 /* Period.swift */; };
 		311A4A82323DEEC6B38ACB48 /* MyNSBErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A47C75AA547326B592964 /* MyNSBErrorController.swift */; };
-		311A4B6C10691DB5C93D6CF5 /* subject_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 311A49D13CA309EA66CD8CEF /* subject_list.json */; };
 		5C7081F621C25676004E8D3E /* (null) in Resources */ = {isa = PBXBuildFile; };
-		5C8FCA9321AB938200C87CC7 /* 4U.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8FCA9221AB938200C87CC7 /* 4U.swift */; };
 		B7FD893221E5A0DB00E00B13 /* ReminderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FD892E21E5A0DB00E00B13 /* ReminderListViewController.swift */; };
 		B7FD893321E5A0DB00E00B13 /* ReminderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FD892F21E5A0DB00E00B13 /* ReminderList.swift */; };
 		B7FD893421E5A0DB00E00B13 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FD893021E5A0DB00E00B13 /* Reminder.swift */; };
@@ -76,6 +80,14 @@
 		2C3607B921042E5B00D0C601 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		2C3607BB210432C000D0C601 /* SingleEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventController.swift; sourceTree = "<group>"; };
 		2C383C7921DB9A20000C1F07 /* Timespan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timespan.swift; sourceTree = "<group>"; };
+		2C383C8B21E5A6B9000C1F07 /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
+		2C383C8C21E5A6B9000C1F07 /* subject_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = subject_list.json; sourceTree = "<group>"; };
+		2C383C8D21E5A6B9000C1F07 /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		2C383CA021E5CAAF000C1F07 /* FourU.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FourU.storyboard; sourceTree = "<group>"; };
+		2C383CA121E5CAAF000C1F07 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		2C383CA221E5CAAF000C1F07 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		2C383CA421E5CAAF000C1F07 /* FourUAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourUAPI.swift; sourceTree = "<group>"; };
+		2C383CAA21E5CB03000C1F07 /* FourUController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourUController.swift; sourceTree = "<group>"; };
 		2C3D0DFD21DA2B0000EE80C3 /* Timetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
 		2C3D0DFF21DA2BA700EE80C3 /* TimetableAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableAPI.swift; sourceTree = "<group>"; };
 		2C3D0E0221DB79E400EE80C3 /* BellTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellTimes.swift; sourceTree = "<group>"; };
@@ -107,17 +119,11 @@
 		2CC7279720D6075B006EACC9 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		2CCD40C021009CEB001975B9 /* PeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodCell.swift; sourceTree = "<group>"; };
 		2CCD40C621020C09001975B9 /* EventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsController.swift; sourceTree = "<group>"; };
-		311A40C1E309CC08382F40EA /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		311A413AD82CED57324694A8 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		311A47C75AA547326B592964 /* MyNSBErrorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNSBErrorController.swift; sourceTree = "<group>"; };
-		311A49D13CA309EA66CD8CEF /* subject_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = subject_list.json; sourceTree = "<group>"; };
 		311A4DE736D9390A203ED33F /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		311A4EA1E3AE48EA82972946 /* Timespan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timespan.swift; sourceTree = "<group>"; };
-		311A4FAE23807AD1A90ADF43 /* Period.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		311A4FD3973F79B051DC6E1C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4847A71EED5C5C35837252DA /* Pods_MyNSBTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNSBTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C8FCA9021AB936500C87CC7 /* 4U.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = 4U.storyboard; sourceTree = "<group>"; };
-		5C8FCA9221AB938200C87CC7 /* 4U.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 4U.swift; sourceTree = "<group>"; };
 		60D12F2296CBFA48C0734EE8 /* Pods_MyNSB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNSB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		759F460CEB3E0F6E3AF80353 /* Pods_MyNSBUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNSBUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80DA76BF3234B0C5E1C3DAB5 /* Pods-MyNSBUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSBUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSBUITests/Pods-MyNSBUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,11 +189,27 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
+		2C383C9F21E5CAAF000C1F07 /* FourU */ = {
+			isa = PBXGroup;
+			children = (
+				2C383CA021E5CAAF000C1F07 /* FourU.storyboard */,
+				2C383CA121E5CAAF000C1F07 /* CollectionViewCell.swift */,
+				2C383CA221E5CAAF000C1F07 /* Issue.swift */,
+				2C383CA421E5CAAF000C1F07 /* FourUAPI.swift */,
+				2C383CAA21E5CB03000C1F07 /* FourUController.swift */,
+			);
+			name = FourU;
+			path = MyNSB/FourU;
+			sourceTree = SOURCE_ROOT;
+		};
 		2C3D0E0121DA2C1700EE80C3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				2C3D0E0221DB79E400EE80C3 /* BellTimes.swift */,
+				2C383C8B21E5A6B9000C1F07 /* Period.swift */,
+				2C383C8D21E5A6B9000C1F07 /* Subject.swift */,
 				2C383C7921DB9A20000C1F07 /* Timespan.swift */,
+				2C383C8C21E5A6B9000C1F07 /* subject_list.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -230,10 +252,10 @@
 		2CB299A0200DE10000825CBA /* MyNSB */ = {
 			isa = PBXGroup;
 			children = (
-				B7FD892D21E5A0BF00E00B13 /* Reminders */,
-				2CB299CF200DE10D00825CBA /* 4U */,
 				2C5C677C21A12F990070D572 /* Default */,
 				2C08F01920390169005F1758 /* Events */,
+				2C383C9F21E5CAAF000C1F07 /* FourU */,
+				B7FD892D21E5A0BF00E00B13 /* Reminders */,
 				2CEC5DB72059D85000DC833D /* Settings */,
 				2CB299D0200DE12800825CBA /* Timetable */,
 				2CB299AA200DE10000825CBA /* LaunchScreen.storyboard */,
@@ -266,23 +288,10 @@
 			path = MyNSBUITests;
 			sourceTree = "<group>";
 		};
-		2CB299CF200DE10D00825CBA /* 4U */ = {
-			isa = PBXGroup;
-			children = (
-				5C8FCA9021AB936500C87CC7 /* 4U.storyboard */,
-				5C8FCA9221AB938200C87CC7 /* 4U.swift */,
-			);
-			path = 4U;
-			sourceTree = "<group>";
-		};
 		2CB299D0200DE12800825CBA /* Timetable */ = {
 			isa = PBXGroup;
 			children = (
-				311A4FAE23807AD1A90ADF43 /* Period.swift */,
 				2CB299D3200DF43500825CBA /* Timetable.storyboard */,
-				311A49D13CA309EA66CD8CEF /* subject_list.json */,
-				311A40C1E309CC08382F40EA /* Subject.swift */,
-				311A4EA1E3AE48EA82972946 /* Timespan.swift */,
 				2CB299D5200DF83100825CBA /* TimetableController.swift */,
 				2CCD40C021009CEB001975B9 /* PeriodCell.swift */,
 				2C3D0DFF21DA2BA700EE80C3 /* TimetableAPI.swift */,
@@ -440,14 +449,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CB299AC200DE10000825CBA /* LaunchScreen.storyboard in Resources */,
+				2C383C8F21E5A6B9000C1F07 /* subject_list.json in Resources */,
 				2CB299A9200DE10000825CBA /* Assets.xcassets in Resources */,
 				2C9362E82132A4300008CF38 /* Events.storyboard in Resources */,
 				2CB299D4200DF43500825CBA /* Timetable.storyboard in Resources */,
 				2CB299A7200DE10000825CBA /* Main.storyboard in Resources */,
 				B7FD893721E5A0F600E00B13 /* Reminder.storyboard in Resources */,
 				5C7081F621C25676004E8D3E /* (null) in Resources */,
+				2C383CA521E5CAB0000C1F07 /* FourU.storyboard in Resources */,
 				2CC7279420D605E2006EACC9 /* Settings.storyboard in Resources */,
-				311A4B6C10691DB5C93D6CF5 /* subject_list.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,27 +577,30 @@
 				2CB299D6200DF83100825CBA /* TimetableController.swift in Sources */,
 				B7FD893221E5A0DB00E00B13 /* ReminderListViewController.swift in Sources */,
 				B7FD893421E5A0DB00E00B13 /* Reminder.swift in Sources */,
+				2C383C8E21E5A6B9000C1F07 /* Period.swift in Sources */,
 				2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */,
 				2C5D6AD220F2DE4A009CC3A3 /* LogoutSegue.swift in Sources */,
 				2C5778BA21C7536E00BB6FBB /* LoadingController.swift in Sources */,
-				311A497982D49BA67D1108E3 /* Period.swift in Sources */,
+				2C383CA621E5CAB0000C1F07 /* CollectionViewCell.swift in Sources */,
+				2C383CA721E5CAB0000C1F07 /* Issue.swift in Sources */,
 				2C5C678021A13E210070D572 /* ImageCache.swift in Sources */,
 				2C5778BC21D9E15B00BB6FBB /* MyNSBRequest.swift in Sources */,
 				B7FD893321E5A0DB00E00B13 /* ReminderList.swift in Sources */,
 				2C3607BC210432C000D0C601 /* SingleEventController.swift in Sources */,
 				2C383C7A21DB9A20000C1F07 /* Timespan.swift in Sources */,
 				311A44C7F9D4402114596981 /* Event.swift in Sources */,
+				2C383CA921E5CAB0000C1F07 /* FourUAPI.swift in Sources */,
 				311A4A82323DEEC6B38ACB48 /* MyNSBErrorController.swift in Sources */,
 				311A411BDC20F39632881832 /* Connection.swift in Sources */,
 				2C5F60F1213C05A8008249C8 /* TimetableColoursController.swift in Sources */,
-				5C8FCA9321AB938200C87CC7 /* 4U.swift in Sources */,
-				311A47783D270B5357C28BA4 /* Subject.swift in Sources */,
 				2C3D0DFE21DA2B0000EE80C3 /* Timetable.swift in Sources */,
 				2C3D0E0321DB79E400EE80C3 /* BellTimes.swift in Sources */,
 				311A47035F0824FF280EAE55 /* Constants.swift in Sources */,
 				B7FD893521E5A0DB00E00B13 /* ReminderScheduleController.swift in Sources */,
 				2C5C677B219EE9720070D572 /* MyNSBError.swift in Sources */,
+				2C383CAB21E5CB04000C1F07 /* FourUController.swift in Sources */,
 				2C5778B621C6429700BB6FBB /* User.swift in Sources */,
+				2C383C9021E5A6B9000C1F07 /* Subject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

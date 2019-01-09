@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    let array:[] = [
+class FourUController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     //Number of Views
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return 0
     }
 }
