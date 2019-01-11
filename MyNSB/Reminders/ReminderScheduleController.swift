@@ -21,14 +21,12 @@ class ReminderScheduleController: UIViewController {
         // if not viewing a previously created reminder
         if viewingReminder != nil {
             viewingReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, repeats: false, UUID: viewingReminder!.UUID)
-            // update the reminder with corresponding UUID (on disk)
-            ReminderList.setItem(viewingReminder!)
-            ReminderList.scheduleItem(viewingReminder!)
         } else {
             viewingReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, repeats: false, UUID: UUID().uuidString)
-            ReminderList.addItem(viewingReminder!)
-            ReminderList.scheduleItem(viewingReminder!)
         }
+	// update the `sharedInstance`
+        ReminderList.sharedInstance.addItem(viewingReminder!)
+        ReminderList.sharedInstance.scheduleItem(viewingReminder!)
         self.navigationController?.popToRootViewController(animated: true)
     }
     

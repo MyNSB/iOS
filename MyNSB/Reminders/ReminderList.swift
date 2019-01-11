@@ -10,32 +10,34 @@ import Foundation
 import UserNotifications
 
 /* This class manages the on disk storage of the reminders */
+// TODO: add API calls upon opening app to fetch reminders into `sharedInstance`
+//       and upon closing app to save reminders on remote server.
+//       On disk storage will suffice whilst app is open
 class ReminderList {
-    private static let ITEMS_KEY = "reminderItems"
+    static let sharedInstance = ReminderList()
+    private let ITEMS_KEY = "reminderItems"
     
-    static func scheduleItem(_ item: Reminder) {
+    func scheduleItem(_ item: Reminder) {
         let center = UNUserNotificationCenter.current()
-        // remove previously existing notification
+        // remove previously existing notification, if any
         center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
-            for notification in notificationRequests {
-                print("\(notification.content.title) is registered")
-                // if an existing notification request matches that of the one to be scheduled
-                if notification.identifier == item.UUID {
-                    center.removePendingNotificationRequests(withIdentifiers: [item.UUID])
+            for request in notificationRequests {
+                if request.identifier == item.UUID {
+                    center.removePendingNotificationRequests(withIdentifiers: [request.identifier])
                     break
                 }
             }
         })
-        
+        // set the notification's contents 
         let notification = UNMutableNotificationContent()
         notification.title = item.title
         notification.body = item.body ?? ""
-        
+        // create a trigger from the reminder's `due` property 
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: item.due)
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: item.repeats)
-        
+        // create a notification request with the reminder's UUID as identifier
         let request = UNNotificationRequest(identifier: item.UUID, content: notification, trigger: trigger)
-
+        // register the request
         center.add(request) { (error) in
             if let error = error {
                 print("error scheduling notification: \(error)")
@@ -45,46 +47,50 @@ class ReminderList {
         }
     }
     
-    // adds item to the UserDefaults Dictionary
-    static func addItem(_ item: Reminder) {
-        var reminderDict = UserDefaults.standard.dictionary(forKey: ReminderList.ITEMS_KEY) ?? Dictionary()
+    // adds item to the UserDefaults Dictionary, overwriting if it already exists
+    func addItem(_ item: Reminder) {
+        var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? Dictionary()
         reminderDict[item.UUID] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "repeats": item.repeats, "UUID": item.UUID]
-        UserDefaults.standard.set(reminderDict, forKey: ReminderList.ITEMS_KEY)
+        UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
     }
     
-    static func removeItem(_ item: Reminder) {
+    func removeItem(_ item: Reminder) {
         let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests(completionHandler: { (requests) in
-            for i in requests {
-                // FIXME: store UUID
-                if (i.content.title == item.title) {
-                    center.removePendingNotificationRequests(withIdentifiers: [i.content.title])
-                    print("removed \(i.content.title)")
+        center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
+            for request in notificationRequests {
+                if (request.identifier == item.UUID) {
+                    center.removePendingNotificationRequests(withIdentifiers: [request.identifier])
+                    print("removed \(request.content.title)")
                     break
                 }
             }
         })
-        if var reminderDict = UserDefaults.standard.dictionary(forKey: ReminderList.ITEMS_KEY) {
+        if var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) {
             reminderDict.removeValue(forKey: item.UUID)
-            UserDefaults.standard.set(reminderDict, forKey: ReminderList.ITEMS_KEY)
+            UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
         }
     }
     
-    static func setItem(_ item: Reminder) {
-        var reminderDict = UserDefaults.standard.dictionary(forKey: ReminderList.ITEMS_KEY)
-        // if reminderDict does not already exist this will throw
-        reminderDict![item.UUID] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "repeats": item.repeats, "UUID": item.UUID]
-        UserDefaults.standard.set(reminderDict, forKey: ReminderList.ITEMS_KEY)
+    func getReminders() -> [Reminder] {
+        let reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? [:]
     }
-    
-    static func getReminders() -> [Reminder] {
-        let reminderDict = UserDefaults.standard.dictionary(forKey: ReminderList.ITEMS_KEY) ?? [:]
-        let items = Array(reminderDict.values)
-        return items.map({
-            let item = $0 as! [String:AnyObject]
-            return Reminder(title: item["title"] as! String, body: item["body"] as? String, due: item["dueDate"] as! Date, repeats: item["repeats"] as! Bool, UUID: item["UUID"] as! String)
-        }).sorted(by: { (remA, remB) -> Bool in
-            (remA.due.compare(remB.due) == .orderedAscending)
+
+    // make sure all incomplete reminders are scheduled as notifications, called once in viewDidLoad
+    // At this point I'm not sure whether shutdowns will discard notifications
+    func refreshNotifications() {
+        let center = UNUserNotificationCenter.current()
+        // remove completed
+        center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
+            for reminder in ReminderList.sharedInstance.getReminders() {
+                for request in notificationRequests {
+                    if (reminder.UUID == request.identifier) {
+                        break
+                    }
+                }
+                print("\(reminder.title) was not found")
+                // not found, schedule it now 
+                self.scheduleItem(reminder)
+            }
         })
     }
 }
