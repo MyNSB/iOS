@@ -13,6 +13,15 @@ class ReminderListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // warn if notifications are not enabled
+        if (UserDefaults.standard.bool(forKey: "notificationsEnabledFlag") == false) {
+            // TODO: present a warning dialog and continue anyway
+            let vc = MainPageController()
+            self.present(vc, animated: false, completion: nil)
+            return
+        }
+        
+        ReminderList.sharedInstance.refreshNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(ReminderListViewController.refreshList), name: NSNotification.Name(rawValue: "reminderListShouldRefresh"), object: nil)
     }
     
@@ -49,7 +58,7 @@ class ReminderListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let viewTitle = NSLocalizedString("View", comment: "view/edit")
         let viewAction = UIContextualAction(style: .normal, title: viewTitle) { (action, view, completion) in
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReminderScheduleID") as! ReminderScheduleController
+            let vc = ReminderScheduleController()
             vc.viewingReminder = self.reminderList[(indexPath as NSIndexPath).row]
             self.navigationController!.pushViewController(vc, animated: true)
             completion(true)
@@ -58,10 +67,9 @@ class ReminderListViewController: UITableViewController {
         
         let completeTitle = NSLocalizedString("Complete", comment: "delete selected reminder")
         let completeAction = UIContextualAction(style: .destructive, title: completeTitle) { (action, view, completion) in
-            let item = self.reminderList.remove(at: (indexPath as NSIndexPath).row)
-            ReminderList.sharedInstance.removeItem(item)
+            ReminderList.sharedInstance.removeItem(self.reminderList[(indexPath as NSIndexPath).row])
             tableView.deleteRows(at: [indexPath], with: .fade)
-            self.navigationItem.rightBarButtonItem!.isEnabled = true // less than 64 reminders now
+            self.refreshList()
             completion(true)
         }
         completeAction.backgroundColor = .red
