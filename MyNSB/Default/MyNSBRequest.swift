@@ -9,5 +9,5 @@
 import Foundation
 
 class MyNSBRequest {
-    static let domain = "http://127.0.0.1:5000"
+    static let domain = "http://192.168.2.151:5000"
 }

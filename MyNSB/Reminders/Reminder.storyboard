@@ -50,7 +50,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reminders" id="gYp-fZ-JDc">
-                        <barButtonItem key="rightBarButtonItem" title="+" id="F4T-IL-j2t">
+                        <barButtonItem key="rightBarButtonItem" image="Add" id="F4T-IL-j2t">
                             <connections>
                                 <segue destination="1xM-v2-64a" kind="show" id="6er-pD-XjN"/>
                             </connections>
@@ -69,30 +69,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="irM-pC-rxY">
-                                <rect key="frame" x="0.0" y="173" width="375" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="irM-pC-rxY">
+                                <rect key="frame" x="0.0" y="129.5" width="375" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="568697344.72429299">
                                     <!--2019-01-09 03:29:04 +0000-->
                                 </date>
                             </datePicker>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="De7-0z-6sF">
-                                <rect key="frame" x="16" y="93" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="De7-0z-6sF">
+                                <rect key="frame" x="16" y="94.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes and details" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y6A-Th-8LX">
-                                <rect key="frame" x="16" y="343" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes and details" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y6A-Th-8LX">
+                                <rect key="frame" x="16" y="350.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phb-mB-g0m">
-                                <rect key="frame" x="170" y="617" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phb-mB-g0m">
+                                <rect key="frame" x="170.5" y="617" width="34" height="30"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="savePressed:" destination="1xM-v2-64a" eventType="touchUpInside" id="y1u-go-m9O"/>
@@ -100,6 +96,19 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ACd-c1-P3j" firstAttribute="trailing" secondItem="De7-0z-6sF" secondAttribute="trailing" constant="16" id="0QX-H5-Mw9"/>
+                            <constraint firstItem="De7-0z-6sF" firstAttribute="leading" secondItem="ACd-c1-P3j" secondAttribute="leading" constant="16" id="5g5-he-Cvh"/>
+                            <constraint firstItem="irM-pC-rxY" firstAttribute="trailing" secondItem="ACd-c1-P3j" secondAttribute="trailing" id="87m-WC-uVV"/>
+                            <constraint firstItem="ACd-c1-P3j" firstAttribute="trailing" secondItem="Y6A-Th-8LX" secondAttribute="trailing" constant="16" id="8Hk-14-qGy"/>
+                            <constraint firstItem="phb-mB-g0m" firstAttribute="centerX" secondItem="ACd-c1-P3j" secondAttribute="centerX" id="Frq-JQ-jCt"/>
+                            <constraint firstItem="irM-pC-rxY" firstAttribute="leading" secondItem="ACd-c1-P3j" secondAttribute="leading" id="KZX-vJ-DrT"/>
+                            <constraint firstItem="De7-0z-6sF" firstAttribute="centerY" secondItem="ACd-c1-P3j" secondAttribute="centerY" multiplier="0.3" id="PsB-S8-uxs"/>
+                            <constraint firstItem="Y6A-Th-8LX" firstAttribute="leading" secondItem="ACd-c1-P3j" secondAttribute="leading" constant="16" id="WFF-Qe-2Ae"/>
+                            <constraint firstItem="Y6A-Th-8LX" firstAttribute="centerY" secondItem="ACd-c1-P3j" secondAttribute="centerY" id="dXJ-bN-zY3"/>
+                            <constraint firstItem="irM-pC-rxY" firstAttribute="centerY" secondItem="ACd-c1-P3j" secondAttribute="centerY" multiplier="0.65" id="rIv-93-R2l"/>
+                            <constraint firstItem="ACd-c1-P3j" firstAttribute="bottom" secondItem="phb-mB-g0m" secondAttribute="bottom" constant="20" id="tcT-fq-FJ7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ACd-c1-P3j"/>
                     </view>
                     <connections>
@@ -129,4 +138,7 @@
             <point key="canvasLocation" x="-233" y="140"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Add" width="25" height="25"/>
+    </resources>
 </document>

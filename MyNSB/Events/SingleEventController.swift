@@ -31,20 +31,11 @@ class SingleEventController: UIViewController {
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventShortDesc: UILabel!
     @IBOutlet weak var eventLongDesc: UILabel!
-
-    private func initAlertController(error: Error) {
-        self.alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
-        }
-
-        self.alertController.addAction(confirmAction)
-        self.present(self.alertController, animated: true, completion: nil)
-    }
-
+    
     private func fetchImage() -> Promise<Image> {
         return Promise<Image> { seal in
             let csCopy = CharacterSet(bitmapRepresentation: CharacterSet.urlPathAllowed.bitmapRepresentation)
-            Alamofire.request(event!.imageURL.addingPercentEncoding(withAllowedCharacters: csCopy)!)
+            Alamofire.request(self.event!.imageURL.addingPercentEncoding(withAllowedCharacters: csCopy)!)
                     .validate()
                     .responseImage { response in
                         switch response.result {

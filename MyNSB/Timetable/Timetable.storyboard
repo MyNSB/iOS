@@ -36,7 +36,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wdx-bL-jjc">
-                                        <rect key="frame" x="19" y="57" width="37" height="37"/>
+                                        <rect key="frame" x="25" y="63" width="25" height="25"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="Left Arrow">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,7 +46,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GD1-2I-s9N">
-                                        <rect key="frame" x="319" y="57" width="37" height="37"/>
+                                        <rect key="frame" x="325" y="63" width="25" height="25"/>
                                         <state key="normal" image="Right Arrow"/>
                                         <connections>
                                             <action selector="clickNextDay:" destination="Qlo-ha-DRZ" eventType="touchUpInside" id="5mk-YA-zPk"/>
@@ -166,7 +166,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Timetable" id="35h-Q8-SJd">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="Home" id="qhD-wK-wBc">
-                            <inset key="imageInsets" minX="0.0" minY="-7" maxX="-17" maxY="0.0"/>
                             <connections>
                                 <segue destination="tMf-3p-p1l" kind="show" id="cuf-Gb-2th"/>
                             </connections>
@@ -187,8 +186,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Home" width="46.551723480224609" height="44.068965911865234"/>
-        <image name="Left Arrow" width="37.5" height="37.5"/>
-        <image name="Right Arrow" width="37.5" height="37.5"/>
+        <image name="Home" width="25" height="25"/>
+        <image name="Left Arrow" width="25" height="25"/>
+        <image name="Right Arrow" width="25" height="25"/>
     </resources>
 </document>

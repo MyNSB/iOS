@@ -15,9 +15,9 @@ struct Issue {
     let coverimage: String
     
     init(dictionary: JSON) {
-        self.name = dictionary["name"] as! String
-        self.edition = dictionary["editionmonth"] as! String
-        self.coverimage = dictionary["CoverImage"] as! String
+        self.name = dictionary["name"].stringValue
+        self.edition = dictionary["editionmonth"].stringValue
+        self.coverimage = dictionary["CoverImage"].stringValue
     }
     
 }

@@ -10,7 +10,7 @@ import SwiftyJSON
 extension String {
     func parseEventDate() -> Date {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         
         return formatter.date(from: self)!
     }

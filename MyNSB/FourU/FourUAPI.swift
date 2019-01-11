@@ -21,17 +21,6 @@ class FourUAPI {
             return "Hello World"
         }
     }
-
-    private func CreateFourU () -> Promise<String> {
-        return firstly {
-            Alamofire.request("http://35.189.50.185:8080/api/v1/4U/Create")
-            .validate()
-            .responseJSON()
-            }.map{ json, response in
-                return "Hello World"
-        }
-    }
-
 }
 
 

@@ -118,7 +118,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Events" id="B20-pj-CH2">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="Home" id="fNe-xe-cOw">
-                            <inset key="imageInsets" minX="0.0" minY="-5" maxX="-17" maxY="0.0"/>
                             <connections>
                                 <segue destination="fvf-V0-bQ0" kind="show" identifier="homeSegue" id="F2K-kP-09R"/>
                             </connections>
@@ -208,6 +207,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Home" width="46.551723480224609" height="44.068965911865234"/>
+        <image name="Home" width="25" height="25"/>
     </resources>
 </document>

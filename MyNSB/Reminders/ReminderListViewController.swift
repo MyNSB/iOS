@@ -59,7 +59,7 @@ class ReminderListViewController: UITableViewController {
         let completeTitle = NSLocalizedString("Complete", comment: "delete selected reminder")
         let completeAction = UIContextualAction(style: .destructive, title: completeTitle) { (action, view, completion) in
             let item = self.reminderList.remove(at: (indexPath as NSIndexPath).row)
-            ReminderList.sharedInstance.removeItem(item)
+            ReminderList.removeItem(item)
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.navigationItem.rightBarButtonItem!.isEnabled = true // less than 64 reminders now
             completion(true)
@@ -76,7 +76,7 @@ class ReminderListViewController: UITableViewController {
     }
     
     @objc func refreshList() {
-        self.reminderList = ReminderList.sharedInstance.getReminders()
+        self.reminderList = ReminderList.getReminders()
         if (reminderList.count >= 64) { // apple allows 64 local notifications at maximum
             print("too many items!")
             self.navigationItem.rightBarButtonItem!.isEnabled = false

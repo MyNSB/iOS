@@ -11,10 +11,9 @@ import UserNotifications
 
 /* This class manages the on disk storage of the reminders */
 class ReminderList {
-    static let sharedInstance = ReminderList()
-    private let ITEMS_KEY = "reminderItems"
+    private static let ITEMS_KEY = "reminderItems"
     
-    func scheduleItem(_ item: Reminder) {
+    static func scheduleItem(_ item: Reminder) {
         let center = UNUserNotificationCenter.current()
         // remove previously existing notification
         center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
@@ -47,13 +46,13 @@ class ReminderList {
     }
     
     // adds item to the UserDefaults Dictionary
-    func addItem(_ item: Reminder) {
-        var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? Dictionary()
+    static func addItem(_ item: Reminder) {
+        var reminderDict = UserDefaults.standard.dictionary(forKey: ReminderList.ITEMS_KEY) ?? Dictionary()
         reminderDict[item.UUID] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "repeats": item.repeats, "UUID": item.UUID]
-        UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
+        UserDefaults.standard.set(reminderDict, forKey: ReminderList.ITEMS_KEY)
     }
     
-    func removeItem(_ item: Reminder) {
+    static func removeItem(_ item: Reminder) {
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests(completionHandler: { (requests) in
             for i in requests {
@@ -65,21 +64,21 @@ class ReminderList {
                 }
             }
         })
-        if var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) {
+        if var reminderDict = UserDefaults.standard.dictionary(forKey: ReminderList.ITEMS_KEY) {
             reminderDict.removeValue(forKey: item.UUID)
-            UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
+            UserDefaults.standard.set(reminderDict, forKey: ReminderList.ITEMS_KEY)
         }
     }
     
-    func setItem(_ item: Reminder) {
-        var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY)
+    static func setItem(_ item: Reminder) {
+        var reminderDict = UserDefaults.standard.dictionary(forKey: ReminderList.ITEMS_KEY)
         // if reminderDict does not already exist this will throw
         reminderDict![item.UUID] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "repeats": item.repeats, "UUID": item.UUID]
-        UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
+        UserDefaults.standard.set(reminderDict, forKey: ReminderList.ITEMS_KEY)
     }
     
-    func getReminders() -> [Reminder] {
-        let reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? [:]
+    static func getReminders() -> [Reminder] {
+        let reminderDict = UserDefaults.standard.dictionary(forKey: ReminderList.ITEMS_KEY) ?? [:]
         let items = Array(reminderDict.values)
         return items.map({
             let item = $0 as! [String:AnyObject]
