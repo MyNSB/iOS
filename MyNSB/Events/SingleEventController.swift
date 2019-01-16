@@ -68,7 +68,7 @@ class SingleEventController: UIViewController {
                 ImageCache.cache.setObject(image, forKey: self.event!.imageURL as NSString)
                 self.eventImage.image = image
             }.catch { error in
-                MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
+                MyNSBErrorController.error(self, error: error as! MyNSBError)
             }
         }
     }

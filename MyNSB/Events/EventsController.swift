@@ -57,7 +57,7 @@ class EventsController: UIViewController {
             self.events = Events(events: events)
             self.calendarView.reloadData()
         }.catch { error in
-            MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
+            MyNSBErrorController.error(self, error: error as! MyNSBError)
         }
     }
 

@@ -15,7 +15,7 @@ import SwiftyJSON
 class EventsAPI {
     static func events() -> Promise<[Event]> {
         return firstly {
-            Alamofire.request("\(MyNSBRequest.domain)/events/Get")
+            Alamofire.request("\(MyNSBRequest.domain)/events/get")
                 .validate()
                 .responseJSON()
             }.map { json, response in

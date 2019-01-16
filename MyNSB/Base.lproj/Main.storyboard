@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Loading Controller-->
         <scene sceneID="5LF-iK-ow1">
@@ -19,20 +24,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIc-ar-Q6d">
-                                <rect key="frame" x="169.5" y="442.5" width="75" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="155.5" y="528.5" width="103.5" height="30"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="ycr-1r-AZU">
+                                <rect key="frame" x="197" y="443" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.15686274509803921" green="0.16078431372549018" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cIc-ar-Q6d" firstAttribute="centerY" secondItem="DpF-tr-Oau" secondAttribute="centerY" id="Qqz-C0-u6P"/>
+                            <constraint firstItem="cIc-ar-Q6d" firstAttribute="centerY" secondItem="DpF-tr-Oau" secondAttribute="centerY" multiplier="1.2" id="Qqz-C0-u6P"/>
                             <constraint firstItem="cIc-ar-Q6d" firstAttribute="centerX" secondItem="DpF-tr-Oau" secondAttribute="centerX" id="iEn-4R-UUQ"/>
+                            <constraint firstItem="ycr-1r-AZU" firstAttribute="centerY" secondItem="DpF-tr-Oau" secondAttribute="centerY" id="jqi-Xv-gXV"/>
+                            <constraint firstItem="ycr-1r-AZU" firstAttribute="centerX" secondItem="DpF-tr-Oau" secondAttribute="centerX" id="kc5-Lc-V2B"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DpF-tr-Oau"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="ycr-1r-AZU" id="5Tf-nm-fxT"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="needsLogin" id="ZzJ-Vj-CxJ"/>
                         <segue destination="con-FV-WK4" kind="show" identifier="mainPage" id="Nca-QV-rYt"/>
                     </connections>
@@ -50,11 +61,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="GeW-47-qmn">
-                                <rect key="frame" x="20.5" y="375.5" width="373" height="155.5"/>
+                                <rect key="frame" x="20.5" y="374" width="373" height="158.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU1-6u-WZU">
                                         <rect key="frame" x="0.0" y="0.0" width="373" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -71,7 +82,8 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvV-1e-tZh">
-                                        <rect key="frame" x="0.0" y="125.5" width="373" height="30"/>
+                                        <rect key="frame" x="0.0" y="125.5" width="373" height="33"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <state key="normal" title="Submit"/>
                                         <connections>
                                             <action selector="submitLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U1t-sJ-UtA"/>
@@ -322,6 +334,6 @@
         <image name="Timetable" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Nca-QV-rYt"/>
+        <segue reference="iAt-w5-omM"/>
     </inferredMetricsTieBreakers>
 </document>

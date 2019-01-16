@@ -15,7 +15,7 @@ import SwiftyJSON
 class User {
     static func isLoggedIn() -> Promise<Bool> {
         return Promise { seal in
-            Alamofire.request("\(MyNSBRequest.domain)/user/GetDetails")
+            Alamofire.request("\(MyNSBRequest.domain)/user/getDetails")
                 .responseJSON { response in
                     if response.response?.statusCode != 200 {
                         seal.fulfill(false)
@@ -25,8 +25,8 @@ class User {
                     switch response.result {
                         case .success:
                             seal.fulfill(true)
-                        case .failure(let error):
-                            seal.reject(MyNSBError.generic(error as NSError))
+                        case .failure:
+                            seal.reject(MyNSBError.from(response: response))
                     }
             }
         }

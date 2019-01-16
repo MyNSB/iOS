@@ -79,6 +79,24 @@
 
 /* Begin PBXFileReference section */
 		1B8E4894D65ADC604095FB6F /* Pods-MyNSB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNSB.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB.release.xcconfig"; sourceTree = "<group>"; };
+		2C243B5621EF2BA40057ED6A /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
+		2C243B5721EF2BA40057ED6A /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
+		2C243B5821EF2BA50057ED6A /* Lato-HeavyItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-HeavyItalic.ttf"; sourceTree = "<group>"; };
+		2C243B5921EF2BA50057ED6A /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		2C243B5A21EF2BA50057ED6A /* Lato-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		2C243B5B21EF2BA50057ED6A /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		2C243B5C21EF2BA50057ED6A /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		2C243B5D21EF2BA60057ED6A /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		2C243B5E21EF2BA60057ED6A /* Lato-HairlineItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-HairlineItalic.ttf"; sourceTree = "<group>"; };
+		2C243B5F21EF2BA60057ED6A /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		2C243B6021EF2BA60057ED6A /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
+		2C243B6121EF2BA60057ED6A /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		2C243B6221EF2BA70057ED6A /* Lato-Heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Heavy.ttf"; sourceTree = "<group>"; };
+		2C243B6321EF2BA70057ED6A /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Hairline.ttf"; sourceTree = "<group>"; };
+		2C243B6421EF2BA70057ED6A /* Lato-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-MediumItalic.ttf"; sourceTree = "<group>"; };
+		2C243B6521EF2BA70057ED6A /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
+		2C243B6621EF2BA70057ED6A /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		2C243B6721EF2BA80057ED6A /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
 		2C3607B921042E5B00D0C601 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		2C3607BB210432C000D0C601 /* SingleEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventController.swift; sourceTree = "<group>"; };
 		2C383C7921DB9A20000C1F07 /* Timespan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timespan.swift; sourceTree = "<group>"; };
@@ -194,6 +212,31 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
+		2C243B5521EF2B940057ED6A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2C243B5F21EF2BA60057ED6A /* Lato-Black.ttf */,
+				2C243B5D21EF2BA60057ED6A /* Lato-BlackItalic.ttf */,
+				2C243B5B21EF2BA50057ED6A /* Lato-Bold.ttf */,
+				2C243B6121EF2BA60057ED6A /* Lato-BoldItalic.ttf */,
+				2C243B6321EF2BA70057ED6A /* Lato-Hairline.ttf */,
+				2C243B5E21EF2BA60057ED6A /* Lato-HairlineItalic.ttf */,
+				2C243B6221EF2BA70057ED6A /* Lato-Heavy.ttf */,
+				2C243B5821EF2BA50057ED6A /* Lato-HeavyItalic.ttf */,
+				2C243B5C21EF2BA50057ED6A /* Lato-Italic.ttf */,
+				2C243B6621EF2BA70057ED6A /* Lato-Light.ttf */,
+				2C243B6721EF2BA80057ED6A /* Lato-LightItalic.ttf */,
+				2C243B5721EF2BA40057ED6A /* Lato-Medium.ttf */,
+				2C243B6421EF2BA70057ED6A /* Lato-MediumItalic.ttf */,
+				2C243B5921EF2BA50057ED6A /* Lato-Regular.ttf */,
+				2C243B6021EF2BA60057ED6A /* Lato-Semibold.ttf */,
+				2C243B5A21EF2BA50057ED6A /* Lato-SemiboldItalic.ttf */,
+				2C243B6521EF2BA70057ED6A /* Lato-Thin.ttf */,
+				2C243B5621EF2BA40057ED6A /* Lato-ThinItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		2C383C9F21E5CAAF000C1F07 /* FourU */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +300,7 @@
 		2CB299A0200DE10000825CBA /* MyNSB */ = {
 			isa = PBXGroup;
 			children = (
+				2C243B5521EF2B940057ED6A /* Fonts */,
 				2C5C677C21A12F990070D572 /* Default */,
 				2C08F01920390169005F1758 /* Events */,
 				2C383C9F21E5CAAF000C1F07 /* FourU */,
@@ -519,6 +563,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RSDayFlow/RSDayFlow.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -528,6 +573,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwaitKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSDayFlow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",

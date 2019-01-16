@@ -8,9 +8,13 @@ target 'MyNSB' do
   # Pods for MyNSB
   pod 'Alamofire', '~>4.5'
   pod 'AlamofireImage', '~>3.3'
+  
   pod 'SwiftyJSON', '~>4.1.0'
+  
   pod 'PromiseKit', '~>6.0'
   pod 'PromiseKit/Alamofire', '~>6.0'
+  pod 'AwaitKit'
+  
   pod 'RSDayFlow', '~>1.7.0'
   pod 'iOS-Color-Picker'
   

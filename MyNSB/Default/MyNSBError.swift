@@ -7,12 +7,23 @@
 //
 
 import Foundation
+import SwiftyJSON
+import Alamofire
 
 enum MyNSBError: Error {
     case emptyUsername
     case emptyPassword
     case connection
-    case generic(NSError)
+    case API(code: Int, message: String)
+}
+
+extension MyNSBError {
+    static func from(response: DataResponse<Any>) -> MyNSBError {
+        let code = response.response!.statusCode
+        let message = JSON(response.data!)["Message"]["Body"].stringValue
+        
+        return MyNSBError.API(code: code, message: message)
+    }
 }
 
 extension MyNSBError: CustomStringConvertible {
@@ -23,9 +34,9 @@ extension MyNSBError: CustomStringConvertible {
             case .emptyPassword:
                 return "Password cannot be empty"
             case .connection:
-                return "Connection error"
-            case .generic(let error):
-                return "Error code \(error.code): \(error.localizedDescription)"
+                return "Cannot connect to the Internet"
+            case .API(let code, let message):
+                return "Error code \(code): \(message)"
         }
     }
 }

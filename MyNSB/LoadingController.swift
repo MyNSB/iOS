@@ -9,13 +9,18 @@
 import UIKit
 
 class LoadingController: UIViewController {
-
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.activityIndicator.startAnimating()
 
         // Do any additional setup after loading the view.
         
         User.isLoggedIn().done { flag in
+            self.activityIndicator.stopAnimating()
+            
             if flag {
                 self.performSegue(withIdentifier: "mainPage", sender: nil)
             } else {

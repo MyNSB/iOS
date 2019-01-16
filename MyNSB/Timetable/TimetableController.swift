@@ -11,16 +11,21 @@ import Alamofire
 import PromiseKit
 import SwiftyJSON
 
+import AwaitKit
+
 class TimetableController: UIViewController {
+    // A list of periods within the timetable, separated by day - each `Period` class contains
+    // all the information needed to represent a period (e.g. classroom, teacher name, subject name)
+    private var timetable: Timetable?
+    
     // The day that the user is currently on, from 0 to 9 (0 being Week A Monday, 9 being Week B Friday)
     private var userSelectedDay = 0
     // The date today, expressed from 0 to 9 (see above)
     private var today = 0
     // Flag for whether today is a weekend or not
     var todayIsWeekend = false
-    // A list of periods within the timetable, separated by day - each `Period` class contains
-    // all the information needed to represent a period (e.g. classroom, teacher name, subject name)
-    private var timetable: Timetable?
+    
+    private static var firstAccess = true
     
     // Mark: Properties
     
@@ -41,12 +46,8 @@ class TimetableController: UIViewController {
         return self.userSelectedDay == self.today
     }
     
-    /// Checks if the user has their timetable stored locally.
-    ///
-    /// - Returns: A boolean that indicates whether the user has their timetable stored.
-    func isTimetableStored() -> Bool {
-        let defaults = UserDefaults.standard
-        return defaults.object(forKey: "timetable") != nil
+    func shouldUpdateTimetable() -> Bool {
+        return Connection.isConnected && UserDefaults.standard.bool(forKey: "automaticUpdatesFlag") && TimetableController.firstAccess
     }
     
     // API calls & Promises
@@ -56,7 +57,7 @@ class TimetableController: UIViewController {
     ///
     /// - Parameter week: The current week, either "A" or "B"
     /// - Returns: A value from 0-9 detailing what day it is in the fortnight
-    private func fetchDayGivenWeek(week: String, day: Int) -> Int {
+    private func dayGivenWeek(week: String, day: Int) -> Int {
         // Current week: since week A Monday is represented as 0, week B Monday is
         // represented as 5. This integer helps separate the possibility for the
         // current day into two separate weeks
@@ -92,23 +93,8 @@ class TimetableController: UIViewController {
                 self.todayIsWeekend = true
             }
             
-            return self.fetchDayGivenWeek(week: week, day: day)
+            return self.dayGivenWeek(week: week, day: day)
         }
-    }
-
-    // Saving offline timetable
-
-    private func saveTimetable() {
-        let defaults = UserDefaults.standard
-
-        if let timetable = self.timetable {
-            defaults.set(NSKeyedArchiver.archivedData(withRootObject: timetable), forKey: "timetable")
-        }
-    }
-
-    private func fetchOfflineTimetable() {
-        let defaults = UserDefaults.standard
-        self.timetable = NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "timetable") as! Data) as! Timetable?
     }
     
     // Moving the view to the selected day
@@ -127,24 +113,24 @@ class TimetableController: UIViewController {
     // Loading the timetable overall
 
     private func loadTimetable() {
-        let connected = Connection.isConnected
-
-        if connected && UserDefaults.standard.bool(forKey: "automaticUpdatesFlag") {
-            let timetable: Promise<Timetable> = self.loadTimetableData()
-            let day: Promise<Int> = self.fetchDay()
-            
-            when(fulfilled: timetable, day).done { (timetable, day) in
-                self.timetable = timetable
-                self.saveTimetable()
-                
-                self.today = day
-                self.userSelectedDay = day
-                self.moveViewToSelectedDay()
-            }.catch { error in
-                MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
+        if self.shouldUpdateTimetable() {
+            async {
+                do {
+                    let timetable = try await(self.loadTimetableData())
+                    let day = try await(self.fetchDay())
+                    
+                    self.timetable = timetable
+                    self.timetable!.save()
+                    
+                    self.today = day
+                    self.userSelectedDay = day
+                    self.moveViewToSelectedDay()
+                } catch let error as NSError {
+                    MyNSBErrorController.error(self, error: error as! MyNSBError)
+                }
             }
-        } else if self.isTimetableStored() {
-            self.fetchOfflineTimetable()
+        } else if Timetable.isStored() {
+            self.timetable = Timetable.fetch()
             self.moveViewToSelectedDay()
         } else {
             MyNSBErrorController.error(self, error: MyNSBError.connection)
@@ -154,22 +140,9 @@ class TimetableController: UIViewController {
 
 // Methods exposed to public
 extension TimetableController {
-    @objc private func updateTimetable() {
-        firstly {
-            self.loadTimetableData()
-        }.done { periods in
-            self.timetable = periods
-        }.catch { error in
-            MyNSBErrorController.error(self, error: MyNSBError.generic(error as NSError))
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let updateTimetableButton = UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(self.updateTimetable))
-        self.navigationItem.rightBarButtonItem = updateTimetableButton
-        
         self.previousDay.tintColor = self.view.tintColor
         self.nextDay.tintColor = self.view.tintColor
         
@@ -210,16 +183,22 @@ extension TimetableController {
         self.userSelectedDay = (self.userSelectedDay + 1) % 10
         self.moveViewToSelectedDay()
     }
+    
+    @IBAction func updateTimetable(_ sender: Any) {
+        firstly {
+            self.loadTimetableData()
+        }.done { periods in
+            self.timetable = periods
+        }.catch { error in
+            MyNSBErrorController.error(self, error: error as! MyNSBError)
+        }
+    }
 }
 
 // Extension on TimetableController for UITableViewController overloads
 extension TimetableController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let timetable = self.timetable else {
-            return 0
-        }
-
-        return timetable.get(day: self.userSelectedDay).count
+        return self.timetable?.get(day: self.userSelectedDay).count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

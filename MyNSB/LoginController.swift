@@ -48,16 +48,16 @@ class LoginController: UIViewController {
                 return
             }
 
-            Alamofire.request("\(MyNSBRequest.domain)/user/Auth", method: .post, headers: generateHeaders(user: user!, password: password!))
+            Alamofire.request("\(MyNSBRequest.domain)/user/auth", method: .post, headers: generateHeaders(user: user!, password: password!))
                 .validate()
                 .responseJSON { response in
                     switch response.result {
                         case .success:
                             seal.fulfill(())
-                        case .failure(let error):
-                            seal.reject(MyNSBError.generic(error as NSError))
+                        case .failure:
+                            seal.reject(MyNSBError.from(response: response))
                     }
-                }
+            }
         }
     }
 

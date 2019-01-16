@@ -9,6 +9,10 @@
 	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lato-Regular.ttf</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>MyNSB</string>
 	<key>CFBundleExecutable</key>
