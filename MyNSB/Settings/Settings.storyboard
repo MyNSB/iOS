@@ -9,13 +9,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main-->
+        <!--Contents-->
         <scene sceneID="BhL-oD-hfs">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="Zeq-yj-Y7R" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="Contents" id="Zeq-yj-Y7R" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dpA-EE-5xS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688" y="-452"/>
+            <point key="canvasLocation" x="638" y="-453"/>
         </scene>
         <!--Settings-->
         <scene sceneID="1pY-h7-gfW">
@@ -97,9 +97,6 @@
                                                     <state key="normal" title="Log out">
                                                         <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="appLogout:" destination="Q13-aA-nId" eventType="touchUpInside" id="JKY-8u-zpw"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -118,7 +115,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="FXT-1d-01x">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="Home" id="wMG-eu-Aqo">
-                            <inset key="imageInsets" minX="0.0" minY="-7" maxX="-19" maxY="0.0"/>
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                             <connections>
                                 <segue destination="Zeq-yj-Y7R" kind="show" id="g2e-hN-mCz"/>
@@ -135,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="112.5" y="214.43661971830986"/>
         </scene>
-        <!--Main-->
+        <!--Login-->
         <scene sceneID="Dgh-tq-DlA">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Main" storyboardName="Main" id="EX5-mR-feq" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="Main" storyboardName="Main" referencedIdentifier="Login" id="EX5-mR-feq" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQe-0g-f1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="650" y="489"/>
@@ -182,6 +178,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Home" width="46.551723480224609" height="44.068965911865234"/>
+        <image name="Home" width="25" height="25"/>
     </resources>
 </document>

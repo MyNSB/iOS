@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import PromiseKit
+import AwaitKit
 
 class LoginController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
@@ -37,35 +38,36 @@ class LoginController: UIViewController {
     }
 
     private func login(user: String?, password: String?) -> Promise<Void> {
-        return Promise { seal in
+        return async {
             guard user != nil, user != "" else {
-                seal.reject(MyNSBError.emptyUsername)
-                return
+                throw MyNSBError.emptyUsername
             }
-
+            
             guard password != nil, password != "" else {
-                seal.reject(MyNSBError.emptyPassword)
-                return
+                throw MyNSBError.emptyPassword
             }
-
-            Alamofire.request("\(MyNSBRequest.domain)/user/auth", method: .post, headers: generateHeaders(user: user!, password: password!))
-                .validate()
-                .responseJSON { response in
-                    switch response.result {
-                        case .success:
-                            seal.fulfill(())
-                        case .failure:
-                            seal.reject(MyNSBError.from(response: response))
-                    }
-            }
+            
+            try await(
+                MyNSBRequest.post(
+                    path: "/user/auth",
+                    headers: self.generateHeaders(user: user!, password: password!)
+                )
+            )
         }
     }
 
     @IBAction func submitLogin(_ sender: Any) {
-        self.login(user: usernameField.text, password: passwordField.text).done { _ in
-            self.performSegue(withIdentifier: "loginSegue", sender: self)
-        }.catch { error in
-            MyNSBErrorController.error(self, error: error as! MyNSBError)
+        let user = self.usernameField.text
+        let password = self.passwordField.text
+        
+        async {
+            do {
+                try await(self.login(user: user, password: password))
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "loginSegue", sender: self)
+                }
+            }
         }
     }
     

@@ -8,9 +8,9 @@
 
 import UIKit
 
-import PromiseKit
 import Alamofire
 import AlamofireImage
+import AwaitKit
 
 extension Date {
     static func formatStringForEvents(start: Date, end: Date) -> String {
@@ -32,22 +32,6 @@ class SingleEventController: UIViewController {
     @IBOutlet weak var eventShortDesc: UILabel!
     @IBOutlet weak var eventLongDesc: UILabel!
     
-    private func fetchImage() -> Promise<Image> {
-        return Promise<Image> { seal in
-            let csCopy = CharacterSet(bitmapRepresentation: CharacterSet.urlPathAllowed.bitmapRepresentation)
-            Alamofire.request(self.event!.imageURL.addingPercentEncoding(withAllowedCharacters: csCopy)!)
-                    .validate()
-                    .responseImage { response in
-                        switch response.result {
-                        case .success(let value):
-                            seal.fulfill(value)
-                        case .failure(let error):
-                            seal.reject(error)
-                        }
-                    }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,13 +46,14 @@ class SingleEventController: UIViewController {
         if let image = ImageCache.cache.object(forKey: self.event!.imageURL as NSString) {
             self.eventImage.image = image
         } else {
-            firstly {
-                self.fetchImage()
-            }.done { image in
-                ImageCache.cache.setObject(image, forKey: self.event!.imageURL as NSString)
-                self.eventImage.image = image
-            }.catch { error in
-                MyNSBErrorController.error(self, error: error as! MyNSBError)
+            async {
+                do {
+                    let image = try await(self.event!.image())
+                    ImageCache.cache.setObject(image, forKey: self.event!.imageURL as NSString)
+                    self.eventImage.image = image
+                } catch let error as MyNSBError {
+                    MyNSBErrorController.error(self, error: error)
+                }
             }
         }
     }

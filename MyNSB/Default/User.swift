@@ -10,24 +10,22 @@ import Foundation
 
 import Alamofire
 import PromiseKit
+import AwaitKit
 import SwiftyJSON
 
 class User {
     static func isLoggedIn() -> Promise<Bool> {
-        return Promise { seal in
-            Alamofire.request("\(MyNSBRequest.domain)/user/getDetails")
-                .responseJSON { response in
-                    if response.response?.statusCode != 200 {
-                        seal.fulfill(false)
-                        return
-                    }
-                    
-                    switch response.result {
-                        case .success:
-                            seal.fulfill(true)
-                        case .failure:
-                            seal.reject(MyNSBError.from(response: response))
-                    }
+        return async {
+            do {
+                try await(MyNSBRequest.get(path: "/user/getDetails"))
+                return true
+            } catch let error as MyNSBError {
+                switch error {
+                case .api:
+                    return false
+                default:
+                    throw error
+                }
             }
         }
     }

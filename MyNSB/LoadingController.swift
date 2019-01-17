@@ -8,6 +8,8 @@
 
 import UIKit
 
+import AwaitKit
+
 class LoadingController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -18,16 +20,13 @@ class LoadingController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        User.isLoggedIn().done { flag in
-            self.activityIndicator.stopAnimating()
+        async {
+            let flag = try! await(User.isLoggedIn())
             
-            if flag {
-                self.performSegue(withIdentifier: "mainPage", sender: nil)
-            } else {
-                self.performSegue(withIdentifier: "needsLogin", sender: nil)
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.performSegue(withIdentifier: flag ? "mainPage" : "needsLogin", sender: nil)
             }
-        }.catch { error in
-            
         }
     }
 
@@ -40,5 +39,4 @@ class LoadingController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

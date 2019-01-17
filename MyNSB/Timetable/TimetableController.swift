@@ -76,17 +76,17 @@ class TimetableController: UIViewController {
     }
 
     private func loadTimetableData() -> Promise<Timetable> {
-        return firstly {
-            TimetableAPI.bellTimes()
-        }.then { bellTimes in
-            return TimetableAPI.timetable(bellTimes: bellTimes)
+        return async {
+            let bellTimes = try await(TimetableAPI.bellTimes())
+            let timetable = try await(TimetableAPI.timetable(bellTimes: bellTimes))
+            return timetable
         }
     }
 
     private func fetchDay() -> Promise<Int> {
-        return firstly {
-            TimetableAPI.week()
-        }.map { week in
+        return async {
+            let week = try await(TimetableAPI.week())
+            
             let day = Calendar.current.component(.weekday, from: Date())
             
             if day == 1 || day == 7 {
@@ -125,8 +125,8 @@ class TimetableController: UIViewController {
                     self.today = day
                     self.userSelectedDay = day
                     self.moveViewToSelectedDay()
-                } catch let error as NSError {
-                    MyNSBErrorController.error(self, error: error as! MyNSBError)
+                } catch let error as MyNSBError {
+                    MyNSBErrorController.error(self, error: error)
                 }
             }
         } else if Timetable.isStored() {
@@ -185,12 +185,13 @@ extension TimetableController {
     }
     
     @IBAction func updateTimetable(_ sender: Any) {
-        firstly {
-            self.loadTimetableData()
-        }.done { periods in
-            self.timetable = periods
-        }.catch { error in
-            MyNSBErrorController.error(self, error: error as! MyNSBError)
+        async {
+            do {
+                let timetable = try await(self.loadTimetableData())
+                self.timetable = timetable
+            } catch let error as MyNSBError {
+                MyNSBErrorController.error(self, error: error)
+            }
         }
     }
 }

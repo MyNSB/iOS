@@ -6,6 +6,8 @@
 import UIKit
 import Foundation
 import SwiftyJSON
+import PromiseKit
+import AlamofireImage
 
 extension String {
     func parseEventDate() -> Date {
@@ -35,5 +37,22 @@ class Event {
         self.shortDescription = contents["EventShortDesc"].stringValue
         self.longDescription = contents["EventLongDesc"].stringValue
         self.imageURL = contents["EventPictureURL"].stringValue
+    }
+    
+    func image() -> Promise<Image> {
+        return Promise<Image> { seal in
+            let csCopy = CharacterSet(bitmapRepresentation: CharacterSet.urlPathAllowed.bitmapRepresentation)
+            
+            Alamofire.request(self.imageURL.addingPercentEncoding(withAllowedCharacters: csCopy)!)
+                .validate()
+                .responseImage { response in
+                    switch response.result {
+                    case .success(let value):
+                        seal.fulfill(value)
+                    case .failure(let error):
+                        seal.reject(error)
+                    }
+            }
+        }
     }
 }

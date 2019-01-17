@@ -10,15 +10,14 @@ import Foundation
 
 import Alamofire
 import PromiseKit
+import AwaitKit
 import SwiftyJSON
 
 class TimetableAPI {
     static func week() -> Promise<String> {
-        return firstly {
-            // Get request to week/Get
-            MyNSBRequest.get(path: "/week/get")
-        }.map { json in
-            return json.stringValue
+        return async {
+            let week = try await(MyNSBRequest.get(path: "/week/get"))
+            return week.stringValue
         }
     }
     
@@ -30,19 +29,15 @@ class TimetableAPI {
     /// - Returns: Bell times for the fortnight, marking the beginning and end
     ///            of each period
     static func bellTimes() -> Promise<BellTimes> {
-        return firstly {
-            MyNSBRequest.get(path: "/belltimes/get")
-        }.map { json in
-            let body = json[0]
+        return async {
+            let body = try await(MyNSBRequest.get(path: "/belltimes/get"))[0]
             return BellTimes(json: body)
         }
     }
     
     static func timetable(bellTimes: BellTimes) -> Promise<Timetable> {
-        return firstly {
-            MyNSBRequest.get(path: "/timetable/get")
-        }.map { json in
-            let body = json[0]
+        return async {
+            let body = try await(MyNSBRequest.get(path: "/timetable/get"))[0]
             return Timetable(json: body, bellTimes: bellTimes)
         }
     }

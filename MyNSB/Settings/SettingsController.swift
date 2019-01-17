@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import PromiseKit
+import AwaitKit
 
 class SettingsController: UITableViewController {
     @IBOutlet weak var automaticUpdatesSwitch: UISwitch!
@@ -36,6 +37,30 @@ class SettingsController: UITableViewController {
             return 2
         } else {
             return 1
+        }
+    }
+    
+    private func logout() -> Promise<Void> {
+        return async {
+            try await(MyNSBRequest.post(path: "/user/logout"))
+            return
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 && indexPath.row == 0 {
+            async {
+                do {
+                    try await(self.logout())
+                    
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "logoutSegue", sender: self)
+                        self.navigationController!.navigationBar.isHidden = true
+                    }
+                } catch let error as MyNSBError {
+                    MyNSBErrorController.error(self, error: error)
+                }
+            }
         }
     }
 
@@ -96,31 +121,5 @@ class SettingsController: UITableViewController {
     
     @IBAction func toggleAutomaticUpdates(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "automaticUpdatesFlag")
-    }
-    
-    // User functions
-
-    private func logout() -> Promise<Void> {
-        return Promise { seal in
-            Alamofire.request("http://35.244.66.186:8080/api/v1/user/Logout", method: .post)
-                .validate()
-                .responseJSON { response in
-                    switch response.result {
-                        case .success:
-                            seal.fulfill(())
-                        case .failure(let error):
-                            seal.reject(error)
-                    }
-                }
-        }
-    }
-
-    @IBAction func appLogout(_ sender: Any) {
-        self.logout().done {
-            self.performSegue(withIdentifier: "logoutSegue", sender: self)
-            self.navigationController!.navigationBar.isHidden = true
-        }.catch { error in
-            MyNSBErrorController.error(self, error: error as! MyNSBError)
-        }
     }
 }

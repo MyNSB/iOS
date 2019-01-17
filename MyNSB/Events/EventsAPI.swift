@@ -11,19 +11,17 @@ import Foundation
 import Alamofire
 import PromiseKit
 import SwiftyJSON
+import AwaitKit
 
 class EventsAPI {
     static func events() -> Promise<[Event]> {
-        return firstly {
-            Alamofire.request("\(MyNSBRequest.domain)/events/get")
-                .validate()
-                .responseJSON()
-            }.map { json, response in
-                let body = JSON(json)["Message"]["Body"][0].arrayValue
-                
-                return body.map { eventJson in
-                    return Event(contents: eventJson)
-                }
+        return async {
+            let json = try await(MyNSBRequest.get(path: "/events/get"))
+            let body = json[0].arrayValue
+            
+            return body.map { eventJSON in
+                return Event(contents: eventJSON)
+            }
         }
     }
 }
