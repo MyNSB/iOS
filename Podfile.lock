@@ -1,23 +1,23 @@
 PODS:
-  - Alamofire (4.7.2)
-  - AlamofireImage (3.3.1):
-    - Alamofire (~> 4.5)
-  - AwaitKit (5.0.1):
+  - Alamofire (4.8.1)
+  - AlamofireImage (3.5.0):
+    - Alamofire (~> 4.8)
+  - AwaitKit (5.1.0):
     - PromiseKit (~> 6)
   - iOS-Color-Picker (1.2)
-  - PromiseKit (6.2.7):
-    - PromiseKit/CorePromise (= 6.2.7)
-    - PromiseKit/Foundation (= 6.2.7)
-    - PromiseKit/UIKit (= 6.2.7)
-  - PromiseKit/Alamofire (6.2.7):
+  - PromiseKit (6.7.1):
+    - PromiseKit/CorePromise (= 6.7.1)
+    - PromiseKit/Foundation (= 6.7.1)
+    - PromiseKit/UIKit (= 6.7.1)
+  - PromiseKit/Alamofire (6.7.1):
     - Alamofire (~> 4.0)
     - PromiseKit/CorePromise
-  - PromiseKit/CorePromise (6.2.7)
-  - PromiseKit/Foundation (6.2.7):
+  - PromiseKit/CorePromise (6.7.1)
+  - PromiseKit/Foundation (6.7.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.2.7):
+  - PromiseKit/UIKit (6.7.1):
     - PromiseKit/CorePromise
-  - RSDayFlow (1.7.0)
+  - RSDayFlow (1.7.1)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
@@ -41,14 +41,14 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
-  AwaitKit: a6d0b0b6d603cedda8ef1c1c249b8d6730359917
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
+  AwaitKit: a8a3d8982097ee09ac75f5c5d3952fbcc2f26f1c
   iOS-Color-Picker: 4284a4d744a7cafe9d22d4b66eefc45342b80f1d
-  PromiseKit: 12b9d87748b170714247d8b2677146ca57e488f2
-  RSDayFlow: 5c3af19200155a956eda4b3a82fec4020e0b5ffd
+  PromiseKit: ef376fb8b4e92edfeb66bd403b983eaa07fbde0c
+  RSDayFlow: c4d27ab9d40773bdd53ace3a5accb807c070d4bf
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 1a76c442dfa7340c65e4297f9f7c5a16ec8d5ced
+PODFILE CHECKSUM: 9128963fb95b839ce12f29fac61cb897d4a42245
 
 COCOAPODS: 1.5.3

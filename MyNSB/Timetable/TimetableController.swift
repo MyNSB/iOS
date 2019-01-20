@@ -8,10 +8,9 @@
 
 import UIKit
 import Alamofire
+import AwaitKit
 import PromiseKit
 import SwiftyJSON
-
-import AwaitKit
 
 class TimetableController: UIViewController {
     // A list of periods within the timetable, separated by day - each `Period` class contains
@@ -21,13 +20,13 @@ class TimetableController: UIViewController {
     // The day that the user is currently on, from 0 to 9 (0 being Week A Monday, 9 being Week B Friday)
     private var userSelectedDay = 0
     // The date today, expressed from 0 to 9 (see above)
-    private var today = 0
-    // Flag for whether today is a weekend or not
-    var todayIsWeekend = false
+    private var today: Int? = nil
     
+    // Flag to check if this is the first time since the app opening that the user
+    // has accessed the timetable, for automatic updating optimisation
     private static var firstAccess = true
     
-    // Mark: Properties
+    // MARK: Properties
     
     @IBOutlet weak var currentWeek: UISegmentedControl!
     @IBOutlet weak var currentDay: UILabel!
@@ -37,63 +36,35 @@ class TimetableController: UIViewController {
 
     // Flags
     
-    /// Checks if a user's on the weekday page for today. For example, if it
-    /// is currently a Wednesday in Week A, this function returns `true` if
-    /// the user is currently on Wednesday, Week A in the timetable.
+    /// Checks if the app should display countdowns in `PeriodCell`s.
     ///
     /// - Returns: A boolean that describes if the user is on the weekday page for today.
-    func isUserOnToday() -> Bool {
+    func shouldDisplayCountdown() -> Bool {
         return self.userSelectedDay == self.today
     }
     
-    func shouldUpdateTimetable() -> Bool {
-        return Connection.isConnected && UserDefaults.standard.bool(forKey: "automaticUpdatesFlag") && TimetableController.firstAccess
-    }
     
-    // API calls & Promises
-    
-    /// Fetches the day that today corresponds with in the fortnight. Week A Monday is 0,
-    /// Week B Friday is 9.
+    /// Checks if the app should update the timetable (if the app is connected to the Internet,
+    /// if the user wants automatic updates and if this is the first time the user opens the
+    /// timetable section of the app)
     ///
-    /// - Parameter week: The current week, either "A" or "B"
-    /// - Returns: A value from 0-9 detailing what day it is in the fortnight
-    private func dayGivenWeek(week: String, day: Int) -> Int {
-        // Current week: since week A Monday is represented as 0, week B Monday is
-        // represented as 5. This integer helps separate the possibility for the
-        // current day into two separate weeks
-        let weekInt = week == "A" ? 0 : 5
-        // Returns the day that's going to be displayed, different from `self.today`
-        var displayDay = 0
-        
-        // If today is on a weekend:
-        if self.todayIsWeekend {
-            // The displayed day is set to the following Monday by rotating the week
-            displayDay = (weekInt + 5) % 10
-        }
-        
-        // Return the displayed day
-        return displayDay
+    /// - Returns: A boolean that describes whether the timetable should be updated or not
+    func shouldUpdateTimetable() -> Bool {
+        return Connection.isConnected &&
+            UserDefaults.standard.bool(forKey: "automaticUpdatesFlag") &&
+            TimetableController.firstAccess
     }
 
-    private func loadTimetableData() -> Promise<Timetable> {
+    private func loadDay() -> Promise<(Int?, Int)> {
         return async {
-            let bellTimes = try await(TimetableAPI.bellTimes())
-            let timetable = try await(TimetableAPI.timetable(bellTimes: bellTimes))
-            return timetable
-        }
-    }
-
-    private func fetchDay() -> Promise<Int> {
-        return async {
-            let week = try await(TimetableAPI.week())
+            let week = try await(TimetableAPI.week()) == "A" ? 0 : 5
+            let day = Calendar.current.component(.weekday, from: Date()) - 2
             
-            let day = Calendar.current.component(.weekday, from: Date())
-            
-            if day == 1 || day == 7 {
-                self.todayIsWeekend = true
+            if day == -1 || day == 5 {
+                return (nil, (week + 5) % 10)
+            } else {
+                return (week + day, week + day)
             }
-            
-            return self.dayGivenWeek(week: week, day: day)
         }
     }
     
@@ -112,25 +83,24 @@ class TimetableController: UIViewController {
     
     // Loading the timetable overall
 
-    private func loadTimetable() {
+    private func initTimetable() {
         if self.shouldUpdateTimetable() {
             async {
                 do {
-                    let timetable = try await(self.loadTimetableData())
-                    let day = try await(self.fetchDay())
-                    
-                    self.timetable = timetable
+                    self.timetable = try await(Timetable.fetch())
                     self.timetable!.save()
                     
-                    self.today = day
-                    self.userSelectedDay = day
-                    self.moveViewToSelectedDay()
+                    (self.today, self.userSelectedDay) = try await(self.loadDay())
+                    
+                    DispatchQueue.main.async {
+                        self.moveViewToSelectedDay()
+                    }
                 } catch let error as MyNSBError {
                     MyNSBErrorController.error(self, error: error)
                 }
             }
-        } else if Timetable.isStored() {
-            self.timetable = Timetable.fetch()
+        } else if Timetable.isOffline() {
+            self.timetable = Timetable.fetchOffline()
             self.moveViewToSelectedDay()
         } else {
             MyNSBErrorController.error(self, error: MyNSBError.connection)
@@ -149,7 +119,7 @@ extension TimetableController {
         self.periods.delegate = self
         self.periods.dataSource = self
         
-        self.loadTimetable()
+        self.initTimetable()
     }
     
     override func didReceiveMemoryWarning() {
@@ -187,8 +157,7 @@ extension TimetableController {
     @IBAction func updateTimetable(_ sender: Any) {
         async {
             do {
-                let timetable = try await(self.loadTimetableData())
-                self.timetable = timetable
+                self.timetable = try await(Timetable.fetch())
             } catch let error as MyNSBError {
                 MyNSBErrorController.error(self, error: error)
             }

@@ -7,6 +7,9 @@
 //
 
 import Foundation
+
+import AwaitKit
+import PromiseKit
 import SwiftyJSON
 
 class Timetable: NSObject, NSCoding {
@@ -44,16 +47,16 @@ class Timetable: NSObject, NSCoding {
         }
     }
     
-    func get(day: Int) -> [Period] {
-        return periods[day]
+    required init(coder aDecoder: NSCoder) {
+        self.periods = aDecoder.decodeObject(forKey: "periods") as! [[Period]]
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.periods, forKey: "periods")
     }
     
-    required init(coder aDecoder: NSCoder) {
-        self.periods = aDecoder.decodeObject(forKey: "periods") as! [[Period]]
+    func get(day: Int) -> [Period] {
+        return periods[day]
     }
     
     func save() {
@@ -61,7 +64,15 @@ class Timetable: NSObject, NSCoding {
         defaults.set(NSKeyedArchiver.archivedData(withRootObject: self), forKey: "timetable")
     }
     
-    static func fetch() -> Timetable? {
+    static func fetch() -> Promise<Timetable> {
+        return async {
+            let bellTimes = try await(TimetableAPI.bellTimes())
+            let timetable = try await(TimetableAPI.timetable(bellTimes: bellTimes))
+            return timetable
+        }
+    }
+    
+    static func fetchOffline() -> Timetable? {
         let defaults = UserDefaults.standard
         return NSKeyedUnarchiver.unarchiveObject(with: defaults.object(forKey: "timetable") as! Data) as! Timetable?
     }
@@ -69,7 +80,7 @@ class Timetable: NSObject, NSCoding {
     /// Checks if the user has their timetable stored locally.
     ///
     /// - Returns: A boolean that indicates whether the user has their timetable stored.
-    static func isStored() -> Bool {
+    static func isOffline() -> Bool {
         return UserDefaults.standard.object(forKey: "timetable") != nil
     }
 }

@@ -3,11 +3,12 @@
 // Copyright (c) 2018 Qwerp-Derp. All rights reserved.
 //
 
-import UIKit
 import Foundation
-import SwiftyJSON
-import PromiseKit
+import UIKit
+
 import AlamofireImage
+import PromiseKit
+import SwiftyJSON
 
 extension String {
     func parseEventDate() -> Date {

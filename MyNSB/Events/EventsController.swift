@@ -7,11 +7,12 @@
 //
 
 import UIKit
-import Alamofire
-import PromiseKit
-import SwiftyJSON
 
+import Alamofire
+import AwaitKit
+import PromiseKit
 import RSDayFlow
+import SwiftyJSON
 
 class EventsController: UIViewController {
     // A list of all the events, taken from the API
@@ -50,14 +51,19 @@ class EventsController: UIViewController {
         self.stackConstraint.constant = self.stackView.frame.height
         self.view.layoutIfNeeded()
         self.eventsShown = false
-
-        firstly {
-            EventsAPI.events()
-        }.done { events in
-            self.events = Events(events: events)
-            self.calendarView.reloadData()
-        }.catch { error in
-            MyNSBErrorController.error(self, error: error as! MyNSBError)
+        
+        async {
+            do {
+                let events = try await(EventsAPI.events())
+                
+                self.events = Events(events: events)
+                
+                DispatchQueue.main.async {
+                    self.calendarView.reloadData()
+                }
+            } catch let error as MyNSBError {
+                MyNSBErrorController.error(self, error: error)
+            }
         }
     }
 
@@ -69,11 +75,15 @@ class EventsController: UIViewController {
     private func hideStackView() {
         self.view.isUserInteractionEnabled = false
         self.stackConstraint.constant = self.stackView.frame.height
-
-        UIView.animate(.promise, duration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-            self.view.layoutIfNeeded()
-            self.stackView.alpha = 0.0
-        }).done { _ in
+        
+        async {
+            try await {
+                UIView.animate(.promise, duration: 0.5, delay: 0, options: .curveEaseOut) {
+                    self.view.layoutIfNeeded()
+                    self.stackView.alpha = 0.0
+                }
+            }
+            
             self.view.isUserInteractionEnabled = true
             self.eventsShown = false
         }
@@ -82,11 +92,15 @@ class EventsController: UIViewController {
     private func showStackView() {
         self.view.isUserInteractionEnabled = false
         self.stackConstraint.constant = 0
-
-        UIView.animate(.promise, duration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-            self.view.layoutIfNeeded()
-            self.stackView.alpha = 1.0
-        }).done { _ in
+        
+        async {
+            try await {
+                UIView.animate(.promise, duration: 0.5, delay: 0, options: .curveEaseOut) {
+                    self.view.layoutIfNeeded()
+                    self.stackView.alpha = 1.0
+                }
+            }
+            
             self.view.isUserInteractionEnabled = true
             self.eventsShown = true
         }

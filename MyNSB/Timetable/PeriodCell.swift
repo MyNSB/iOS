@@ -48,7 +48,7 @@ class PeriodCell: UITableViewCell {
     }
     
     private func adjustCountdownLabel(background: UIColor) {
-        if !controller!.todayIsWeekend && controller!.isUserOnToday() && Date() < self.period!.end {
+        if controller!.shouldDisplayCountdown() && Date() < self.period!.end {
             self.countdownLabel.isHidden = false
             self.countdownLabel.text = self.calculateCountdown(start: self.period!.start)
             self.countdownLabel.textColor = background

@@ -8,20 +8,22 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
-import PromiseKit
 import AwaitKit
+import PromiseKit
+import SwiftyJSON
 
 class LoginController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
 
+    /// Dismisses the keyboard when the user clicks outside the text field
     @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         self.usernameField.resignFirstResponder()
         self.passwordField.resignFirstResponder()
     }
     
     override func viewDidLoad() {
+        // Add a gesture recogniser for when the user clicks outside of the text fields
         let gesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         self.view.addGestureRecognizer(gesture)
     }
@@ -31,12 +33,14 @@ class LoginController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    /// Generate basic authentication headers for a user
     private func generateHeaders(user: String, password: String) -> HTTPHeaders? {
         return [
             "Authorization": "Basic " + (user + ":" + password).data(using: .utf8)!.base64EncodedString()
         ]
     }
 
+    /// Logs in the user via the API
     private func login(user: String?, password: String?) -> Promise<Void> {
         return async {
             guard user != nil, user != "" else {
@@ -70,5 +74,4 @@ class LoginController: UIViewController {
             }
         }
     }
-    
 }

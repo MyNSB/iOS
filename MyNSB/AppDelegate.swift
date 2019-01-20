@@ -13,22 +13,34 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    private func isFirstLaunch() -> Bool {
+    private static var isFirstLaunch: Bool {
         return !UserDefaults.standard.bool(forKey: "launchedFlag")
+    }
+    
+    @objc private func requestNotifications() {
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options: [.badge, .alert, .sound]) { (success, error) in
+            if success {
+                print("Notifications enabled")
+            } else {
+                print("Notification permissions request failed with error: \(error!)")
+            }
+        }
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // If the user hasn't launched the app before:
-        if self.isFirstLaunch() {
+        if AppDelegate.isFirstLaunch {
+            // Add default constants
             UserDefaults.standard.set(true, forKey: "automaticUpdatesFlag")
             // Add default constant for colours (based off of NSB intranet colours on timetables)
             UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: Constants.Timetable.defaultColours), forKey: "timetableColours")
-            UserDefaults.standard.set(true, forKey: "launchedFlag")
             
-            // setup notifications (or not)
-            requestNotifications()
+            // Set up notifications (or not)
+            self.requestNotifications()
             let center = UNUserNotificationCenter.current()
             
             center.getNotificationSettings { settings in
@@ -38,19 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     UserDefaults.standard.set(false, forKey: "notificationsEnabledFlag")
                 }
             }
+            
+            // We've loaded all the default settings already, set self.isFirstLaunch to `false`
+            UserDefaults.standard.set(true, forKey: "launchedFlag")
         }
         return true
-    }
-    
-    @objc func requestNotifications() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.badge, .alert, .sound]) { (success, error) in
-            if success {
-                print("notifications enabled")
-            } else {
-                print("notification permissions request failed with error: \(error!)")
-            }
-        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

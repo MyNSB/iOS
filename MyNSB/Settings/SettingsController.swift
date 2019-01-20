@@ -48,6 +48,7 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // "Log out" table view cell path
         if indexPath.section == 1 && indexPath.row == 0 {
             async {
                 do {

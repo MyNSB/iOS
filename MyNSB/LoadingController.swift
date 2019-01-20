@@ -16,16 +16,24 @@ class LoadingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Animate the loading icon
         self.activityIndicator.startAnimating()
 
         // Do any additional setup after loading the view.
         
         async {
-            let flag = try! await(User.isLoggedIn())
-            
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.performSegue(withIdentifier: flag ? "mainPage" : "needsLogin", sender: nil)
+            do {
+                // Check if the user is logged in
+                let flag = try await(User.isLoggedIn())
+                
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    // If the user is logged in, move to the contents page, otherwise
+                    // move to the login page
+                    self.performSegue(withIdentifier: flag ? "mainPage" : "needsLogin", sender: nil)
+                }
+            } catch {
+                MyNSBErrorController.error(self, error: MyNSBError.connection)
             }
         }
     }

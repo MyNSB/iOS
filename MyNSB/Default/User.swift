@@ -9,11 +9,14 @@
 import Foundation
 
 import Alamofire
-import PromiseKit
 import AwaitKit
-import SwiftyJSON
+import PromiseKit
 
 class User {
+    /// Checks if the current user is logged in or not. Uses /user/getDetails
+    /// internally. May throw if an error occurs with the app.
+    ///
+    /// - Returns: Whether the user is logged in or not
     static func isLoggedIn() -> Promise<Bool> {
         return async {
             do {
