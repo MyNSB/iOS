@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		03A1C530EC5FE2946C698639 /* Pods_MyNSBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4847A71EED5C5C35837252DA /* Pods_MyNSBTests.framework */; };
 		287BB061B3575ABB1463E9F4 /* Pods_MyNSBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759F460CEB3E0F6E3AF80353 /* Pods_MyNSBUITests.framework */; };
-		2C243B6921F42D710057ED6A /* ReminderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C243B6821F42D710057ED6A /* ReminderAPI.swift */; };
 		2C243B6B21F43F280057ED6A /* FourU.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C243B6A21F43F280057ED6A /* FourU.storyboard */; };
+		2C243B6D21F5A2440057ED6A /* ReminderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C243B6C21F5A2440057ED6A /* ReminderAPI.swift */; };
 		2C3607BA21042E5B00D0C601 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607B921042E5B00D0C601 /* EventCell.swift */; };
 		2C3607BC210432C000D0C601 /* SingleEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3607BB210432C000D0C601 /* SingleEventController.swift */; };
 		2C383C7A21DB9A20000C1F07 /* Timespan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C383C7921DB9A20000C1F07 /* Timespan.swift */; };
@@ -98,8 +98,8 @@
 		2C243B6521EF2BA70057ED6A /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
 		2C243B6621EF2BA70057ED6A /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		2C243B6721EF2BA80057ED6A /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
-		2C243B6821F42D710057ED6A /* ReminderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderAPI.swift; sourceTree = "<group>"; };
 		2C243B6A21F43F280057ED6A /* FourU.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FourU.storyboard; sourceTree = "<group>"; };
+		2C243B6C21F5A2440057ED6A /* ReminderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderAPI.swift; sourceTree = "<group>"; };
 		2C3607B921042E5B00D0C601 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		2C3607BB210432C000D0C601 /* SingleEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventController.swift; sourceTree = "<group>"; };
 		2C383C7921DB9A20000C1F07 /* Timespan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timespan.swift; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 				B7FD892F21E5A0DB00E00B13 /* ReminderList.swift */,
 				B7FD892E21E5A0DB00E00B13 /* ReminderListViewController.swift */,
 				B7FD893121E5A0DB00E00B13 /* ReminderScheduleController.swift */,
-				2C243B6821F42D710057ED6A /* ReminderAPI.swift */,
+				2C243B6C21F5A2440057ED6A /* ReminderAPI.swift */,
 			);
 			path = Reminders;
 			sourceTree = "<group>";
@@ -633,7 +633,7 @@
 				2CC7279820D6075B006EACC9 /* SettingsController.swift in Sources */,
 				2CCD40C721020C09001975B9 /* EventsController.swift in Sources */,
 				2C3D0E0021DA2BA700EE80C3 /* TimetableAPI.swift in Sources */,
-				2C243B6921F42D710057ED6A /* ReminderAPI.swift in Sources */,
+				2C243B6D21F5A2440057ED6A /* ReminderAPI.swift in Sources */,
 				2CB299A4200DE10000825CBA /* LoginController.swift in Sources */,
 				2CCD40C121009CEB001975B9 /* PeriodCell.swift in Sources */,
 				2C67B3BE20DF7BF700ADB773 /* MainPageController.swift in Sources */,

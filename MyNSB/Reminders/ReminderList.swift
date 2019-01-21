@@ -33,7 +33,7 @@ class ReminderList {
         notification.body = item.body ?? ""
         // create a trigger from the reminder's `due` property
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: item.due)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: item.repeats)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
         // create a notification request with the reminder's UUID as identifier
         let request = UNNotificationRequest(identifier: item.UUID, content: notification, trigger: trigger)
         // register the request

@@ -8,20 +8,31 @@
 
 import Foundation
 
+import SwiftyJSON
+
+extension String {
+    func parseReminderString() -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "DD-MM-YYYY hh:mm"
+        
+        return formatter.date(from: self)!
+    }
+}
+
 /* internally used by ReminderList.swift */
 struct Reminder: Codable {
-    var title:   String
-    var body:    String?
-    var due:     Date
-    var UUID:    String // stored as string
-    var repeats: Bool
+    let title: String
+    let body:  String?
+    let due:   Date
+    let tags:  [String]
+    let id:    String // stored as string
     
-    init(title: String, body: String?, due: Date, repeats: Bool, UUID: String){
-        self.title = title
-        self.body = body
-        self.due = due
-        self.repeats = repeats
-        self.UUID = UUID
+    init(json: JSON) {
+        self.title = json["Headers"]["Subject"].stringValue
+        self.body = json["Body"].stringValue
+        self.due = json["DateTime"].stringValue.parseReminderString()
+        self.tags = json["Tags"].arrayValue.map { $0.stringValue }
+        self.id = String(json["ID"].intValue)
     }
     
     var overdue: Bool {
