@@ -11,13 +11,14 @@ import SwiftyJSON
 
 struct Issue {
     let name: String
-    let edition: String
-    let coverimage: String
+    let description: String
+    let imageURL: String
+    let link: String
     
-    init(dictionary: JSON) {
-        self.name = dictionary["name"].stringValue
-        self.edition = dictionary["editionmonth"].stringValue
-        self.coverimage = dictionary["CoverImage"].stringValue
+    init(json: JSON) {
+        self.name = json["Name"].stringValue
+        self.description = json["Desc"].stringValue
+        self.imageURL = json["ImageUrl"].stringValue
+        self.link = json["Link"].stringValue
     }
-    
 }
