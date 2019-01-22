@@ -10,6 +10,7 @@ import Foundation
 
 import AwaitKit
 import PromiseKit
+import SwiftyJSON
 
 extension Date {
     func parseReminderDate() -> String {
@@ -29,7 +30,7 @@ class ReminderAPI {
                     parameters: [
                         "Body": body,
                         "Subject": subject,
-                        "Tags": tags,
+                        "Tags": JSON(tags).rawString()!,
                         "Date": date.parseReminderDate()
                     ]
                 )
@@ -39,16 +40,18 @@ class ReminderAPI {
     
     static func delete(id: String) -> Promise<Void> {
         return async {
-            try await(MyNSBRequest.post(
-                path: "/reminders/delete",
-                parameters: ["Reminder_ID": id]
-            ))
+            try await(
+                MyNSBRequest.post(
+                    path: "/reminders/delete",
+                    parameters: ["Reminder_ID": id]
+                )
+            )
         }
     }
     
     static func get() -> Promise<[Reminder]> {
         return async {
-            let body = try await(MyNSBRequest.get(path: "/reminders/get")).arrayValue
+            let body = try await(MyNSBRequest.get(path: "/reminders/get"))[0].arrayValue
             return body.map { Reminder(json: $0) }
         }
     }

@@ -13,7 +13,7 @@ import SwiftyJSON
 extension String {
     func parseReminderString() -> Date {
         let formatter = DateFormatter()
-        formatter.dateFormat = "DD-MM-YYYY hh:mm"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         
         return formatter.date(from: self)!
     }
