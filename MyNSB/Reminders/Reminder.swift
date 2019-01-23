@@ -27,6 +27,14 @@ struct Reminder: Codable {
     let tags:  [String]
     let id:    String // stored as string
     
+    init(title: String, body: String?, due: Date, tags: [String], id: String) {
+        self.title = title
+        self.body = body
+        self.due = due
+        self.tags = tags
+        self.id = id
+    }
+    
     init(json: JSON) {
         self.title = json["Headers"]["Subject"].stringValue
         self.body = json["Body"].stringValue
@@ -36,6 +44,6 @@ struct Reminder: Codable {
     }
     
     var overdue: Bool {
-        return (Date().compare(self.due) == .orderedDescending)
+        return Date().compare(self.due) == .orderedDescending
     }
 }

@@ -49,9 +49,14 @@ class ReminderAPI {
         }
     }
     
-    static func get() -> Promise<[Reminder]> {
+    static func get(start: Date, end: Date) -> Promise<[Reminder]> {
         return async {
-            let body = try await(MyNSBRequest.get(path: "/reminders/get"))[0].arrayValue
+            let body = try await(
+                MyNSBRequest.get(path: "/reminders/get", parameters: [
+                    "Start_Time": start.parseReminderDate(),
+                    "End_Time": end.parseReminderDate()
+                ])
+            )[0].arrayValue
             return body.map { Reminder(json: $0) }
         }
     }

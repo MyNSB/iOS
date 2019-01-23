@@ -71,6 +71,8 @@ class LoginController: UIViewController {
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "loginSegue", sender: self)
                 }
+            } catch let error as MyNSBError {
+                MyNSBErrorController.error(self, error: error)
             }
         }
     }

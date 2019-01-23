@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import UserNotifications
+
 import Alamofire
 import AwaitKit
 import PromiseKit
@@ -21,6 +23,8 @@ class TimetableController: UIViewController {
     private var userSelectedDay = 0
     // The date today, expressed from 0 to 9 (see above)
     private var today: Int? = nil
+    
+    private var calendar = Calendar.current
     
     // Flag to check if this is the first time since the app opening that the user
     // has accessed the timetable, for automatic updating optimisation
@@ -43,7 +47,6 @@ class TimetableController: UIViewController {
         return self.userSelectedDay == self.today
     }
     
-    
     /// Checks if the app should update the timetable (if the app is connected to the Internet,
     /// if the user wants automatic updates and if this is the first time the user opens the
     /// timetable section of the app)
@@ -58,7 +61,7 @@ class TimetableController: UIViewController {
     private func loadDay() -> Promise<(Int?, Int)> {
         return async {
             let week = try await(TimetableAPI.week()) == "A" ? 0 : 5
-            let day = Calendar.current.component(.weekday, from: Date()) - 2
+            let day = self.calendar.component(.weekday, from: Date()) - 2
             
             if day == -1 || day == 5 {
                 return (nil, (week + 5) % 10)
@@ -91,6 +94,7 @@ class TimetableController: UIViewController {
                     self.timetable!.save()
                     
                     (self.today, self.userSelectedDay) = try await(self.loadDay())
+                    self.launchNotifications()
                     
                     DispatchQueue.main.async {
                         self.moveViewToSelectedDay()
@@ -104,6 +108,54 @@ class TimetableController: UIViewController {
             self.moveViewToSelectedDay()
         } else {
             MyNSBErrorController.error(self, error: MyNSBError.connection)
+        }
+    }
+    
+    // Given a date `date`, returns that same date but at 00:00:00
+    private func getDay(date: Date) -> Date {
+        let currentComponents = self.calendar.dateComponents([.year, .month, .day], from: date)
+        return self.calendar.date(from: currentComponents)!
+    }
+    
+    private func launchNotifications() {
+        let today = self.getDay(date: Date())
+        var weekday = Calendar.current.component(.weekday, from: today) - 2
+        if weekday == 5 { weekday = -2 }
+        let monday = today.addingTimeInterval(TimeInterval(weekday * 24 * 60 * 60))
+        
+        let centre = UNUserNotificationCenter.current()
+        
+        centre.getPendingNotificationRequests { _ in
+            let notifs: [String] = UserDefaults.standard.stringArray(forKey: "timetableNotifs") ?? []
+            centre.removePendingNotificationRequests(withIdentifiers: notifs)
+            
+            var newNotifs: [String] = []
+            for day in 0..<10 {
+                for period in self.timetable!.get(day: day) {
+                    let adjustedDay = day >= 5 ? day + 2 : day
+                    
+                    let currentDay = self.calendar.dateComponents([.year, .month, .day], from: monday.addingTimeInterval(TimeInterval(adjustedDay * 24 * 60 * 60)))
+                    var periodComponents = self.calendar.dateComponents([.year, .month, .day], from: period.start)
+                    
+                    periodComponents.year = currentDay.year
+                    periodComponents.month = currentDay.month
+                    periodComponents.day = currentDay.day
+                    
+                    let content = UNMutableNotificationContent()
+                    content.title = period.subject.longName
+                    content.body = "Room: \(period.room ?? "None")"
+                    content.sound = UNNotificationSound.default()
+                    
+                    let id = UUID().uuidString
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: periodComponents, repeats: false)
+                    let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+                    print(request)
+                    newNotifs.append(id)
+                    centre.add(request)
+                }
+            }
+            
+            UserDefaults.standard.set(newNotifs, forKey: "timetableNotifs")
         }
     }
 }

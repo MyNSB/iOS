@@ -19,9 +19,9 @@ class ReminderList {
     func scheduleItem(_ item: Reminder) {
         let center = UNUserNotificationCenter.current()
         // remove previously existing notification, if any
-        center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
+        center.getPendingNotificationRequests(completionHandler: { notificationRequests in
             for request in notificationRequests {
-                if request.identifier == item.UUID {
+                if request.identifier == item.id {
                     center.removePendingNotificationRequests(withIdentifiers: [request.identifier])
                     break
                 }
@@ -35,9 +35,9 @@ class ReminderList {
         let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: item.due)
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
         // create a notification request with the reminder's UUID as identifier
-        let request = UNNotificationRequest(identifier: item.UUID, content: notification, trigger: trigger)
+        let request = UNNotificationRequest(identifier: item.id, content: notification, trigger: trigger)
         // register the request
-        center.add(request) { (error) in
+        center.add(request) { error in
             if let error = error {
                 print("error scheduling notification: \(error)")
             } else {
@@ -49,7 +49,7 @@ class ReminderList {
     // adds item to the UserDefaults Dictionary, overwriting if it already exists
     func addItem(_ item: Reminder) {
         var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? Dictionary()
-        reminderDict[item.UUID] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "repeats": item.repeats, "UUID": item.UUID]
+        reminderDict[item.id] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "tags": item.tags, "id": item.id]
         UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
     }
     
@@ -57,7 +57,7 @@ class ReminderList {
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
             for request in notificationRequests {
-                if (request.identifier == item.UUID) {
+                if (request.identifier == item.id) {
                     center.removePendingNotificationRequests(withIdentifiers: [request.identifier])
                     print("removed \(request.content.title)")
                     break
@@ -65,7 +65,7 @@ class ReminderList {
             }
         })
         if var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) {
-            reminderDict.removeValue(forKey: item.UUID)
+            reminderDict.removeValue(forKey: item.id)
             UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
         }
     }
@@ -74,8 +74,8 @@ class ReminderList {
         let reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? [:]
         let items = Array(reminderDict.values)
         return items.map({
-            let item = $0 as! [String:AnyObject]
-            return Reminder(title: item["title"] as! String, body: item["body"] as? String, due: item["dueDate"] as! Date, repeats: item["repeats"] as! Bool, UUID: item["UUID"] as! String)
+            let item = $0 as! [String: AnyObject]
+            return Reminder(title: item["title"] as! String, body: item["body"] as? String, due: item["dueDate"] as! Date, tags: item["tags"] as! [String], id: item["id"] as! String)
         }).sorted(by: { (remA, remB) -> Bool in
             (remA.due.compare(remB.due) == .orderedAscending)
         })
@@ -86,10 +86,10 @@ class ReminderList {
     func refreshNotifications() {
         let center = UNUserNotificationCenter.current()
         // remove completed
-        center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
+        center.getPendingNotificationRequests(completionHandler: { notificationRequests in
             for reminder in ReminderList.sharedInstance.getReminders() {
                 for request in notificationRequests {
-                    if (reminder.UUID == request.identifier) {
+                    if (reminder.id == request.identifier) {
                         break
                     }
                 }

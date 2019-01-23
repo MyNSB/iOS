@@ -16,9 +16,9 @@ import AwaitKit
 class MyNSBRequest {
     static let domain = "https://mynsb.nsbvisions.com/api/v1"
     
-    static func get(path: String) -> Promise<JSON> {
+    static func get(path: String, parameters: Parameters? = nil) -> Promise<JSON> {
         return Promise<JSON> { seal in
-            Alamofire.request(MyNSBRequest.domain + path)
+            Alamofire.request(MyNSBRequest.domain + path, parameters: parameters)
                 .validate()
                 .responseJSON { response in
                     switch response.result {

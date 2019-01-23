@@ -20,9 +20,9 @@ class ReminderScheduleController: UIViewController {
     @IBAction func savePressed(_ sender: UIButton) {
         // if not viewing a previously created reminder
         if viewingReminder != nil {
-            viewingReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, repeats: false, UUID: viewingReminder!.UUID)
+            viewingReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, tags: [], id: viewingReminder!.id)
         } else {
-            viewingReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, repeats: false, UUID: UUID().uuidString)
+            viewingReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, tags: [], id: UUID().uuidString)
         }
 	// update the `sharedInstance`
         ReminderList.sharedInstance.addItem(viewingReminder!)

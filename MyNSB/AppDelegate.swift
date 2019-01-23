@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If the user hasn't launched the app before:
         if AppDelegate.isFirstLaunch {
             // Add default constants
+            
             UserDefaults.standard.set(true, forKey: "automaticUpdatesFlag")
             // Add default constant for colours (based off of NSB intranet colours on timetables)
             UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: Constants.Timetable.defaultColours), forKey: "timetableColours")
