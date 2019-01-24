@@ -24,11 +24,8 @@ class TimetableController: UIViewController {
     // The date today, expressed from 0 to 9 (see above)
     private var today: Int? = nil
     
+    // Current calendar
     private var calendar = Calendar.current
-    
-    // Flag to check if this is the first time since the app opening that the user
-    // has accessed the timetable, for automatic updating optimisation
-    private static var firstAccess = true
     
     // MARK: Properties
     
@@ -47,6 +44,18 @@ class TimetableController: UIViewController {
         return self.userSelectedDay == self.today
     }
     
+    func firstAccessOfDay() -> Bool {
+        let nilableDay = UserDefaults.standard.object(forKey: "timetableLastAccessed") as? Date
+        guard let day = nilableDay else {
+            return false
+        }
+        
+        let dayComponents = self.calendar.dateComponents([.year, .month, .day], from: day)
+        let todayComponents = self.calendar.dateComponents([.year, .month, .day], from: Date())
+        
+        return [dayComponents.year, dayComponents.month, dayComponents.day] == [todayComponents.year, todayComponents.month, todayComponents.day]
+    }
+    
     /// Checks if the app should update the timetable (if the app is connected to the Internet,
     /// if the user wants automatic updates and if this is the first time the user opens the
     /// timetable section of the app)
@@ -54,10 +63,10 @@ class TimetableController: UIViewController {
     /// - Returns: A boolean that describes whether the timetable should be updated or not
     func shouldUpdateTimetable() -> Bool {
         return Connection.isConnected &&
-            UserDefaults.standard.bool(forKey: "automaticUpdatesFlag") &&
-            TimetableController.firstAccess
+            UserDefaults.standard.bool(forKey: "timetableUpdatesFlag") &&
+            self.firstAccessOfDay()
     }
-
+    
     private func loadDay() -> Promise<(Int?, Int)> {
         return async {
             let week = try await(TimetableAPI.week()) == "A" ? 0 : 5
@@ -94,7 +103,9 @@ class TimetableController: UIViewController {
                     self.timetable!.save()
                     
                     (self.today, self.userSelectedDay) = try await(self.loadDay())
+                    
                     self.launchNotifications()
+                    UserDefaults.standard.set(Date(), forKey: "timetableLastAccessed")
                     
                     DispatchQueue.main.async {
                         self.moveViewToSelectedDay()
@@ -105,7 +116,20 @@ class TimetableController: UIViewController {
             }
         } else if Timetable.isOffline() {
             self.timetable = Timetable.fetchOffline()
-            self.moveViewToSelectedDay()
+            
+            if Connection.isConnected {
+                async {
+                    do {
+                        (self.today, self.userSelectedDay) = try await(self.loadDay())
+                        
+                        DispatchQueue.main.async {
+                            self.moveViewToSelectedDay()
+                        }
+                    } catch let error as MyNSBError {
+                        MyNSBErrorController.error(self, error: error)
+                    }
+                }
+            }
         } else {
             MyNSBErrorController.error(self, error: MyNSBError.connection)
         }
@@ -117,42 +141,56 @@ class TimetableController: UIViewController {
         return self.calendar.date(from: currentComponents)!
     }
     
+    private func createRequest(day: Date, period: Period) -> UNNotificationRequest {
+        let dayComponents = self.calendar.dateComponents([.year, .month, .day], from: day)
+        var periodComponents = self.calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: period.start)
+        
+        periodComponents.year = dayComponents.year
+        periodComponents.month = dayComponents.month
+        periodComponents.day = dayComponents.day
+        
+        let content = UNMutableNotificationContent()
+        content.title = period.subject.longName
+        content.body = "Room: \(period.room ?? "None")"
+        content.sound = UNNotificationSound.default()
+        
+        let id = UUID().uuidString
+        let trigger = UNCalendarNotificationTrigger(dateMatching: periodComponents, repeats: false)
+        return UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+    }
+    
+    /// Load all notifications for the next 2 weeks.
     private func launchNotifications() {
+        let maxNotifications = 30
+        
         let today = self.getDay(date: Date())
-        var weekday = Calendar.current.component(.weekday, from: today) - 2
+        var weekday = self.calendar.component(.weekday, from: today) - 2
         if weekday == 5 { weekday = -2 }
         let monday = today.addingTimeInterval(TimeInterval(weekday * 24 * 60 * 60))
         
         let centre = UNUserNotificationCenter.current()
         
         centre.getPendingNotificationRequests { _ in
-            let notifs: [String] = UserDefaults.standard.stringArray(forKey: "timetableNotifs") ?? []
+            let notifs: [String] = UserDefaults.standard.stringArray(forKey: "timetableNotifs")!
             centre.removePendingNotificationRequests(withIdentifiers: notifs)
             
             var newNotifs: [String] = []
             for day in 0..<10 {
-                for period in self.timetable!.get(day: day) {
-                    let adjustedDay = day >= 5 ? day + 2 : day
+                let periodDay = self.userSelectedDay >= 5 ? (day + 5) % 10 : day
+                let adjustedDayValue = day >= 5 ? day + 2 : day
+                let adjustedDay = monday.addingTimeInterval(TimeInterval(adjustedDayValue * 24 * 60 * 60))
+                
+                for period in self.timetable!.get(day: periodDay) {
+                    let request = self.createRequest(day: adjustedDay, period: period)
+                    let id = request.identifier
                     
-                    let currentDay = self.calendar.dateComponents([.year, .month, .day], from: monday.addingTimeInterval(TimeInterval(adjustedDay * 24 * 60 * 60)))
-                    var periodComponents = self.calendar.dateComponents([.year, .month, .day], from: period.start)
-                    
-                    periodComponents.year = currentDay.year
-                    periodComponents.month = currentDay.month
-                    periodComponents.day = currentDay.day
-                    
-                    let content = UNMutableNotificationContent()
-                    content.title = period.subject.longName
-                    content.body = "Room: \(period.room ?? "None")"
-                    content.sound = UNNotificationSound.default()
-                    
-                    let id = UUID().uuidString
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: periodComponents, repeats: false)
-                    let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
-                    print(request)
                     newNotifs.append(id)
                     centre.add(request)
+                    
+                    if (newNotifs.count >= maxNotifications) { break }
                 }
+                
+                if (newNotifs.count >= maxNotifications) { break }
             }
             
             UserDefaults.standard.set(newNotifs, forKey: "timetableNotifs")
@@ -231,5 +269,10 @@ extension TimetableController: UITableViewDelegate, UITableViewDataSource {
         cell.update(period: period)
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = self.periods.dequeueReusableCell(withIdentifier: "periodCell", for: indexPath) as! PeriodCell
+        cell.setSelected(false, animated: true)
     }
 }

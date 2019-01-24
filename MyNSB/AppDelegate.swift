@@ -13,8 +13,10 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
+    private static let defaults = UserDefaults.standard
+    
     private static var isFirstLaunch: Bool {
-        return !UserDefaults.standard.bool(forKey: "launchedFlag")
+        return !AppDelegate.defaults.bool(forKey: "launchedFlag")
     }
     
     @objc private func requestNotifications() {
@@ -36,9 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AppDelegate.isFirstLaunch {
             // Add default constants
             
-            UserDefaults.standard.set(true, forKey: "automaticUpdatesFlag")
+            AppDelegate.defaults.set(true, forKey: "timetableUpdatesFlag")
             // Add default constant for colours (based off of NSB intranet colours on timetables)
-            UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: Constants.Timetable.defaultColours), forKey: "timetableColours")
+            AppDelegate.defaults.set(NSKeyedArchiver.archivedData(withRootObject: Constants.Timetable.defaultColours), forKey: "timetableColours")
+            
+            AppDelegate.defaults.set([String](), forKey: "timetableNotifs")
             
             // Set up notifications (or not)
             self.requestNotifications()
@@ -46,14 +50,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             center.getNotificationSettings { settings in
                 if settings.alertSetting == UNNotificationSetting.enabled {
-                    UserDefaults.standard.set(true, forKey: "notificationsEnabledFlag")
+                    AppDelegate.defaults.set(true, forKey: "notificationsEnabledFlag")
                 } else {
-                    UserDefaults.standard.set(false, forKey: "notificationsEnabledFlag")
+                    AppDelegate.defaults.set(false, forKey: "notificationsEnabledFlag")
                 }
             }
             
             // We've loaded all the default settings already, set self.isFirstLaunch to `false`
-            UserDefaults.standard.set(true, forKey: "launchedFlag")
+            AppDelegate.defaults.set(true, forKey: "launchedFlag")
         }
         return true
     }

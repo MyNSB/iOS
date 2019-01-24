@@ -9,7 +9,7 @@
 import UIKit
 
 class PeriodCell: UITableViewCell {
-    private var period: Period?
+    private var period: Period!
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
@@ -31,9 +31,21 @@ class PeriodCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    private func duration(first: Date, second: Date) -> Int? {
+        let firstDate = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: first))!
+        let secondDate = Calendar.current.date(from: Calendar.current.dateComponents([.hour, .minute, .second], from: second))!
+        
+        if firstDate > secondDate {
+            return nil
+        }
+        
+        return Calendar.current.dateComponents([.second], from: firstDate, to: secondDate).second!
+    }
+    
     private func calculateCountdown(start: Date) -> String {
-        if Date() < start {
-            let secondsUntilStart = Int(DateInterval(start: Date(), end: start).duration)
+        let duration = self.duration(first: Date(), second: start)
+        if duration != nil {
+            let secondsUntilStart = duration!
             
             if secondsUntilStart >= 3600 {
                 return "\(secondsUntilStart / 3600)h"
@@ -48,9 +60,9 @@ class PeriodCell: UITableViewCell {
     }
     
     private func adjustCountdownLabel(background: UIColor) {
-        if controller!.shouldDisplayCountdown() && Date() < self.period!.end {
+        if controller!.shouldDisplayCountdown() && self.duration(first: Date(), second: self.period.end) != nil {
             self.countdownLabel.isHidden = false
-            self.countdownLabel.text = self.calculateCountdown(start: self.period!.start)
+            self.countdownLabel.text = self.calculateCountdown(start: self.period.start)
             self.countdownLabel.textColor = background
             
             if background == UIColor.white {
@@ -64,7 +76,7 @@ class PeriodCell: UITableViewCell {
     }
     
     private func adjustInfoLabels(textColour: UIColor) {
-        if self.period!.subject.group == "Recess" || self.period!.subject.group == "Lunch" {
+        if self.period.subject.group == "Recess" || self.period.subject.group == "Lunch" {
             self.stackView.isHidden = true
         } else {
             self.stackView.isHidden = false
@@ -83,7 +95,7 @@ class PeriodCell: UITableViewCell {
         
         let archived = UserDefaults.standard.data(forKey: "timetableColours")!
         let colours = NSKeyedUnarchiver.unarchiveObject(with: archived) as! [String: UIColor]
-        let currentColour = colours[self.period!.subject.group]!
+        let currentColour = colours[self.period.subject.group]!
         let adjustedTextColour = Subject.textColourIsWhite(colour: currentColour) ? UIColor.white : UIColor.black
         
         self.backgroundColor = currentColour
