@@ -24,7 +24,9 @@ class MyNSBErrorController {
             }
         }
 
-        alertController.addAction(confirmAction)
-        controller.present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            alertController.addAction(confirmAction)
+            controller.present(alertController, animated: true, completion: nil)
+        }
     }
 }

@@ -9,6 +9,9 @@
 import UIKit
 
 class MainPageController: UITableViewController {
+    private let offline = ["reminders", "timetable"]
+    private let online  = ["fouru", "events", "reminders", "timetable"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,11 +36,19 @@ class MainPageController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+        if Connection.isConnected {
+            return 4
+        } else {
+            return 2
+        }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if Connection.isConnected {
+            return self.tableView.dequeueReusableCell(withIdentifier: self.online[indexPath.row])!
+        } else {
+            return self.tableView.dequeueReusableCell(withIdentifier: self.offline[indexPath.row])!
+        }
     }
 
     /*

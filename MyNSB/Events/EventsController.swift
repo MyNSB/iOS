@@ -26,7 +26,7 @@ class EventsController: UIViewController {
     // The event that's currently being selected, used when preparing to segue into a SingleEventController
     private var currentEvent: Event!
 
-    @IBOutlet weak var calendarView: RSDFDatePickerView!
+    @IBOutlet weak var calendarView: CalendarView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var stackConstraint: NSLayoutConstraint!
     @IBOutlet weak var currentDayLabel: UILabel!

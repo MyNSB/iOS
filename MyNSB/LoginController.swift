@@ -33,13 +33,6 @@ class LoginController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /// Generate basic authentication headers for a user
-    private func generateHeaders(user: String, password: String) -> HTTPHeaders? {
-        return [
-            "Authorization": "Basic " + (user + ":" + password).data(using: .utf8)!.base64EncodedString()
-        ]
-    }
-
     /// Logs in the user via the API
     private func login(user: String?, password: String?) -> Promise<Void> {
         return async {
@@ -54,7 +47,7 @@ class LoginController: UIViewController {
             try await(
                 MyNSBRequest.post(
                     path: "/user/auth",
-                    headers: self.generateHeaders(user: user!, password: password!)
+                    headers: User.generateHeaders(user: user!, password: password!)
                 )
             )
         }

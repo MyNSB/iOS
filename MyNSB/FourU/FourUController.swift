@@ -56,12 +56,14 @@ class FourUController: UIViewController, UICollectionViewDelegate, UICollectionV
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
         
-        cell.label.text = issue.name
+        cell.titleLabel.text = issue.name
+        cell.descriptionLabel.text = issue.description
         cell.coverImage.image = self.images[indexPath.row]
         
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
 }
-
-

@@ -21,20 +21,25 @@ class LoadingController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        async {
-            do {
-                // Check if the user is logged in
-                let flag = try await(User.isLoggedIn())
-                
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    // If the user is logged in, move to the contents page, otherwise
-                    // move to the login page
-                    self.performSegue(withIdentifier: flag ? "mainPage" : "needsLogin", sender: nil)
+        if Connection.isConnected {
+            async {
+                do {
+                    // Check if the user is logged in
+                    let flag = try await(User.isLoggedIn())
+                    print(flag)
+                    
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        // If the user is logged in, move to the contents page, otherwise
+                        // move to the login page
+                        self.performSegue(withIdentifier: flag ? "mainPage" : "needsLogin", sender: nil)
+                    }
+                } catch {
+                    MyNSBErrorController.error(self, error: MyNSBError.connection)
                 }
-            } catch {
-                MyNSBErrorController.error(self, error: MyNSBError.connection)
             }
+        } else {
+            self.performSegue(withIdentifier: "mainPage", sender: nil)
         }
     }
 

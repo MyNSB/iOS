@@ -13,6 +13,13 @@ import AwaitKit
 import PromiseKit
 
 class User {
+    /// Generate basic authentication headers for a user
+    static func generateHeaders(user: String, password: String) -> HTTPHeaders {
+        return [
+            "Authorization": "Basic " + (user + ":" + password).data(using: .utf8)!.base64EncodedString()
+        ]
+    }
+    
     /// Checks if the current user is logged in or not. Uses /user/getDetails
     /// internally. May throw if an error occurs with the app.
     ///
@@ -20,15 +27,21 @@ class User {
     static func isLoggedIn() -> Promise<Bool> {
         return async {
             do {
-                try await(MyNSBRequest.get(path: "/user/getDetails"))
-                return true
+                try await(
+                    MyNSBRequest.post(
+                        path: "/user/auth",
+                        headers: User.generateHeaders(user: "a", password: "a")
+                    )
+                )
+                return false
             } catch let error as MyNSBError {
-                switch error {
-                case .api:
-                    return false
-                default:
-                    throw error
+                if case let MyNSBError.api(code, message) = error {
+                    if code == 400 && message == "Already Logged In" {
+                        return true
+                    }
                 }
+                
+                throw error
             }
         }
     }
