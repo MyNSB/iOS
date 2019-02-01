@@ -9,13 +9,22 @@
 import UIKit
 import WebKit
 
-class WebController: UIViewController {
+class WebController: UIViewController, WKNavigationDelegate {
+    var website: URL?
+    
     @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.webView.navigationDelegate = self
 
         // Do any additional setup after loading the view.
+        
+        if let website = self.website {
+            let request = URLRequest(url: website)
+            self.webView.load(request)
+        }
     }
     
 

@@ -16,10 +16,8 @@ import SwiftyJSON
 class FourUAPI {
     static func get() -> Promise<[Issue]> {
         return async {
-            let body = try await(MyNSBRequest.get(path: "/4u/get")).arrayValue
+            let body = try await(MyNSBRequest.get(path: "/4u/get"))[0].arrayValue
             return body.map { Issue(json: $0) }
         }
     }
 }
-
-

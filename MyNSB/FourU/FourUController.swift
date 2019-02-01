@@ -15,20 +15,28 @@ class FourUController: UIViewController, UICollectionViewDelegate, UICollectionV
     private var issues: [Issue] = []
     private var images: [UIImage] = []
     
+    private var currentURL: URL?
+    
     @IBOutlet weak var issuesView: UICollectionView!
     
     override func viewDidLoad() {
         self.issuesView.delegate = self
         self.issuesView.dataSource = self
         
+        let group = DispatchGroup()
+        
         async {
             do {
                 self.issues = try await(FourUAPI.get())
-                self.images = try self.issues.map { issue in
-                    try await(issue.image())
+                
+                for issue in self.issues {
+                    group.enter()
+                    let image = try await(issue.image())
+                    self.images.append(image)
+                    group.leave()
                 }
                 
-                DispatchQueue.main.async {
+                group.notify(queue: .main) {
                     self.issuesView.reloadData()
                 }
             } catch let error as MyNSBError {
@@ -45,6 +53,7 @@ class FourUController: UIViewController, UICollectionViewDelegate, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! IssueCell
         let issue = self.issues[indexPath.row]
         
+        
         cell.contentView.layer.cornerRadius = 4.0
         cell.contentView.layer.borderWidth = 1.0
         cell.contentView.layer.borderColor = UIColor.clear.cgColor
@@ -56,6 +65,7 @@ class FourUController: UIViewController, UICollectionViewDelegate, UICollectionV
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
         
+        
         cell.titleLabel.text = issue.name
         cell.descriptionLabel.text = issue.description
         cell.coverImage.image = self.images[indexPath.row]
@@ -63,7 +73,21 @@ class FourUController: UIViewController, UICollectionViewDelegate, UICollectionV
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let url = self.currentURL else {
+            return
+        }
         
+        if segue.identifier == "showIssue" {
+            let destination = segue.destination as! WebController
+            destination.website = url
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let issue = self.issues[indexPath.row]
+        
+        self.currentURL = URL(string: issue.link)
+        self.performSegue(withIdentifier: "showIssue", sender: self)
     }
 }

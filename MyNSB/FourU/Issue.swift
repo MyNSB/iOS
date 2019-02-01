@@ -26,11 +26,12 @@ struct Issue {
         self.link = json["Link"].stringValue
     }
     
+    /// A function that loads the image associated with the issue.
+    ///
+    /// - Returns: a promise containing the image for the specific 4U issue
     func image() -> Promise<Image> {
         return Promise<Image> { seal in
-            let csCopy = CharacterSet(bitmapRepresentation: CharacterSet.urlPathAllowed.bitmapRepresentation)
-            
-            Alamofire.request(self.imageURL.addingPercentEncoding(withAllowedCharacters: csCopy)!)
+            Alamofire.request(self.imageURL)
                 .validate()
                 .responseImage { response in
                     switch response.result {
