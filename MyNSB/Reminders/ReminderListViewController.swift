@@ -20,9 +20,13 @@ class ReminderListViewController: UITableViewController {
             self.present(vc, animated: false, completion: nil)
             return
         }
-        
-        ReminderList.sharedInstance.refreshNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(ReminderListViewController.refreshList), name: NSNotification.Name(rawValue: "reminderListShouldRefresh"), object: nil)
+        return async {
+            // Sync with remote
+            ReminderList.sharedInstance.syncReminders()
+            ReminderList.sharedInstance.refreshNotifications()
+            refreshList()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +71,8 @@ class ReminderListViewController: UITableViewController {
         
         let completeTitle = NSLocalizedString("Complete", comment: "delete selected reminder")
         let completeAction = UIContextualAction(style: .destructive, title: completeTitle) { (action, view, completion) in
-            ReminderList.sharedInstance.removeItem(self.reminderList[(indexPath as NSIndexPath).row])
+            let deleted = self.reminderList[(indexPath as NSIndexPath).row]
+            ReminderList.sharedInstance.removeItem(deleted)
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.refreshList()
             completion(true)

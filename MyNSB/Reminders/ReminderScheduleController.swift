@@ -18,15 +18,18 @@ class ReminderScheduleController: UIViewController {
     @IBOutlet weak var deadlinePicker: UIDatePicker!
     
     @IBAction func savePressed(_ sender: UIButton) {
-        // if not viewing a previously created reminder
-        if viewingReminder != nil {
-            viewingReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, tags: [], id: viewingReminder!.id)
-        } else {
-            viewingReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, tags: [], id: UUID().uuidString)
+        let newID = viewingReminder?.id ?? UUID().uuidString
+        let newReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, tags: [], id: newID)
+
+        // if the old reminder has been edited
+        if (viewingReminder != nil && viewingReminder != newReminder) {
+            // delete outdated remote reminder - this shouldn't be necessary but API interface (probably?) needs changing
+            try await(ReminderAPI.delete(viewingReminder!.id))
         }
-	// update the `sharedInstance`
-        ReminderList.sharedInstance.addItem(viewingReminder!)
-        ReminderList.sharedInstance.scheduleItem(viewingReminder!)
+        // update the reminder
+        ReminderList.sharedInstance.addItem(newReminder!)
+        ReminderList.sharedInstance.scheduleItem(newReminder!)
+        // pop back to list view
         self.navigationController?.popToRootViewController(animated: true)
     }
     

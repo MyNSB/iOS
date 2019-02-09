@@ -9,9 +9,6 @@ import Foundation
 import UserNotifications
 
 /* This class manages the on disk storage of the reminders */
-// TODO: add API calls upon opening app to fetch reminders into `sharedInstance`
-//       and upon closing app to save reminders on remote server.
-//       On disk storage will suffice whilst app is open
 class ReminderList {
     static let sharedInstance = ReminderList()
     private let ITEMS_KEY = "reminderItems"
@@ -46,11 +43,16 @@ class ReminderList {
         }
     }
     
-    // adds item to the UserDefaults Dictionary, overwriting if it already exists
+    // adds item to the UserDefaults Dictionary, overwriting if it already exists, also adds to remote
     func addItem(_ item: Reminder) {
         var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? Dictionary()
         reminderDict[item.id] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "tags": item.tags, "id": item.id]
         UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
+        return async {
+            try await(
+                ReminderAPI.create(subject: item.title, body: item.body, tags: item.tags, date: item.due))
+            )
+        }
     }
     
     func removeItem(_ item: Reminder) {
@@ -68,10 +70,16 @@ class ReminderList {
             reminderDict.removeValue(forKey: item.id)
             UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
         }
+	return async {
+		try await(
+                    ReminderAPI.delete(item.id)
+                )
+	}
     }
     
     func getReminders() -> [Reminder] {
         let reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? [:]
+
         let items = Array(reminderDict.values)
         return items.map({
             let item = $0 as! [String: AnyObject]
@@ -98,5 +106,20 @@ class ReminderList {
                 self.scheduleItem(reminder)
             }
         })
+    }
+
+    // sync with remote
+    func syncReminders() {
+        let currentDate = Date()
+        // once again, API should have been better designed
+        let oneYear = DateComponents()
+        oneYear.year = 1
+        let futureDate = Calendar.current.date(byAdding: oneYear, to: currentDate)
+        let reminderDict: [Reminder]
+        for reminder in ReminderAPI.get(start: currentDate, end: futureDate) {
+            reminderDict[reminder.id] = ["title": reminder.title, "body": reminder.body ?? "", "dueDate": reminder.due, "tags": reminder.tags, "id": reminder.id];
+        }
+
+        UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
     }
 }
