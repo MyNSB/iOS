@@ -7,16 +7,16 @@ target 'MyNSB' do
   inhibit_all_warnings!
 
   # Pods for MyNSB
-  pod 'Alamofire', '~>4.5'
-  pod 'AlamofireImage', '~>3.3'
+  pod 'Alamofire', '~>4.8.1'
+  pod 'AlamofireImage', '~>3.5'
   
-  pod 'SwiftyJSON', '~>4.1.0'
+  pod 'SwiftyJSON', '~>4.0'
   
-  pod 'PromiseKit', '~>6.0'
+  pod 'PromiseKit', '~>6.8'
   pod 'PromiseKit/Alamofire', '~>6.0'
   pod 'AwaitKit'
   
-  pod 'RSDayFlow', '~>1.7.0'
+  pod 'RSDayFlow', '~>1.7.1'
   pod 'iOS-Color-Picker'
   
   target 'MyNSBTests' do
