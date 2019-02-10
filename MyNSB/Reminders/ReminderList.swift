@@ -7,6 +7,8 @@
 //
 import Foundation
 import UserNotifications
+import AwaitKit
+import PromiseKit
 
 /* This class manages the on disk storage of the reminders */
 class ReminderList {
@@ -48,15 +50,17 @@ class ReminderList {
         var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? Dictionary()
         reminderDict[item.id] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "tags": item.tags, "id": item.id]
         UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
-        return async {
+        
+        async {
             try await(
-                ReminderAPI.create(subject: item.title, body: item.body, tags: item.tags, date: item.due))
+                ReminderAPI.create(subject: item.title, body: item.body ?? "", tags: item.tags, date: item.due)
             )
         }
     }
     
     func removeItem(_ item: Reminder) {
         let center = UNUserNotificationCenter.current()
+        
         center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
             for request in notificationRequests {
                 if (request.identifier == item.id) {
@@ -66,21 +70,23 @@ class ReminderList {
                 }
             }
         })
+        
         if var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) {
             reminderDict.removeValue(forKey: item.id)
             UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
         }
-	return async {
-		try await(
-                    ReminderAPI.delete(item.id)
-                )
-	}
+        
+        async {
+            try await(
+                ReminderAPI.delete(id: item.id)
+            )
+        }
     }
     
     func getReminders() -> [Reminder] {
         let reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? [:]
-
         let items = Array(reminderDict.values)
+        
         return items.map({
             let item = $0 as! [String: AnyObject]
             return Reminder(title: item["title"] as! String, body: item["body"] as? String, due: item["dueDate"] as! Date, tags: item["tags"] as! [String], id: item["id"] as! String)
@@ -101,6 +107,7 @@ class ReminderList {
                         break
                     }
                 }
+                
                 print("\(reminder.title) was not found")
                 // not found, schedule it now
                 self.scheduleItem(reminder)
@@ -109,17 +116,22 @@ class ReminderList {
     }
 
     // sync with remote
-    func syncReminders() {
+    func syncReminders() -> Promise<Void> {
         let currentDate = Date()
         // once again, API should have been better designed
-        let oneYear = DateComponents()
+        var oneYear = DateComponents()
         oneYear.year = 1
-        let futureDate = Calendar.current.date(byAdding: oneYear, to: currentDate)
-        let reminderDict: [Reminder]
-        for reminder in ReminderAPI.get(start: currentDate, end: futureDate) {
-            reminderDict[reminder.id] = ["title": reminder.title, "body": reminder.body ?? "", "dueDate": reminder.due, "tags": reminder.tags, "id": reminder.id];
+        let futureDate = Calendar.current.date(byAdding: oneYear, to: currentDate)!
+        
+        return async {
+            let api = try await(ReminderAPI.get(start: currentDate, end: futureDate))
+            var reminderDict: [String: [String: Any]] = [:]
+            
+            for reminder in api {
+                reminderDict[reminder.id] = ["title": reminder.title, "body": reminder.body ?? "", "dueDate": reminder.due, "tags": reminder.tags, "id": reminder.id]
+            }
+            
+            UserDefaults.standard.set(reminderDict, forKey: self.ITEMS_KEY)
         }
-
-        UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
     }
 }

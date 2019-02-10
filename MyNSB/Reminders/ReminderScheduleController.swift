@@ -10,6 +10,8 @@ import UIKit
 import UserNotifications
 import NotificationCenter
 
+import AwaitKit
+
 class ReminderScheduleController: UIViewController {
     var viewingReminder: Reminder?
     
@@ -22,13 +24,15 @@ class ReminderScheduleController: UIViewController {
         let newReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, tags: [], id: newID)
 
         // if the old reminder has been edited
-        if (viewingReminder != nil && viewingReminder != newReminder) {
+        if viewingReminder != nil && viewingReminder!.id != newReminder.id {
             // delete outdated remote reminder - this shouldn't be necessary but API interface (probably?) needs changing
-            try await(ReminderAPI.delete(viewingReminder!.id))
+            async {
+                try await(ReminderAPI.delete(id: self.viewingReminder!.id))
+            }
         }
         // update the reminder
-        ReminderList.sharedInstance.addItem(newReminder!)
-        ReminderList.sharedInstance.scheduleItem(newReminder!)
+        ReminderList.sharedInstance.addItem(newReminder)
+        ReminderList.sharedInstance.scheduleItem(newReminder)
         // pop back to list view
         self.navigationController?.popToRootViewController(animated: true)
     }

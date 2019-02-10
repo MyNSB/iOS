@@ -9,8 +9,10 @@
 import UIKit
 
 class MainPageController: UITableViewController {
-    private let offline = ["reminders", "timetable"]
     private let online  = ["fouru", "events", "reminders", "timetable"]
+    private let offline = ["reminders", "timetable"]
+    
+    private var connected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,8 @@ class MainPageController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        self.connected = Connection.isConnected
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,15 +40,15 @@ class MainPageController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if Connection.isConnected {
-            return 4
+        if self.connected {
+            return self.online.count
         } else {
-            return 2
+            return self.offline.count
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if Connection.isConnected {
+        if self.connected {
             return self.tableView.dequeueReusableCell(withIdentifier: self.online[indexPath.row])!
         } else {
             return self.tableView.dequeueReusableCell(withIdentifier: self.offline[indexPath.row])!

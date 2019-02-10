@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AwaitKit
 
 class ReminderListViewController: UITableViewController {
     var reminderList: [Reminder] = []
@@ -15,17 +16,23 @@ class ReminderListViewController: UITableViewController {
         super.viewDidLoad()
         // warn if notifications are not enabled
         if (UserDefaults.standard.bool(forKey: "notificationsEnabledFlag") == false) {
-            // TODO: present a warning dialog and continue anyway
-            let vc = MainPageController()
-            self.present(vc, animated: false, completion: nil)
-            return
+            MyNSBErrorController.error(self, error: MyNSBError.generic(message: "Please enable notifications!"))
         }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(ReminderListViewController.refreshList), name: NSNotification.Name(rawValue: "reminderListShouldRefresh"), object: nil)
-        return async {
-            // Sync with remote
-            ReminderList.sharedInstance.syncReminders()
-            ReminderList.sharedInstance.refreshNotifications()
-            refreshList()
+        
+        async {
+            do {
+                // Sync with remote
+                try await(ReminderList.sharedInstance.syncReminders())
+                ReminderList.sharedInstance.refreshNotifications()
+                
+                DispatchQueue.main.async {
+                    self.refreshList()
+                }
+            } catch let error as MyNSBError {
+                MyNSBErrorController.error(self, error: error)
+            }
         }
     }
     
@@ -90,6 +97,7 @@ class ReminderListViewController: UITableViewController {
     
     @objc func refreshList() {
         self.reminderList = ReminderList.sharedInstance.getReminders()
+        
         if (reminderList.count >= 64) { // apple allows 64 local notifications at maximum
             print("too many items!")
             self.navigationItem.rightBarButtonItem!.isEnabled = false

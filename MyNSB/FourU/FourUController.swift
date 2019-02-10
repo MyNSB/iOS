@@ -50,7 +50,7 @@ class FourUController: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) //as! IssueCell FIXME: add IssueCell.swift
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! IssueCell
         let issue = self.issues[indexPath.row]
         
         
@@ -64,7 +64,6 @@ class FourUController: UIViewController, UICollectionViewDelegate, UICollectionV
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
-        
         
         cell.titleLabel.text = issue.name
         cell.descriptionLabel.text = issue.description
