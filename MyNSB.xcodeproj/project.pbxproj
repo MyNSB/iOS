@@ -107,7 +107,7 @@
 		2C243B6621EF2BA70057ED6A /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		2C243B6721EF2BA80057ED6A /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
 		2C243B6C21F5A2440057ED6A /* ReminderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderAPI.swift; sourceTree = "<group>"; };
-		2C243B6E21F6CD690057ED6A /* IssueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IssueCell.swift; path = "../../../../../Downloads/MyNSB 4/iOS/MyNSB/4U/IssueCell.swift"; sourceTree = "<group>"; };
+		2C243B6E21F6CD690057ED6A /* IssueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		2C243B7021F6CDB40057ED6A /* FourU.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FourU.storyboard; sourceTree = "<group>"; };
 		2C243B7221F9CD6A0057ED6A /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		2C243B7621F9CF500057ED6A /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
