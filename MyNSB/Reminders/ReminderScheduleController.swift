@@ -14,6 +14,7 @@ import AwaitKit
 
 class ReminderScheduleController: UIViewController {
     var viewingReminder: Reminder?
+    var changed = false
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var bodyField: UITextField!
@@ -23,12 +24,9 @@ class ReminderScheduleController: UIViewController {
         let newID = viewingReminder?.id ?? UUID().uuidString
         let newReminder = Reminder(title: titleField.text!, body: bodyField?.text, due: deadlinePicker.date, tags: [], id: newID)
 
-        // if the old reminder has been edited
-        if viewingReminder != nil && viewingReminder!.id != newReminder.id {
-            // delete outdated remote reminder - this shouldn't be necessary but API interface (probably?) needs changing
-            async {
-                try await(ReminderAPI.delete(id: self.viewingReminder!.id))
-            }
+        // if the old reminder has been edited, delete the old reminder
+        if viewingReminder != nil {
+            ReminderList.sharedInstance.removeItem(viewingReminder!)
         }
         // update the reminder
         ReminderList.sharedInstance.addItem(newReminder)

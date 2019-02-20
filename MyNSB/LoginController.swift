@@ -56,6 +56,9 @@ class LoginController: UIViewController {
     @IBAction func submitLogin(_ sender: Any) {
         let user = self.usernameField.text
         let password = self.passwordField.text
+        // store details FIXME: is this safe?
+        UserDefaults.standard.set(user, forKey: "username")
+        UserDefaults.standard.set(password, forKey: "password")
         
         async {
             do {

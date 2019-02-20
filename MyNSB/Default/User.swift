@@ -27,14 +27,23 @@ class User {
     static func isLoggedIn() -> Promise<Bool> {
         return async {
             do {
+                let user = UserDefaults.standard.string(forKey: "username")
+                let password = UserDefaults.standard.string(forKey: "password")
+                print("here")
+                if (user == nil) {
+                    assert(password == nil)
+                    print("not logged in")
+                    return false
+                }
                 try await(
                     MyNSBRequest.post(
                         path: "/user/auth",
-                        headers: User.generateHeaders(user: "a", password: "a")
+                        headers: User.generateHeaders(user: user!, password: password!)
                     )
                 )
                 return false
             } catch let error as MyNSBError {
+                // error thrown if already logged in
                 if case let MyNSBError.api(code, message) = error {
                     if code == 400 && message == "Already Logged In" {
                         return true

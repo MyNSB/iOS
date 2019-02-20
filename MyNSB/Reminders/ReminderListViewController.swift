@@ -23,21 +23,20 @@ class ReminderListViewController: UITableViewController {
         
         async {
             do {
-                // Sync with remote
                 try await(ReminderList.sharedInstance.syncReminders())
                 ReminderList.sharedInstance.refreshNotifications()
-                
-                DispatchQueue.main.async {
-                    self.refreshList()
-                }
             } catch let error as MyNSBError {
                 MyNSBErrorController.error(self, error: error)
+            }
+            
+            DispatchQueue.main.async {
+                self.refreshList()
             }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
         refreshList()
     }
     

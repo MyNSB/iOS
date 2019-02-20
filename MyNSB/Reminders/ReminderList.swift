@@ -45,22 +45,26 @@ class ReminderList {
         }
     }
     
-    // adds item to the UserDefaults Dictionary, overwriting if it already exists, also adds to remote
     func addItem(_ item: Reminder) {
-        var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? Dictionary()
+        // just create a dummy in the meantime so that the user can see the new reminder
+        var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) ?? [:]
         reminderDict[item.id] = ["title": item.title, "body": item.body ?? "", "dueDate": item.due, "tags": item.tags, "id": item.id]
-        UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
-        
+        UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY) 
+
         async {
             try await(
                 ReminderAPI.create(subject: item.title, body: item.body ?? "", tags: item.tags, date: item.due)
             )
+	    // update local list with the correct ID FIXME: this is real crappy
+            self.syncReminders()
+            self.refreshNotifications() // make sure new reminder w/ 'correct' identifier is scheduled
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "reminderListShouldRefresh"), object: self)
         }
     }
     
     func removeItem(_ item: Reminder) {
         let center = UNUserNotificationCenter.current()
-        
+        // remove corresponding notification       
         center.getPendingNotificationRequests(completionHandler: { (notificationRequests) in
             for request in notificationRequests {
                 if (request.identifier == item.id) {
@@ -70,12 +74,12 @@ class ReminderList {
                 }
             }
         })
-        
+        // update on-disk storage 
         if var reminderDict = UserDefaults.standard.dictionary(forKey: ITEMS_KEY) {
             reminderDict.removeValue(forKey: item.id)
             UserDefaults.standard.set(reminderDict, forKey: ITEMS_KEY)
         }
-        
+        // update remote 
         async {
             try await(
                 ReminderAPI.delete(id: item.id)
@@ -115,17 +119,16 @@ class ReminderList {
         })
     }
 
-    // sync with remote
+    // sync the shared instance with remote
     func syncReminders() -> Promise<Void> {
         let currentDate = Date()
-        // once again, API should have been better designed
         var oneYear = DateComponents()
         oneYear.year = 1
         let futureDate = Calendar.current.date(byAdding: oneYear, to: currentDate)!
         
         return async {
-            let api = try await(ReminderAPI.get(start: currentDate, end: futureDate))
             var reminderDict: [String: [String: Any]] = [:]
+            let api = try await(ReminderAPI.get(start: currentDate, end: futureDate))
             
             for reminder in api {
                 reminderDict[reminder.id] = ["title": reminder.title, "body": reminder.body ?? "", "dueDate": reminder.due, "tags": reminder.tags, "id": reminder.id]

@@ -61,7 +61,7 @@
 		311A44C7F9D4402114596981 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A4DE736D9390A203ED33F /* Event.swift */; };
 		311A47035F0824FF280EAE55 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A4FD3973F79B051DC6E1C /* Constants.swift */; };
 		311A4A82323DEEC6B38ACB48 /* MyNSBErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311A47C75AA547326B592964 /* MyNSBErrorController.swift */; };
-		5C7081F621C25676004E8D3E /* (null) in Resources */ = {isa = PBXBuildFile; };
+		5C7081F621C25676004E8D3E /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		B7FD893221E5A0DB00E00B13 /* ReminderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FD892E21E5A0DB00E00B13 /* ReminderListViewController.swift */; };
 		B7FD893321E5A0DB00E00B13 /* ReminderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FD892F21E5A0DB00E00B13 /* ReminderList.swift */; };
 		B7FD893421E5A0DB00E00B13 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FD893021E5A0DB00E00B13 /* Reminder.swift */; };
@@ -553,7 +553,7 @@
 				2CB299A7200DE10000825CBA /* Main.storyboard in Resources */,
 				B7FD893721E5A0F600E00B13 /* Reminder.storyboard in Resources */,
 				2C243B7121F6CDB40057ED6A /* FourU.storyboard in Resources */,
-				5C7081F621C25676004E8D3E /* (null) in Resources */,
+				5C7081F621C25676004E8D3E /* BuildFile in Resources */,
 				2CC7279420D605E2006EACC9 /* Settings.storyboard in Resources */,
 				2C243B7D21FA8BC60057ED6A /* Lato-Bold.ttf in Resources */,
 				2C243B7821F9D1F10057ED6A /* Lato-Regular.ttf in Resources */,
@@ -601,7 +601,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MyNSB/Pods-MyNSB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
@@ -622,7 +622,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyNSB/Pods-MyNSB-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyNSB/Pods-MyNSB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E2F16F1B9934C661652193C3 /* [CP] Check Pods Manifest.lock */ = {

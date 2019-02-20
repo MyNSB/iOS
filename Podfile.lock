@@ -5,30 +5,30 @@ PODS:
   - AwaitKit (5.1.0):
     - PromiseKit (~> 6)
   - iOS-Color-Picker (1.2)
-  - PromiseKit (6.7.1):
-    - PromiseKit/CorePromise (= 6.7.1)
-    - PromiseKit/Foundation (= 6.7.1)
-    - PromiseKit/UIKit (= 6.7.1)
-  - PromiseKit/Alamofire (6.7.1):
+  - PromiseKit (6.8.3):
+    - PromiseKit/CorePromise (= 6.8.3)
+    - PromiseKit/Foundation (= 6.8.3)
+    - PromiseKit/UIKit (= 6.8.3)
+  - PromiseKit/Alamofire (6.8.3):
     - Alamofire (~> 4.0)
     - PromiseKit/CorePromise
-  - PromiseKit/CorePromise (6.7.1)
-  - PromiseKit/Foundation (6.7.1):
+  - PromiseKit/CorePromise (6.8.3)
+  - PromiseKit/Foundation (6.8.3):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.7.1):
+  - PromiseKit/UIKit (6.8.3):
     - PromiseKit/CorePromise
   - RSDayFlow (1.7.1)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.5)
-  - AlamofireImage (~> 3.3)
+  - Alamofire (~> 4.8.1)
+  - AlamofireImage (~> 3.5)
   - AwaitKit
   - iOS-Color-Picker
-  - PromiseKit (~> 6.0)
+  - PromiseKit (~> 6.8)
   - PromiseKit/Alamofire (~> 6.0)
-  - RSDayFlow (~> 1.7.0)
-  - SwiftyJSON (~> 4.1.0)
+  - RSDayFlow (~> 1.7.1)
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -45,10 +45,10 @@ SPEC CHECKSUMS:
   AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
   AwaitKit: a8a3d8982097ee09ac75f5c5d3952fbcc2f26f1c
   iOS-Color-Picker: 4284a4d744a7cafe9d22d4b66eefc45342b80f1d
-  PromiseKit: ef376fb8b4e92edfeb66bd403b983eaa07fbde0c
+  PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
   RSDayFlow: c4d27ab9d40773bdd53ace3a5accb807c070d4bf
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 9128963fb95b839ce12f29fac61cb897d4a42245
+PODFILE CHECKSUM: 3ec8a3c1609bcb427071cf7792a0388703457829
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0
